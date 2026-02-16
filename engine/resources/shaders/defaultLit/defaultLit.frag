@@ -16,10 +16,18 @@ uniform vec4 materialColour;
 uniform int lightType;
 uniform vec4 lightColour;
 uniform vec3 lightPos;
+
+struct Light {
+    vec3 position;
+    vec4 colour;
+    float intensity;
+    int type;
+};
+uniform Light lightData;
 uniform vec3 camPos;
 
 vec4 pointLight() {
-    vec3 lightVec = lightPos - currentPos;
+    vec3 lightVec = lightData.position - currentPos;
     float dist = length(lightVec);
     float a = 0.00005;
     float b = 0.00001;
@@ -55,7 +63,7 @@ vec4 pointLight() {
         finalSpecular = vec4(texture(specular0, texCoord).r * specular * intensity);
     }
 
-    return (finalLighting + finalSpecular) * lightColour;
+    return (finalLighting + finalSpecular) * lightData.colour;
 }
 
 vec4 spotLight() {
@@ -67,7 +75,7 @@ vec4 spotLight() {
 
     // diffuse lighting (from a light source)
     vec3 _normal = normalize(normal);
-    vec3 lightDirection = normalize(lightPos - currentPos);
+    vec3 lightDirection = normalize(lightData.position - currentPos);
     float diffuse = max(dot(_normal, lightDirection), 0.0f);
 
     // specular lighting
@@ -94,7 +102,7 @@ vec4 spotLight() {
         finalSpecular = vec4(texture(specular0, texCoord).r * specular * intensity);
     }
 
-    return (finalLighting + finalSpecular) * lightColour;
+    return (finalLighting + finalSpecular) * lightData.colour;
 }
 
 vec4 directLight() {
@@ -128,17 +136,17 @@ vec4 directLight() {
         finalSpecular = vec4(texture(specular0, texCoord).r * specular);
     }
 
-    return (finalLighting + finalSpecular) * lightColour;
+    return (finalLighting + finalSpecular) * lightData.colour;
 }
 
 vec4 frag() {
-    if (0 == lightType) {
+    if (0 == lightData.type) {
         return pointLight();
     }
-    else if (1 == lightType) {
+    else if (1 == lightData.type) {
         return spotLight();
     }
-    else if (2 == lightType) {
+    else if (2 == lightData.type) {
         return directLight();
     }
     else {

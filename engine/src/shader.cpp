@@ -12,6 +12,7 @@
 #include "MEGEngine/math/vec4.h"
 #include "MEGEngine/math/mat4.h"
 #include "MEGEngine/colour.h"
+#include "MEGEngine/light.h"
 
 namespace MEGEngine {
 	// Reads a text file and outputs a string with everything in the text file
@@ -132,6 +133,12 @@ namespace MEGEngine {
 			glUniform4f(glGetUniformLocation(_id, name), value.r, value.g, value.b, value.a);
 		else if constexpr (std::is_same<T, Mat4>::value)
 			glUniformMatrix4fv(glGetUniformLocation(_id, name), 1, GL_FALSE, glm::value_ptr(Private::toGlmMat4(value)));
+		else if constexpr (std::is_same<T, LightData>::value) {
+			glUniform3f(glGetUniformLocation(_id, "lightData.position"), value.position.x, value.position.y, value.position.z);
+			glUniform4f(glGetUniformLocation(_id, "lightData.colour"), value.colour.r, value.colour.g, value.colour.b, value.colour.a);
+			glUniform1f(glGetUniformLocation(_id, "lightData.intensity"), value.intensity);
+			glUniform1i(glGetUniformLocation(_id, "lightData.type"), static_cast<int>(value.type));
+		}
 		else
 			std::cout << "Invalid uniform type provided" << std::endl;
 	}
@@ -144,4 +151,5 @@ namespace MEGEngine {
 	template void Shader::setUniform<Vec4>(const char* name, const Vec4& value);
 	template void Shader::setUniform<Colour>(const char* name, const Colour& value);
 	template void Shader::setUniform<Mat4>(const char* name, const Mat4& value);
+	template void Shader::setUniform<LightData>(const char* name, const LightData& value);
 }

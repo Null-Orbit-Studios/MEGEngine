@@ -39,7 +39,6 @@ protected:
 		MEGEngine::modelLoader.loadModelFromData(light, MEGEngine::Cube::vertices(), MEGEngine::Cube::indices());
 		light.meshRenderer()->setMaterial(std::make_shared<MEGEngine::Material>(MEGEngine::ShaderManager::getShader("light")));
 		light.meshRenderer()->material()->setColour({1.0, 1.0, 1.0, 1.0});
-		light.setType(MEGEngine::LightType::DIRECTIONAL_LIGHT);
 
 		auto& sword = scene().createEntity<MEGEngine::Entity>();
 		MEGEngine::modelLoader.loadModelFromFile(sword, (MEGEngine::settings.general().modelDirectory + "/sword/sword.gltf").c_str());
