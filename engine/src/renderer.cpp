@@ -117,11 +117,9 @@ namespace MEGEngine {
         entity.meshRenderer()->material()->shader()->setUniform("scale", sca);
 
         // TODO: shader support for multiple light sources
-        entity.meshRenderer()->material()->shader()->setUniform("lightColour", scene.lightData()[0].colour);
+        entity.meshRenderer()->material()->shader()->setUniform("lightData", scene.lightData()[0]);
         if (auto* light = dynamic_cast<Light*>(&entity)) { // if this entity is the light, set its translation in vert shader
-            entity.meshRenderer()->material()->shader()->setUniform("translation", scene.lightData()[0].position);
-        } else { // any other entity, set light pos in frag shader
-            entity.meshRenderer()->material()->shader()->setUniform("lightPosition", scene.lightData()[0].colour);
+            entity.meshRenderer()->material()->shader()->setUniform("translation", Mat4::translation(scene.lightData()[0].position));
         }
 
         // Draw the actual mesh

@@ -7,10 +7,10 @@
 
 
 namespace MEGEngine {
-    enum LightType {
-        pointLight,
-        spotLight,
-        directionalLight,
+    enum class LightType {
+        POINT_LIGHT = 0,
+        SPOT_LIGHT,
+        DIRECTIONAL_LIGHT,
     };
 
     struct ENGINE_API LightData {
@@ -37,7 +37,7 @@ namespace MEGEngine {
         Colour _colour = {1.0f, 1.0f, 1.0f, 1.0f};
         float _intensity = 1.0f;
         bool _dirty = true;
-        LightType _type;
+        LightType _type = LightType::POINT_LIGHT;
     };
 } // MEGEngine
 
