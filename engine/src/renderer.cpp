@@ -117,6 +117,7 @@ namespace MEGEngine {
         entity.meshRenderer()->material()->shader()->setUniform("scale", sca);
 
         // TODO: shader support for multiple light sources
+        entity.meshRenderer()->material()->shader()->setUniform("lightType", static_cast<int>(scene.lightData()[0].type));
         entity.meshRenderer()->material()->shader()->setUniform("lightColour", scene.lightData()[0].colour);
         if (auto* light = dynamic_cast<Light*>(&entity)) { // if this entity is the light, set its translation in vert shader
             entity.meshRenderer()->material()->shader()->setUniform("translation", scene.lightData()[0].position);
