@@ -44,7 +44,7 @@ namespace MEGEngine {
         for (auto& entity : _entities) {
             if (auto* light = dynamic_cast<Light*>(entity.get())) {
                 LightData data{};
-                data.position = light->transform().position();
+                data.position = light->getComponent<Transform>()->position();
                 data.colour = light->colour();
                 data.intensity = light->intensity();
                 data.type = light->type();

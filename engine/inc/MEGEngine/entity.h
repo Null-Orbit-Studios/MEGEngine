@@ -18,7 +18,6 @@ namespace MEGEngine {
 
 		virtual void onUpdate() {} // TODO: update will be moved to script component when script feature is added
 
-		Transform& transform() const;
 		MeshRenderer* meshRenderer();
 
 		void setMeshRenderer(std::unique_ptr<MeshRenderer> renderer);
@@ -84,7 +83,6 @@ namespace MEGEngine {
 	protected:
 		Entity* _parent = nullptr;
 		std::vector<Entity*> _children;
-		std::unique_ptr<Transform> _transform = std::make_unique<Transform>();
 		std::unique_ptr<MeshRenderer> _meshRenderer = nullptr;
 
 		std::vector<std::unique_ptr<Component>> _components;

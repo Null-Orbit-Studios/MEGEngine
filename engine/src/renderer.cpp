@@ -101,16 +101,16 @@ namespace MEGEngine {
             texture->texUnit(*entity.meshRenderer()->material()->shader(), (uniformName).c_str(), slot++);
             texture->bind();
         }
-        entity.meshRenderer()->material()->shader()->setUniform("camPos", scene.camera().transform().position());
+        entity.meshRenderer()->material()->shader()->setUniform("camPos", scene.camera().getComponent<Transform>()->position());
         entity.meshRenderer()->material()->shader()->setUniform("camMatrix", scene.camera().camMatrix());
 
         // Create matrices
-        Mat4 trans = Mat4::translation(entity.transform().position());
-        Mat4 rot = entity.transform().orientation().toMatrix();
-        Mat4 sca = Mat4::scale(entity.transform().scale());
+        Mat4 trans = Mat4::translation(entity.getComponent<Transform>()->position());
+        Mat4 rot = entity.getComponent<Transform>()->orientation().toMatrix();
+        Mat4 sca = Mat4::scale(entity.getComponent<Transform>()->scale());
 
         // Push the matrices to the vertex shader
-        Mat4 modelMatrix = entity.transform().modelMatrix();
+        Mat4 modelMatrix = entity.getComponent<Transform>()->modelMatrix();
         entity.meshRenderer()->material()->shader()->setUniform("model",  modelMatrix);
         entity.meshRenderer()->material()->shader()->setUniform("translation", trans);
         entity.meshRenderer()->material()->shader()->setUniform("rotation", rot);

@@ -32,7 +32,7 @@ protected:
 
 		scene().camera().init();
 
-		scene().camera().transform().setPosition({0, 0, -10});
+		scene().camera().getComponent<MEGEngine::Transform>()->setPosition({0, 0, -10});
 
 		auto& light = scene().createEntity<MEGEngine::Light>();
 		light.setColour({1.0, 1.0, 1.0, 1.0});
@@ -42,16 +42,15 @@ protected:
 
 		auto& sword = scene().createEntity<MEGEngine::Entity>();
 		MEGEngine::modelLoader.loadModelFromFile(sword, (MEGEngine::settings.general().modelDirectory + "/sword/sword.gltf").c_str());
-		sword.transform().setPosition(MEGEngine::Vec3(-5, -5, 10));
-		sword.transform().setOrientation(MEGEngine::Quat(0, 0, 0, 1));
-		sword.transform().setScale(0.2);
+		sword.getComponent<MEGEngine::Transform>()->setPosition(MEGEngine::Vec3(5, -5, 0));
+		sword.getComponent<MEGEngine::Transform>()->setOrientation(MEGEngine::Quat(0, 0, 0, 1));
+		sword.getComponent<MEGEngine::Transform>()->setScale(0.2);
 
 		auto& floor = scene().createEntity<MEGEngine::Entity>();
 		MEGEngine::modelLoader.loadModelFromData(floor, MEGEngine::Cube::vertices(), MEGEngine::Cube::indices());
 		floor.meshRenderer()->setMaterial(std::make_shared<MEGEngine::Material>());
-		floor.meshRenderer()->material()->setColour({1.0, 1.0, 1.0, 1.0});
-		floor.transform().setPosition(MEGEngine::Vec3(0, -30, 0));
-		floor.transform().setScale(MEGEngine::Vec3(100, 0.1, 100));
+		floor.getComponent<MEGEngine::Transform>()->setPosition(MEGEngine::Vec3(0, -30, 0));
+		floor.getComponent<MEGEngine::Transform>()->setScale(MEGEngine::Vec3(100, 0.1, 100));
 
 	}
 

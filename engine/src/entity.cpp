@@ -8,10 +8,6 @@ namespace MEGEngine {
 		addComponent<Transform>();
 	}
 
-	Transform& Entity::transform() const {
-		return *_transform;
-	}
-
 	MeshRenderer* Entity::meshRenderer() {
 		return _meshRenderer.get();
 	}
