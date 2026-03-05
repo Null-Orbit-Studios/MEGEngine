@@ -18,10 +18,6 @@ namespace MEGEngine {
 
 		virtual void onUpdate() {} // TODO: update will be moved to script component when script feature is added
 
-		MeshRenderer* meshRenderer();
-
-		void setMeshRenderer(std::unique_ptr<MeshRenderer> renderer);
-
 		void addChild(Entity& child);
 		[[nodiscard]] const std::vector<Entity*>& children() const;
 		[[nodiscard]] Entity* parent() const;
@@ -83,7 +79,6 @@ namespace MEGEngine {
 	protected:
 		Entity* _parent = nullptr;
 		std::vector<Entity*> _children;
-		std::unique_ptr<MeshRenderer> _meshRenderer = nullptr;
 
 		std::vector<std::unique_ptr<Component>> _components;
 		std::unordered_map<ComponentTypeID, Component*> _componentLookup;

@@ -8,13 +8,6 @@ namespace MEGEngine {
 		addComponent<Transform>();
 	}
 
-	MeshRenderer* Entity::meshRenderer() {
-		return _meshRenderer.get();
-	}
-	void Entity::setMeshRenderer(std::unique_ptr<MeshRenderer> renderer) {
-		_meshRenderer = std::move(renderer);
-	}
-
 	void Entity::addChild(Entity& child) {
 		if (child._parent) {
 			auto& siblings = child._parent->_children;

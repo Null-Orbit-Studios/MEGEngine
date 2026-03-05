@@ -38,20 +38,20 @@ namespace MEGEngine {
         std::vector<RenderGroup> renderQueue;
 
         for (auto& entity : scene.entities()) {
-            if (entity->meshRenderer()) { // loop through render groups to store entities in order of shader
+            if (entity->hasComponent<MeshRenderer>()) { // loop through render groups to store entities in order of shader
                 if (renderQueue.empty()) {
                     RenderGroup newGroup;
-                    newGroup.shader = entity->meshRenderer()->material()->shader();
+                    newGroup.shader = entity->getComponent<MeshRenderer>()->material()->shader();
                     renderQueue.push_back(newGroup);
                 }
 
                 for (int i = 0; i < renderQueue.size(); i++) {
-                    if (entity->meshRenderer()->material()->shader()->ID() == renderQueue[i].shader->ID()) {
+                    if (entity->getComponent<MeshRenderer>()->material()->shader()->ID() == renderQueue[i].shader->ID()) {
                         renderQueue[i].entities.push_back(entity.get());
                     }
                     else if (i == renderQueue.size() - 1) {
                         RenderGroup newGroup;
-                        newGroup.shader = entity->meshRenderer()->material()->shader();
+                        newGroup.shader = entity->getComponent<MeshRenderer>()->material()->shader();
                         newGroup.entities.push_back(entity.get());
                         renderQueue.push_back(newGroup);
                     }
@@ -68,13 +68,15 @@ namespace MEGEngine {
     }
 
     void Renderer::draw(Entity& entity, const Scene& scene) {
-        if (!entity.meshRenderer()->material()->shader()) {
+        auto mr = entity.getComponent<MeshRenderer>();
+
+        if (!mr->material()->shader()) {
             Log(LogLevel::WRN, "Attempt to draw failed. Shader is null");
             return;
         }
 
-        entity.meshRenderer()->material()->bind();
-        entity.meshRenderer()->mesh()->bind();
+        mr->material()->bind();
+        mr->mesh()->bind();
 
         // Keep track of how many of each type of textures we have
         unsigned int numDiffuse = 0;
@@ -82,7 +84,7 @@ namespace MEGEngine {
 
         // for (unsigned int i = 0; i < entity.meshRenderer()->material()->textures().size(); i++)
         unsigned int slot = 0;
-        for (auto& pair : entity.meshRenderer()->material()->textures())
+        for (auto& pair : mr->material()->textures())
         {
             TexType type = pair.first;
             std::shared_ptr<Texture> texture = pair.second;
@@ -98,11 +100,11 @@ namespace MEGEngine {
                 num = std::to_string(numSpecular++);
                 uniformName = "specular" + num;
             }
-            texture->texUnit(*entity.meshRenderer()->material()->shader(), (uniformName).c_str(), slot++);
+            texture->texUnit(*mr->material()->shader(), (uniformName).c_str(), slot++);
             texture->bind();
         }
-        entity.meshRenderer()->material()->shader()->setUniform("camPos", scene.camera().getComponent<Transform>()->position());
-        entity.meshRenderer()->material()->shader()->setUniform("camMatrix", scene.camera().camMatrix());
+        mr->material()->shader()->setUniform("camPos", scene.camera().getComponent<Transform>()->position());
+        mr->material()->shader()->setUniform("camMatrix", scene.camera().camMatrix());
 
         // Create matrices
         Mat4 trans = Mat4::translation(entity.getComponent<Transform>()->position());
@@ -111,18 +113,18 @@ namespace MEGEngine {
 
         // Push the matrices to the vertex shader
         Mat4 modelMatrix = entity.getComponent<Transform>()->modelMatrix();
-        entity.meshRenderer()->material()->shader()->setUniform("model",  modelMatrix);
-        entity.meshRenderer()->material()->shader()->setUniform("translation", trans);
-        entity.meshRenderer()->material()->shader()->setUniform("rotation", rot);
-        entity.meshRenderer()->material()->shader()->setUniform("scale", sca);
+        mr->material()->shader()->setUniform("model",  modelMatrix);
+        mr->material()->shader()->setUniform("translation", trans);
+        mr->material()->shader()->setUniform("rotation", rot);
+        mr->material()->shader()->setUniform("scale", sca);
 
         // TODO: shader support for multiple light sources
-        entity.meshRenderer()->material()->shader()->setUniform("lightData", scene.lightData()[0]);
+        mr->material()->shader()->setUniform("lightData", scene.lightData()[0]);
         if (auto* light = dynamic_cast<Light*>(&entity)) { // if this entity is the light, set its translation in vert shader
-            entity.meshRenderer()->material()->shader()->setUniform("translation", Mat4::translation(scene.lightData()[0].position));
+            mr->material()->shader()->setUniform("translation", Mat4::translation(scene.lightData()[0].position));
         }
 
         // Draw the actual mesh
-        glDrawElements(GL_TRIANGLES, entity.meshRenderer()->mesh()->numIndices(), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, mr->mesh()->numIndices(), GL_UNSIGNED_INT, 0);
     }
 } // MEGEngine
