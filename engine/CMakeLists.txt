@@ -85,6 +85,7 @@ add_library(MEGEngine SHARED
         inc/MEGEngine/input/input_system.h
         inc/MEGEngine/engine.cpp
         inc/MEGEngine/engine.h
+        inc/MEGEngine/component.h
 )
 
 target_include_directories(MEGEngine
