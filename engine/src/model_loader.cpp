@@ -1,3 +1,5 @@
+#include <fstream>
+
 #include "GLM/gtc/type_ptr.hpp"
 
 #include <JSON/json.hpp>
@@ -35,10 +37,26 @@ namespace MEGEngine {
         return instance;
     }
 
+    // Reads a text file and outputs a string with everything in the text file
+    std::string get_model_file_contents(const char* filename, uint& status) {
+        status = 0;
+        std::ifstream file(filename, std::ios::binary);
+        if (!file) {
+            Log(LogLevel::WRN, "Failed to open file for reading: " + std::string(filename));
+            status = 1;
+        }
+        std::stringstream ss;
+        ss << file.rdbuf();
+        return ss.str();
+    }
+
     void ModelLoader::loadModelFromFile(Entity& model, const char *file) {
         Log(LogLevel::DBG, "Loading model from file: %s", file);
         // get full contents of the GLTF model file (follows a JSON format)
-        std::string text = get_file_contents(file);
+        uint status;
+        std::string text = get_model_file_contents(file, status);
+        if (status != 0)
+            return;
 
         // With data parsed into a JSON object, we can access the data without manually reading and modifying strings
         _impl->_json = json::parse(text);
@@ -53,7 +71,7 @@ namespace MEGEngine {
 
     void ModelLoader::loadModelFromData(Entity &model, const std::vector<class Vertex> &vertices, const std::vector<unsigned int> &indices) {
         MeshRenderer mr(std::make_shared<Mesh>(vertices, indices), std::make_shared<Material>());
-        model.setMeshRenderer(std::make_shared<MeshRenderer>(mr));
+        model.setMeshRenderer(std::make_unique<MeshRenderer>(mr));
     }
 
     void ModelLoader::traverseNode(Entity& model, unsigned int nodeIndex, Mat4 matrix) {
@@ -113,7 +131,7 @@ namespace MEGEngine {
         // Check if the node contains a mesh and if it does load it
         if (node.find("mesh") != node.end())
         {
-            model.setMeshRenderer(std::make_shared<MeshRenderer>(loadMeshRenderer(node["mesh"])));
+            model.setMeshRenderer(std::make_unique<MeshRenderer>(loadMeshRenderer(node["mesh"])));
         }
 
         // Check if the node has children, and if it does, apply this function to them with the matNextNode
