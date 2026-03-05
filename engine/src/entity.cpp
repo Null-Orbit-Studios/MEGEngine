@@ -8,10 +8,10 @@ namespace MEGEngine {
 		return *_transform;
 	}
 
-	std::shared_ptr<MeshRenderer> Entity::meshRenderer() {
-		return _meshRenderer;
+	MeshRenderer* Entity::meshRenderer() {
+		return _meshRenderer.get();
 	}
-	void Entity::setMeshRenderer(std::shared_ptr<MeshRenderer> renderer) {
+	void Entity::setMeshRenderer(std::unique_ptr<MeshRenderer> renderer) {
 		_meshRenderer = std::move(renderer);
 	}
 
