@@ -4,15 +4,8 @@
 #include "MEGEngine/utils/log.h"
 
 namespace MEGEngine {
-	Transform& Entity::transform() const {
-		return *_transform;
-	}
-
-	std::shared_ptr<MeshRenderer> Entity::meshRenderer() {
-		return _meshRenderer;
-	}
-	void Entity::setMeshRenderer(std::shared_ptr<MeshRenderer> renderer) {
-		_meshRenderer = std::move(renderer);
+	Entity::Entity() {
+		addComponent<Transform>();
 	}
 
 	void Entity::addChild(Entity& child) {

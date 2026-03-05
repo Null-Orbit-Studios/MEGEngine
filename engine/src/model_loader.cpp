@@ -71,7 +71,7 @@ namespace MEGEngine {
 
     void ModelLoader::loadModelFromData(Entity &model, const std::vector<class Vertex> &vertices, const std::vector<unsigned int> &indices) {
         MeshRenderer mr(std::make_shared<Mesh>(vertices, indices), std::make_shared<Material>());
-        model.setMeshRenderer(std::make_unique<MeshRenderer>(mr));
+        model.addComponent<MeshRenderer>(mr);
     }
 
     void ModelLoader::traverseNode(Entity& model, unsigned int nodeIndex, Mat4 matrix) {
@@ -131,7 +131,7 @@ namespace MEGEngine {
         // Check if the node contains a mesh and if it does load it
         if (node.find("mesh") != node.end())
         {
-            model.setMeshRenderer(std::make_unique<MeshRenderer>(loadMeshRenderer(node["mesh"])));
+            model.addComponent<MeshRenderer>(loadMeshRenderer(node["mesh"]));
         }
 
         // Check if the node has children, and if it does, apply this function to them with the matNextNode

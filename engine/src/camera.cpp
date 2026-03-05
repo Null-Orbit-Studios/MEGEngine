@@ -55,10 +55,10 @@ namespace MEGEngine {
     }
 
     void Camera::onUpdate() {
-        Vec3 camForward = transform().orientation().rotate(Vec3::worldForward());
+        Vec3 camForward = this->getComponent<Transform>()->orientation().rotate(Vec3::worldForward());
         Mat4 view = Mat4::lookAt(
-            _transform->position(),
-            _transform->position() + camForward,
+            this->getComponent<Transform>()->position(),
+            this->getComponent<Transform>()->position() + camForward,
             Vec3::worldUp()
             );
 
@@ -86,8 +86,8 @@ namespace MEGEngine {
         if (_localMove.length() * _localMove.length() > 0) {
             _localMove = _localMove.normalized();
 
-            Vec3 worldMove = transform().orientation().rotate(_localMove);
-            transform().setPosition(transform().position() + (worldMove * speed * Timer::deltaTime()));
+            Vec3 worldMove = this->getComponent<Transform>()->orientation().rotate(_localMove);
+            this->getComponent<Transform>()->setPosition(this->getComponent<Transform>()->position() + (worldMove * speed * Timer::deltaTime()));
         }
 
         _localMove = {0, 0, 0};
@@ -111,9 +111,9 @@ namespace MEGEngine {
             float rotY = sensitivity * ((float)mouseX - (_width/2)) / _width;
 
             // Calculates upcoming vertical change in the Orientation
-            Quat tmpOrientation = _transform->orientation();
+            Quat tmpOrientation = this->getComponent<Transform>()->orientation();
 
-            Vec3 camRight = _transform->orientation().rotate(Vec3::worldRight());
+            Vec3 camRight = this->getComponent<Transform>()->orientation().rotate(Vec3::worldRight());
             Quat pitch = Quat::fromAxisAngle(camRight, glm::radians(rotX));
             tmpOrientation = pitch * tmpOrientation;
 
@@ -123,12 +123,12 @@ namespace MEGEngine {
             // Decides whether or not the next vertical Orientation is legal or not
             if (pitchAngle > -85.0f && pitchAngle < 85.0f)
             {
-                _transform->setOrientation(tmpOrientation);
+                this->getComponent<Transform>()->setOrientation(tmpOrientation);
             }
 
             // Rotates the Orientation left and right
             Quat yaw = Quat::fromAxisAngle(Vec3::worldUp(), glm::radians(rotY));
-            _transform->setOrientation(yaw * _transform->orientation().normalised());
+            this->getComponent<Transform>()->setOrientation(yaw * this->getComponent<Transform>()->orientation().normalised());
 
             // Sets mouse cursor to the middle of the screen so that it doesn't end up roaming around
             glfwSetCursorPos(glfwWindow->impl, (_width / 2), (_height / 2));

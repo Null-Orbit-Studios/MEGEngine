@@ -4,9 +4,10 @@
 #include <memory>
 
 #include "MEGEngine/common.h"
+#include "MEGEngine/component.h"
 
 namespace MEGEngine {
-    class ENGINE_API MeshRenderer {
+    class ENGINE_API MeshRenderer : public Component {
     public:
         MeshRenderer(std::shared_ptr<class Mesh> mesh, std::shared_ptr<class Material> material);
         void setMaterial(std::shared_ptr<class Material> material);
