@@ -1,6 +1,7 @@
 #ifndef MEGENGINEPROJECT_TRANSFORM_H
 #define MEGENGINEPROJECT_TRANSFORM_H
 
+#include "MEGEngine/component.h"
 #include "MEGEngine/common.h"
 
 #include "MEGEngine/math/quat.h"
@@ -8,7 +9,7 @@
 #include "MEGEngine/math/vec3.h"
 
 namespace MEGEngine {
-    class ENGINE_API Transform {
+    class ENGINE_API Transform : public Component {
     public:
         Transform();
 

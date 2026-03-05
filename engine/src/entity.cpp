@@ -4,6 +4,10 @@
 #include "MEGEngine/utils/log.h"
 
 namespace MEGEngine {
+	Entity::Entity() {
+		addComponent<Transform>();
+	}
+
 	Transform& Entity::transform() const {
 		return *_transform;
 	}
