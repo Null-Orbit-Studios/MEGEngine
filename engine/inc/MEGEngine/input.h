@@ -10,5 +10,6 @@
 #include "MEGEngine/input/input_system.h"
 #include "MEGEngine/input/raw_input_event_bus.h"
 #include "MEGEngine/input/player_action_bus.h"
+#include "MEGEngine/input/input_receiver.h"
 
 #endif //MEGENGINEPROJECT_INPUT_H

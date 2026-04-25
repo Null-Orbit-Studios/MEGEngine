@@ -10,6 +10,7 @@ class ExampleGame : public MEGEngine::Application {
 public:
 	using Application::Application;
 	MEGEngine::InputSystem inputSystem;
+	MEGEngine::PlayerController playerController;
 
 protected:
 	void onInit() override {
@@ -30,7 +31,26 @@ protected:
 		inputSystem.bind(*gameplay, moveRgt, MEGEngine::InputSource{MEGEngine::InputSource::Type::KEY, MEGEngine::KeyCode::D}, +1);
 		inputSystem.pushContext(gameplay);
 
-		scene().camera().init();
+		if (auto ir = scene().camera().addComponent<MEGEngine::InputReceiver>()) {
+			ir->linkActionCallback(
+				"MoveForward",
+				[this](const MEGEngine::ActionState& s){ scene().camera().moveForward(s.value.asFloat()); }
+				);
+			ir->linkActionCallback(
+				"MoveBackward",
+				[this](const MEGEngine::ActionState& s){ scene().camera().moveForward(s.value.asFloat()); }
+				);
+			ir->linkActionCallback(
+				"MoveRight",
+				[this](const MEGEngine::ActionState& s){ scene().camera().moveRight(s.value.asFloat()); }
+				);
+			ir->linkActionCallback(
+				"MoveLeft",
+				[this](const MEGEngine::ActionState& s){ scene().camera().moveRight(s.value.asFloat()); }
+				);
+
+			playerController.setInputReceiver(ir);
+		}
 
 		scene().camera().getComponent<MEGEngine::Transform>()->setPosition({0, 0, -10});
 
