@@ -20,6 +20,7 @@ namespace MEGEngine {
             PlayerActionBus::Callback callback;
         };
 
+        // accessed by PlayerController (friend class) to subscribe to actions when this component's parent entity gets possessed
         std::vector<actionCallback> actionCallbacks;
     };
 } // MEGEngine

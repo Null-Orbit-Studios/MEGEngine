@@ -10,7 +10,6 @@ class ExampleGame : public MEGEngine::Application {
 public:
 	using Application::Application;
 	MEGEngine::InputSystem inputSystem;
-	MEGEngine::PlayerController playerController;
 
 protected:
 	void onInit() override {
@@ -49,7 +48,7 @@ protected:
 				[this](const MEGEngine::ActionState& s){ scene().camera().moveRight(s.value.asFloat()); }
 				);
 
-			playerController.possess(scene().camera());
+			MEGEngine::Engine::instance().playerController()->possess(scene().camera());
 		}
 
 		scene().camera().getComponent<MEGEngine::Transform>()->setPosition({0, 0, -10});

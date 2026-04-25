@@ -9,9 +9,11 @@ namespace MEGEngine {
     class ENGINE_API PlayerController {
     public:
         void possess(Entity& player);
+        void update();
+        InputReceiver* inputReceiver();
 
     private:
-        InputReceiver* inputReceiver = nullptr;
+        InputReceiver* _inputReceiver = nullptr;
 
     };
 } // MEGEngine

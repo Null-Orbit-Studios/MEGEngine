@@ -10,17 +10,38 @@ namespace MEGEngine {
         }
 
         // unsubscribe all actions of previous receiver
-        if (inputReceiver) {
-            for (const auto& pair : inputReceiver->actionCallbacks) {
+        if (_inputReceiver) {
+            for (const auto& pair : _inputReceiver->actionCallbacks) {
                 Engine::instance().inputSystem()->unsubscribe(*pair.action);
             }
         }
 
 
         // set new receiver and subscribe all actions
-        inputReceiver = receiver;
-        for (const auto& pair : inputReceiver->actionCallbacks) {
+        _inputReceiver = receiver;
+        for (const auto& pair : _inputReceiver->actionCallbacks) {
             Engine::instance().inputSystem()->subscribe(*pair.action, pair.callback);
         }
+
+        Log(LogLevel::DBG, "Possessed new entity: %s", typeid(player).name());
+
+    }
+
+    void PlayerController::update() {
+        if (_inputReceiver) {
+            // unsubscribe all actions of receiver
+            for (const auto& pair : _inputReceiver->actionCallbacks) {
+                Engine::instance().inputSystem()->unsubscribe(*pair.action);
+            }
+
+            // subscribe to all actions of input receiver
+            for (const auto& pair : _inputReceiver->actionCallbacks) {
+                Engine::instance().inputSystem()->subscribe(*pair.action, pair.callback);
+            }
+        }
+    }
+
+    InputReceiver* PlayerController::inputReceiver() {
+        return _inputReceiver;
     }
 } // MEGEngine
