@@ -2,7 +2,12 @@
 #include "MEGEngine/engine.h"
 
 namespace MEGEngine {
-    void PlayerController::setInputReceiver(InputReceiver* receiver) {
+    void PlayerController::possess(Entity& player) {
+        auto receiver = player.getComponent<InputReceiver>();
+        if (!receiver) {
+            Log(LogLevel::ERR, "Cannot possess entity as it does not have an InputReceiver component");
+            return;
+        }
 
         // unsubscribe all actions of previous receiver
         if (inputReceiver) {
@@ -10,6 +15,7 @@ namespace MEGEngine {
                 Engine::instance().inputSystem()->unsubscribe(*pair.action);
             }
         }
+
 
         // set new receiver and subscribe all actions
         inputReceiver = receiver;

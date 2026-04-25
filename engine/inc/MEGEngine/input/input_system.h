@@ -19,7 +19,6 @@ namespace MEGEngine {
         std::shared_ptr<InputContext> createContext();
         void bind(InputContext& ctx, InputAction& action, InputSource src, float scale = 1.0f);
         void pushContext(std::shared_ptr<InputContext> ctx);
-        //TODO: unsubscribe?
         void subscribe(InputAction& action, PlayerActionBus::Callback cb);
         void unsubscribe(InputAction& action);
         void update();
