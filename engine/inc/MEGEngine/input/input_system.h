@@ -21,6 +21,7 @@ namespace MEGEngine {
         void pushContext(std::shared_ptr<InputContext> ctx);
         //TODO: unsubscribe?
         void subscribe(InputAction& action, PlayerActionBus::Callback cb);
+        void unsubscribe(InputAction& action);
         void update();
         InputManager& manager() { return _manager; }
         InputMappingSystem& mapping() { return _mapping; };

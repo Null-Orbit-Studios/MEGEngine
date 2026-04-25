@@ -42,6 +42,10 @@ namespace MEGEngine {
         _actionBus.subscribe(&action, std::move(cb));
     }
 
+    void InputSystem::unsubscribe(InputAction &action) {
+        _actionBus.unsubscribe(&action);
+    }
+
     void InputSystem::update() {
         _mapping.beginFrame();
         _manager.update();

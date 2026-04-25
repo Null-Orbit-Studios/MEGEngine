@@ -12,6 +12,7 @@ namespace MEGEngine {
         using Callback = std::function<void(const ActionState&)>;
 
         void subscribe(InputAction* action, Callback cb);
+        void unsubscribe(InputAction* action);
         void publish(const std::unordered_map<InputAction*, ActionState>& states);
 
     private:

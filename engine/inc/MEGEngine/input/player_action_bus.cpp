@@ -5,6 +5,10 @@ namespace MEGEngine {
         _listeners[action].push_back(cb);
     }
 
+    void PlayerActionBus::unsubscribe(InputAction *action) {
+        _listeners.erase(action);
+    }
+
     void PlayerActionBus::publish(const std::unordered_map<InputAction *, ActionState> &states) {
         for (auto& [action, state] : states) {
             if (_listeners.count(action)) {

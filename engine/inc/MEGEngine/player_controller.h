@@ -11,7 +11,7 @@ namespace MEGEngine {
         void setInputReceiver(InputReceiver* receiver);
 
     private:
-        InputReceiver* inputReceiver;
+        InputReceiver* inputReceiver = nullptr;
 
     };
 } // MEGEngine
