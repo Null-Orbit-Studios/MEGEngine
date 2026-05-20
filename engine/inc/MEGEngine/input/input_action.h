@@ -17,9 +17,29 @@ namespace MEGEngine {
         ActionValue(float v) : _value(v) {}
         ActionValue(Vec2 v) : _value(v) {}
 
-        const bool* asBool() const { return std::get_if<bool>(&_value); }
-        const float* asFloat() const { return std::get_if<float>(&_value); }
-        const Vec2* asVec2() const { return std::get_if<Vec2>(&_value); }
+        const bool asBool() const {
+            const bool* val = std::get_if<bool>(&_value);
+            if (val)
+                return *val;
+            else
+                return false;
+        }
+
+        const float asFloat() const {
+            const float* val = std::get_if<float>(&_value);
+            if (val)
+                return *val;
+            else
+                return 0;
+        }
+
+        const Vec2 asVec2() const {
+            const Vec2* val = std::get_if<Vec2>(&_value);
+            if (val)
+                return *val;
+            else
+                return Vec2(0, 0);
+        }
 
         const variant& asVariant() const { return _value; }
 

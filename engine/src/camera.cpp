@@ -47,13 +47,13 @@ namespace MEGEngine {
         return _camMatrix;
     }
 
-    void Camera::moveForward(const float* val) {
+    void Camera::moveForward(float val) {
         if (val)
-            _localMove.z += *val;
+            _localMove.z += val;
     }
-    void Camera::moveRight(const float* val) {
+    void Camera::moveRight(float val) {
         if (val)
-            _localMove.x += *val;
+            _localMove.x += val;
     }
 
     void Camera::processInputs(Window& window) {
