@@ -86,6 +86,10 @@ add_library(MEGEngine SHARED
         inc/MEGEngine/engine.cpp
         inc/MEGEngine/engine.h
         inc/MEGEngine/component.h
+        src/player_controller.cpp
+        inc/MEGEngine/player_controller.h
+        inc/MEGEngine/input/input_receiver.cpp
+        inc/MEGEngine/input/input_receiver.h
 )
 
 target_include_directories(MEGEngine

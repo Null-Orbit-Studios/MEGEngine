@@ -15,9 +15,8 @@ namespace MEGEngine {
 		void processInputs(class Window& window);
 
 		// TODO: remove once player controller is added
-		void init();
-		void moveForward(const float* val);
-		void moveRight(const float* val);
+		void moveForward(float val);
+		void moveRight(float val);
 
 	private:
 		float _width;

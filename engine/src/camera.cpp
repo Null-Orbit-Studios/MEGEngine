@@ -30,30 +30,6 @@ namespace MEGEngine {
         initialMouseY(float(height)),
         lastMouseInputState(GLFW_RELEASE) {}
 
-    void Camera::init() {
-        if (auto fwdAction = Engine::instance().inputSystem()->findAction("MoveForward")) {
-            Engine::instance().inputSystem()->subscribe(*fwdAction, [this](const ActionState& s){ moveForward(s.value.asFloat()); });
-        } else {
-            Log(LogLevel::WRN, "Find input action returned null");
-        }
-        if (auto fwdAction = Engine::instance().inputSystem()->findAction("MoveBackward")) {
-            Engine::instance().inputSystem()->subscribe(*fwdAction, [this](const ActionState& s){ moveForward(s.value.asFloat()); });
-        } else {
-            Log(LogLevel::WRN, "Find input action returned null");
-        }
-
-        if (auto rightAction = Engine::instance().inputSystem()->findAction("MoveRight")) {
-            Engine::instance().inputSystem()->subscribe(*rightAction, [this](const ActionState& s){ moveRight(s.value.asFloat()); });
-        } else {
-            Log(LogLevel::WRN, "Find input action returned null");
-        }
-        if (auto rightAction = Engine::instance().inputSystem()->findAction("MoveLeft")) {
-            Engine::instance().inputSystem()->subscribe(*rightAction, [this](const ActionState& s){ moveRight(s.value.asFloat()); });
-        } else {
-            Log(LogLevel::WRN, "Find input action returned null");
-        }
-    }
-
     void Camera::onUpdate() {
         Vec3 camForward = this->getComponent<Transform>()->orientation().rotate(Vec3::worldForward());
         Mat4 view = Mat4::lookAt(
@@ -71,13 +47,13 @@ namespace MEGEngine {
         return _camMatrix;
     }
 
-    void Camera::moveForward(const float* val) {
+    void Camera::moveForward(float val) {
         if (val)
-            _localMove.z += *val;
+            _localMove.z += val;
     }
-    void Camera::moveRight(const float* val) {
+    void Camera::moveRight(float val) {
         if (val)
-            _localMove.x += *val;
+            _localMove.x += val;
     }
 
     void Camera::processInputs(Window& window) {

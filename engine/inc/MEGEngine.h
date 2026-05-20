@@ -23,6 +23,7 @@
 
 #include "MEGEngine/events.h"
 #include "MEGEngine/input.h"
+#include "MEGEngine/player_controller.h"
 
 #include "MEGEngine/engine.h"
 

@@ -31,7 +31,7 @@ namespace MEGEngine {
 		T* getComponent() {
 			auto it = _componentLookup.find(typeid(T));
 			if (it == _componentLookup.end()) {
-				Log(LogLevel::WRN, "Entity::getComponent<T>(): Component not found");
+				Log(LogLevel::WRN, "Entity::getComponent<%s>(): Component not found", typeid(T).name());
 				return nullptr;
 			}
 
@@ -41,7 +41,7 @@ namespace MEGEngine {
 		template<typename T, typename... Args>
 		T* addComponent(Args&&... args) {
 			if (hasComponent<T>()) {
-				Log(LogLevel::WRN, "Entity::addComponent<T>(): Component already registered");
+				Log(LogLevel::WRN, "Entity::addComponent<%s>(): Component already registered", typeid(T).name());
 				return nullptr;
 			}
 
@@ -58,7 +58,7 @@ namespace MEGEngine {
 		void removeComponent() {
 			auto mapIt = _componentLookup.find(typeid(T));
 			if (mapIt == _componentLookup.end()) {
-				Log(LogLevel::WRN, "Entity::removeComponent<T>(): Component not found");
+				Log(LogLevel::WRN, "Entity::removeComponent<%s>(): Component not found", typeid(T).name());
 				return;
 			}
 

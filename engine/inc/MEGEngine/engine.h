@@ -3,6 +3,7 @@
 
 #include "MEGEngine/common.h"
 #include "MEGEngine/input.h"
+#include "MEGEngine/player_controller.h"
 
 namespace MEGEngine {
     class ENGINE_API Engine {
@@ -19,8 +20,14 @@ namespace MEGEngine {
         InputSystem* inputSystem() {
             return _inputSystem;
         }
+
+        PlayerController* playerController() {
+            return &_playerController;
+        }
+
     private:
         InputSystem* _inputSystem = nullptr;
+        PlayerController _playerController;
     };
 }
 
