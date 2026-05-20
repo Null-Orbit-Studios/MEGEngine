@@ -1,10 +1,12 @@
-#include "mINI/ini.h"
+#include <fstream>
+#include <filesystem>
+
+#include "JSON/json.hpp"
 
 #include "MEGEngine/utils/log.h"
 #include "MEGEngine/settings.h"
-#include <filesystem>
 
-using namespace mINI;
+using JSON = nlohmann::json;
 
 namespace MEGEngine {
 
@@ -14,19 +16,24 @@ namespace MEGEngine {
     }
 
     void Settings::init() {
-        INIFile file("defaultSettings.ini");
-        INIStructure ini;
         Log(LogLevel::DBG, "Current directory: %s", std::filesystem::current_path().c_str());
-        bool readSuccess = file.read(ini);
-        if (!readSuccess) {
-            Log(LogLevel::ERR, "Failed to read engine settings file");
+
+
+        std::string settingsFilename = "defaultSettings.json";
+        JSON json;
+        std::ifstream file(settingsFilename, std::ios::binary);
+        if (!file) {
+            Log(LogLevel::ERR, "Failed to open settings file for reading: " + std::string(settingsFilename));
             throw std::runtime_error("Failed to read engine settings file");
         }
+        std::stringstream ss;
+        ss << file.rdbuf();
+        json = JSON::parse(ss);
 
-        general().shaderDirectory = ini.get("General").get("shaderDirectory");
-        general().modelDirectory = ini.get("General").get("modelDirectory");
+        general().shaderDirectory = json["General"]["shaderDirectory"];
+        general().modelDirectory = json["General"]["modelDirectory"];
 
-        graphics().maxFps = stoi(ini.get("Graphics").get("maxFps"));
+        graphics().maxFps = json["Graphics"]["maxFps"];
 
         //TODO: get engine library location and store engine root directory
 

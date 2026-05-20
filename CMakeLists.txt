@@ -41,7 +41,7 @@ endif ()
 
 add_custom_command(TARGET MEGEngine PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different        # executes "cmake -E copy_if_different..."
-        "${PROJECT_SOURCE_DIR}/defaultSettings.ini"          # <-- in-file
+        "${PROJECT_SOURCE_DIR}/defaultSettings.json"          # <-- in-file
         ${CMAKE_BINARY_DIR}                                  # <-- out-file path
 )
 
