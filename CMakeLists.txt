@@ -51,10 +51,12 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 unset(CMAKE_BUILD_TYPE CACHE) # Can be overwritten but resets to debug on next build
 
+option(BUILD_TESTS OFF)
 if(BUILD_EXAMPLES STREQUAL "ON")
         add_subdirectory(examples)
 endif()
 
+option(BUILD_TESTS ON)
 if(BUILD_TESTS STREQUAL "ON")
         add_subdirectory(tests)
 endif()
