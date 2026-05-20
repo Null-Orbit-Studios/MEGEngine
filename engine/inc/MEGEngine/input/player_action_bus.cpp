@@ -11,9 +11,11 @@ namespace MEGEngine {
 
     void PlayerActionBus::publish(const std::unordered_map<InputAction *, ActionState> &states) {
         for (auto& [action, state] : states) {
-            if (_listeners.count(action)) {
-                for (auto& cb : _listeners[action]) {
-                    cb(state);
+            if (state.started || state.ongoing || state.completed) { // only publish if state is 'active'
+                if (_listeners.count(action)) {
+                    for (auto& cb : _listeners[action]) {
+                        cb(state);
+                    }
                 }
             }
         }
