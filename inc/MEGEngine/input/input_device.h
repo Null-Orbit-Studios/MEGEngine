@@ -2,11 +2,9 @@
 #define MEGENGINEPROJECT_INPUT_DEVICE_H
 
 #include <array>
+#include <typeinfo>
 
 #include "MEGEngine/common.h"
-
-// TODO: remove temp debugging includes
-#include <typeinfo>
 #include "MEGEngine/utils/log.h"
 
 namespace MEGEngine {

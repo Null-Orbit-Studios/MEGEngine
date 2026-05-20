@@ -50,7 +50,9 @@ namespace MEGEngine {
                 levelStr = "\033[31mERR\033[0m"; // colour codes for when displayed in terminal
                 break;
         }
+        #ifdef DEBUG
         //TODO: display logs to the game screen
+        #endif
         auto time = std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now());
         auto formattedTime = std::format("{:%T}", time);
         std::cout << formattedTime << " [" << levelStr << "]: " << msg << std::endl;

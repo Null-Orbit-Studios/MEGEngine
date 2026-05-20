@@ -21,7 +21,6 @@ namespace MEGEngine {
 
     private:
 
-        // TODO: fill this out with the rest of the keys
         static constexpr std::array<KeyCode, GLFW_KEY_LAST> buildTable()
         {
             std::array<KeyCode, GLFW_KEY_LAST> table{};
