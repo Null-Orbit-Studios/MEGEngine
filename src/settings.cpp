@@ -14,7 +14,7 @@ namespace MEGEngine {
     }
 
     void Settings::init() {
-        INIFile file("../engine/engineSettings.ini");
+        INIFile file("defaultSettings.ini");
         INIStructure ini;
         Log(LogLevel::DBG, "Current directory: %s", std::filesystem::current_path().c_str());
         bool readSuccess = file.read(ini);
