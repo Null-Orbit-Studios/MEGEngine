@@ -12,10 +12,7 @@ namespace MEGEngine {
     public:
         Event() = default;
     };
-} // EVENT
-
-
-namespace MEGEngine {
+    
     class ENGINE_API EventListener {
     public:
         EventListener(class Entity& parent);
@@ -28,9 +25,7 @@ namespace MEGEngine {
     protected:
         Entity& _parent;
     };
-} // EVENT LISTENER
 
-namespace MEGEngine {
     class ENGINE_API EventManager {
     public:
         static void processEvents();
@@ -51,6 +46,6 @@ namespace MEGEngine {
         inline static std::vector<std::type_index> _eventQueue;
         inline static std::unordered_map<std::type_index, std::vector<EventListener*>> _listeners;
     };
-} // EVENT MANAGER
+} // MEGEngine
 
 #endif //MEGENGINEPROJECT_EVENTS_H
