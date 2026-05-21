@@ -30,6 +30,8 @@ namespace MEGEngine {
         ss << file.rdbuf();
         json = JSON::parse(ss);
 
+        // TODO: Handle exceptions when entry isn't found in json
+
         general().shaderDirectory = json["General"]["shaderDirectory"];
         general().modelDirectory = json["General"]["modelDirectory"];
 

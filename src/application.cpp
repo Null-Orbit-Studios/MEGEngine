@@ -42,7 +42,6 @@ namespace MEGEngine {
 		while (running) {
 			_scene->update();
 			_scene->camera().processInputs(window());
-			// InputManager::processInputs();
 
 	    	_renderer->render(*_scene);
 
@@ -53,7 +52,11 @@ namespace MEGEngine {
 	    		requestQuit();
 
 	        // Limit FPS and set deltaTime
-	    	std::this_thread::sleep_for(std::chrono::milliseconds(10));
+			uint32_t maxFps = Settings::instance().graphics().maxFps;
+			if (!maxFps) {
+				maxFps = 60;
+			}
+	    	std::this_thread::sleep_for(std::chrono::milliseconds(1000) / maxFps);
 
 	    	Timer::setDeltaTime(lastFrame);
 			onUpdate();
