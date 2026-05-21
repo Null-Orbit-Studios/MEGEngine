@@ -25,6 +25,9 @@
 #include "MEGEngine/input.h"
 #include "MEGEngine/player_controller.h"
 
+#include "MEGEngine/component.h"
+#include "MEGEngine/scripted_behaviour.h"
+
 #include "MEGEngine/engine.h"
 
 #endif //MEGENGINEPROJECT_MEGENGINE_H

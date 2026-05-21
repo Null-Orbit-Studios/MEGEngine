@@ -9,14 +9,10 @@ namespace MEGEngine {
 	class ENGINE_API Camera : public Entity {
 	public:
 		Camera(int width, int height);
-		void onUpdate() override;
+		void updateCamMatrix();
 
 		Mat4 camMatrix() const;
 		void processInputs(class Window& window);
-
-		// TODO: remove once player controller is added
-		void moveForward(float val);
-		void moveRight(float val);
 
 	private:
 		float _width;
@@ -34,14 +30,8 @@ namespace MEGEngine {
 
 		// Used to prevent camera from jumping on click
 		bool firstClick = true;
-
-		float speed = 5.0f;
-		float baseSpeed = 5.0f;
-		bool isSprinting = false;
-		float boostSpeed = 10.0f;
+		
 		float sensitivity = 100.0f;
-
-		Vec3 _localMove = {0, 0, 0};
 	};
 }
 

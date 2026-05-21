@@ -30,7 +30,7 @@ namespace MEGEngine {
         initialMouseY(float(height)),
         lastMouseInputState(GLFW_RELEASE) {}
 
-    void Camera::onUpdate() {
+    void Camera::updateCamMatrix() {
         Vec3 camForward = this->getComponent<Transform>()->orientation().rotate(Vec3::worldForward());
         Mat4 view = Mat4::lookAt(
             this->getComponent<Transform>()->position(),
@@ -47,27 +47,8 @@ namespace MEGEngine {
         return _camMatrix;
     }
 
-    void Camera::moveForward(float val) {
-        if (val)
-            _localMove.z += val;
-    }
-    void Camera::moveRight(float val) {
-        if (val)
-            _localMove.x += val;
-    }
-
     void Camera::processInputs(Window& window) {
         WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
-
-        if (_localMove.length() * _localMove.length() > 0) {
-            _localMove = _localMove.normalized();
-
-            Vec3 worldMove = this->getComponent<Transform>()->orientation().rotate(_localMove);
-            this->getComponent<Transform>()->setPosition(this->getComponent<Transform>()->position() + (worldMove * speed * Timer::deltaTime()));
-        }
-
-        _localMove = {0, 0, 0};
-
 
         if (glfwGetMouseButton(glfwWindow->impl, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
             glfwSetInputMode(glfwWindow->impl, GLFW_CURSOR, GLFW_CURSOR_DISABLED);

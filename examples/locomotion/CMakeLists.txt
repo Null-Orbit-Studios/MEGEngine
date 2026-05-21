@@ -1,9 +1,8 @@
 
+file(GLOB_RECURSE GAME_SOURCES src/*.cpp src/*.h src/*.hpp)
+
 # App executable
-add_executable(locomotion
-        src/main.cpp
-        src/CustomEvents.h
-)
+add_executable(locomotion ${GAME_SOURCES})
 
 target_include_directories(locomotion PRIVATE
         inc

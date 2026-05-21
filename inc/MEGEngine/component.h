@@ -6,13 +6,24 @@
 #include "MEGEngine/common.h"
 
 namespace MEGEngine {
-    // Abstract class - serves as the base class for all entity components
+
+    class Entity; // forward declared to avoid circular dependency
+
+    // Base class for all entity components
     class ENGINE_API Component {
-    protected:
-        Component() = default;
+    public:
+        virtual ~Component() = default;
+
+        Entity* parent() const {
+            return _parent;
+        }
+
+    private:
+        friend class Entity;
+        Entity* _parent = nullptr;
     };
 
     using ComponentTypeID = std::type_index;
-} // MEGEngine
+}
 
 #endif //MEGENGINEPROJECT_COMPONENT_H

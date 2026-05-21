@@ -3,9 +3,17 @@
 #include "MEGEngine/mesh_renderer.h"
 #include "MEGEngine/utils/log.h"
 
+#include "MEGEngine/scripted_behaviour.h"
+
 namespace MEGEngine {
 	Entity::Entity() {
 		addComponent<Transform>();
+	}
+
+	void Entity::callOnStart(std::type_index type) {
+		if (auto script = dynamic_cast<ScriptedBehaviour*>(_componentLookup[type])) {
+			script->onStart();
+		}
 	}
 
 	void Entity::addChild(Entity& child) {

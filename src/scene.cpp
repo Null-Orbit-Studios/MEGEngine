@@ -1,5 +1,6 @@
 #include "MEGEngine/scene.h"
 #include "MEGEngine/camera.h"
+#include "MEGEngine/scripted_behaviour.h"
 
 namespace MEGEngine {
     Scene::Scene(float width, float height) {
@@ -36,7 +37,12 @@ namespace MEGEngine {
     void Scene::update() {
         // trigger updates for each entity in the scene
         for (auto& entity : _entities) {
-            entity->onUpdate();
+            for (auto& component : entity->getComponents()) {
+                if (auto script = dynamic_cast<ScriptedBehaviour*>(component.get())) {
+                    script->onUpdate();
+                }
+            }
+            camera().updateCamMatrix();
         }
 
         // clear and refresh scene light data

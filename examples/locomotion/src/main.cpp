@@ -5,6 +5,7 @@
 #include "MEGEngine/utils/log.h"
 
 #include "CustomEvents.h"
+#include "MoveCamera.h"
 
 class ExampleGame : public MEGEngine::Application {
 public:
@@ -32,22 +33,24 @@ protected:
 		inputSystem.bind(*gameplay, swapPlayer, MEGEngine::InputSource{MEGEngine::InputSource::Type::KEY, MEGEngine::KeyCode::T}, +1);
 		inputSystem.pushContext(gameplay);
 
+		scene().camera().addComponent<MoveCamera>();
+
 		if (auto ir = scene().camera().addComponent<MEGEngine::InputReceiver>()) {
 			ir->linkActionCallback(
 				"MoveForward",
-				[this](const MEGEngine::ActionState& s){ scene().camera().moveForward(s.value.asFloat()); }
+				[this](const MEGEngine::ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveForward(s.value.asFloat()); }
 			);
 			ir->linkActionCallback(
 				"MoveBackward",
-				[this](const MEGEngine::ActionState& s){ scene().camera().moveForward(s.value.asFloat()); }
+				[this](const MEGEngine::ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveForward(s.value.asFloat()); }
 			);
 			ir->linkActionCallback(
 				"MoveRight",
-				[this](const MEGEngine::ActionState& s){ scene().camera().moveRight(s.value.asFloat()); }
+				[this](const MEGEngine::ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveRight(s.value.asFloat()); }
 			);
 			ir->linkActionCallback(
 				"MoveLeft",
-				[this](const MEGEngine::ActionState& s){ scene().camera().moveRight(s.value.asFloat()); }
+				[this](const MEGEngine::ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveRight(s.value.asFloat()); }
 			);
 
 			MEGEngine::Engine::instance().playerController()->possess(scene().camera());

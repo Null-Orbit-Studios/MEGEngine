@@ -16,8 +16,6 @@ namespace MEGEngine {
 		Entity();
 		virtual ~Entity() = default;
 
-		virtual void onUpdate() {} // TODO: update will be moved to script component when script feature is added
-
 		void addChild(Entity& child);
 		[[nodiscard]] const std::vector<Entity*>& children() const;
 		[[nodiscard]] Entity* parent() const;
@@ -38,6 +36,10 @@ namespace MEGEngine {
 			return static_cast<T*>(it->second);
 		}
 
+		const std::vector<std::unique_ptr<Component>>& getComponents() const {
+			return _components;
+		}
+
 		template<typename T, typename... Args>
 		T* addComponent(Args&&... args) {
 			if (hasComponent<T>()) {
@@ -50,6 +52,11 @@ namespace MEGEngine {
 
 			_componentLookup[typeid(T)] = ptr;
 			_components.push_back(std::move(component));
+
+			_componentLookup[typeid(T)]->_parent = this;
+
+			// if component inherits ScriptBehaviour, call the onStart() function
+			callOnStart(typeid(T));
 
 			return ptr;
 		}
@@ -82,6 +89,8 @@ namespace MEGEngine {
 
 		std::vector<std::unique_ptr<Component>> _components;
 		std::unordered_map<ComponentTypeID, Component*> _componentLookup;
+
+		void callOnStart(std::type_index type);
 	};
 }
 
