@@ -6,18 +6,18 @@
 #include "MEGEngine/common.h"
 #include "MEGEngine/input/input_action.h"
 
-namespace MEGEngine {
-    class ENGINE_API PlayerActionBus {
-    public:
-        using Callback = std::function<void(const ActionState&)>;
 
-        void subscribe(InputAction* action, Callback cb);
-        void unsubscribe(InputAction* action);
-        void publish(const std::unordered_map<InputAction*, ActionState>& states);
+class ENGINE_API PlayerActionBus {
+public:
+    using Callback = std::function<void(const ActionState&)>;
 
-    private:
-        std::unordered_map<InputAction*, std::vector<Callback>> _listeners;
-    };
-} // MEGEngine
+    void subscribe(InputAction* action, Callback cb);
+    void unsubscribe(InputAction* action);
+    void publish(const std::unordered_map<InputAction*, ActionState>& states);
+
+private:
+    std::unordered_map<InputAction*, std::vector<Callback>> _listeners;
+};
+
 
 #endif //MEGENGINEPROJECT_PLAYER_ACTION_BUS_H

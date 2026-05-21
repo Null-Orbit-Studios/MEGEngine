@@ -1,13 +1,12 @@
 #include "raw_input_event_bus.h"
 
-namespace MEGEngine {
-    std::vector<std::unique_ptr<Base_QueuedEvent>> RawInputEventBus::_eventQueue;
 
-    void RawInputEventBus::dispatch() {
-        for (auto& event : _eventQueue)
-            event->dispatch();
+std::vector<std::unique_ptr<Base_QueuedEvent>> RawInputEventBus::_eventQueue;
 
-        _eventQueue.clear();
-    }
+void RawInputEventBus::dispatch() {
+    for (auto& event : _eventQueue)
+        event->dispatch();
 
-} // MEGEngine
+    _eventQueue.clear();
+}
+

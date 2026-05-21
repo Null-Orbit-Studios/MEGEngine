@@ -8,24 +8,24 @@
 #include "MEGEngine/settings.h"
 
 
-namespace MEGEngine {
-	std::string get_file_contents(const char* filename);
 
-	class ENGINE_API Shader {
-	public:
-		unsigned int ID();
-		Shader(const char* vertexFile = (settings.general().shaderDirectory+"/defaultLit/defaultLit.vert").c_str(), const char* fragmentFile = (settings.general().shaderDirectory+"/defaultLit/defaultLit.frag").c_str());
+std::string get_file_contents(const char* filename);
 
-		void activate();
-		void del();
+class ENGINE_API Shader {
+public:
+	unsigned int ID();
+	Shader(const char* vertexFile = (settings.general().shaderDirectory+"/defaultLit/defaultLit.vert").c_str(), const char* fragmentFile = (settings.general().shaderDirectory+"/defaultLit/defaultLit.frag").c_str());
 
-		template<typename T>
-		void setUniform(const char* name, const T& value);
+	void activate();
+	void del();
 
-	private:
-		unsigned int _id;
-		void compileErrors(unsigned int shader, const char* type);
-	};
-}
+	template<typename T>
+	void setUniform(const char* name, const T& value);
+
+private:
+	unsigned int _id;
+	void compileErrors(unsigned int shader, const char* type);
+};
+
 
 #endif //SHADER_H

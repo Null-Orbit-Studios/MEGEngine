@@ -16,7 +16,7 @@
 #include "MEGEngine/math/mat4.h"
 #include "MEGEngine/math/quat.h"
 
-namespace MEGEngine::Private {
+namespace Private {
 
 	inline glm::vec2 toGlmVec2(const Vec2& v) {
 		return {v.x, v.y};

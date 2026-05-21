@@ -6,72 +6,72 @@
 
 #include "MEGEngine/common.h"
 
-namespace MEGEngine {
-	class Window;
-	class Scene;
-	class Renderer;
 
-	struct ENGINE_API ApplicationConfig {
-		std::string windowTitle = "MEGEngine Game";
-		int width = 1280;
-		int height = 720;
-		bool fullscreen = false;
-		bool vsync = true;
-	};
+class Window;
+class Scene;
+class Renderer;
 
-	class ENGINE_API Application {
-	public:
-		ApplicationConfig config;
+struct ENGINE_API ApplicationConfig {
+	std::string windowTitle = "MEGEngine Game";
+	int width = 1280;
+	int height = 720;
+	bool fullscreen = false;
+	bool vsync = true;
+};
 
-		// Create instance using ApplicationConfig structure
-		explicit Application(const ApplicationConfig& config);
-		// Create instance using default configuration
-		Application() = default;
-		// Overwritable destructor so instance can handle its own clean-up
-		virtual ~Application();
+class ENGINE_API Application {
+public:
+	ApplicationConfig config;
 
-		// Prevents copying of the instance
-		Application(const Application&) = delete;
-		Application& operator=(const Application&) = delete;
+	// Create instance using ApplicationConfig structure
+	explicit Application(const ApplicationConfig& config);
+	// Create instance using default configuration
+	Application() = default;
+	// Overwritable destructor so instance can handle its own clean-up
+	virtual ~Application();
 
-		// Prevents moving the instance
-		Application(Application&&) noexcept;
-		Application& operator=(Application&&) noexcept;
+	// Prevents copying of the instance
+	Application(const Application&) = delete;
+	Application& operator=(const Application&) = delete;
 
-		// Handles the main loop
-		void run();
-		// Handles application exit
-		void requestQuit();
+	// Prevents moving the instance
+	Application(Application&&) noexcept;
+	Application& operator=(Application&&) noexcept;
 
-		// Return window object owned by the application
-		Window& window();
+	// Handles the main loop
+	void run();
+	// Handles application exit
+	void requestQuit();
 
-		// Return scene object owned by the application
-		Scene& scene();
+	// Return window object owned by the application
+	Window& window();
 
-		// Return renderer object owned by the application
-		Renderer& renderer();
+	// Return scene object owned by the application
+	Scene& scene();
 
-	protected:
-		// Virtual function, overwritten by objects of this class. Called on application startup
-		virtual void onInit() {}
-		// Virtual function, overwritten by objects of this class. Called on each frame
-		virtual void onUpdate() {};
-		// Virtual function, overwritten by objects of this class. Called on application exit
-		virtual void onShutdown() {};
+	// Return renderer object owned by the application
+	Renderer& renderer();
 
-	private:
-		// Internal function to create necessary objects
-		void init();
-		// Internal function to handle application exit
-		void shutdown();
+protected:
+	// Virtual function, overwritten by objects of this class. Called on application startup
+	virtual void onInit() {}
+	// Virtual function, overwritten by objects of this class. Called on each frame
+	virtual void onUpdate() {};
+	// Virtual function, overwritten by objects of this class. Called on application exit
+	virtual void onShutdown() {};
 
-		bool running = false;
+private:
+	// Internal function to create necessary objects
+	void init();
+	// Internal function to handle application exit
+	void shutdown();
 
-		std::unique_ptr<Window> _window;
-		std::unique_ptr<Renderer> _renderer;
-		std::unique_ptr<Scene> _scene;
-	};
-} // MEGEngine
+	bool running = false;
+
+	std::unique_ptr<Window> _window;
+	std::unique_ptr<Renderer> _renderer;
+	std::unique_ptr<Scene> _scene;
+};
+
 
 #endif //MEGENGINE_APPLICATION_H

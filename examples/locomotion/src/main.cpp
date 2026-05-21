@@ -7,116 +7,116 @@
 #include "CustomEvents.h"
 #include "MoveCamera.h"
 
-class ExampleGame : public MEGEngine::Application {
+class ExampleGame : public Application {
 public:
 	using Application::Application;
-	MEGEngine::InputSystem inputSystem;
+	InputSystem inputSystem;
 
 protected:
 	void onInit() override {
 		// once at start
 		inputSystem.init();
-		MEGEngine::Engine::instance().setInputSystem(&inputSystem); // for access throughout the application
-		MEGEngine::KeyboardDevice keyboard(&window());
-		inputSystem.manager().addDevice(std::make_unique<MEGEngine::KeyboardDevice>(keyboard));
+		Engine::instance().setInputSystem(&inputSystem); // for access throughout the application
+		KeyboardDevice keyboard(&window());
+		inputSystem.manager().addDevice(std::make_unique<KeyboardDevice>(keyboard));
 		// TODO: Have a single move action that takes a Vec2 or Vec3?
-		auto& moveFwd = inputSystem.createAction("MoveForward", MEGEngine::InputAction::Type::FLOAT);
-		auto& moveBwd = inputSystem.createAction("MoveBackward", MEGEngine::InputAction::Type::FLOAT);
-		auto& moveRgt = inputSystem.createAction("MoveRight", MEGEngine::InputAction::Type::FLOAT);
-		auto& moveLft = inputSystem.createAction("MoveLeft", MEGEngine::InputAction::Type::FLOAT);
-		auto& swapPlayer = inputSystem.createAction("SwapPlayer", MEGEngine::InputAction::Type::BOOL);
+		auto& moveFwd = inputSystem.createAction("MoveForward", InputAction::Type::FLOAT);
+		auto& moveBwd = inputSystem.createAction("MoveBackward", InputAction::Type::FLOAT);
+		auto& moveRgt = inputSystem.createAction("MoveRight", InputAction::Type::FLOAT);
+		auto& moveLft = inputSystem.createAction("MoveLeft", InputAction::Type::FLOAT);
+		auto& swapPlayer = inputSystem.createAction("SwapPlayer", InputAction::Type::BOOL);
 		auto gameplay = inputSystem.createContext();
-		inputSystem.bind(*gameplay, moveFwd, MEGEngine::InputSource{MEGEngine::InputSource::Type::KEY, MEGEngine::KeyCode::W}, +1);
-		inputSystem.bind(*gameplay, moveLft, MEGEngine::InputSource{MEGEngine::InputSource::Type::KEY, MEGEngine::KeyCode::A}, -1);
-		inputSystem.bind(*gameplay, moveBwd, MEGEngine::InputSource{MEGEngine::InputSource::Type::KEY, MEGEngine::KeyCode::S}, -1);
-		inputSystem.bind(*gameplay, moveRgt, MEGEngine::InputSource{MEGEngine::InputSource::Type::KEY, MEGEngine::KeyCode::D}, +1);
-		inputSystem.bind(*gameplay, swapPlayer, MEGEngine::InputSource{MEGEngine::InputSource::Type::KEY, MEGEngine::KeyCode::T}, +1);
+		inputSystem.bind(*gameplay, moveFwd, InputSource{InputSource::Type::KEY, KeyCode::W}, +1);
+		inputSystem.bind(*gameplay, moveLft, InputSource{InputSource::Type::KEY, KeyCode::A}, -1);
+		inputSystem.bind(*gameplay, moveBwd, InputSource{InputSource::Type::KEY, KeyCode::S}, -1);
+		inputSystem.bind(*gameplay, moveRgt, InputSource{InputSource::Type::KEY, KeyCode::D}, +1);
+		inputSystem.bind(*gameplay, swapPlayer, InputSource{InputSource::Type::KEY, KeyCode::T}, +1);
 		inputSystem.pushContext(gameplay);
 
 		scene().camera().addComponent<MoveCamera>();
 
-		if (auto ir = scene().camera().addComponent<MEGEngine::InputReceiver>()) {
+		if (auto ir = scene().camera().addComponent<InputReceiver>()) {
 			ir->linkActionCallback(
 				"MoveForward",
-				[this](const MEGEngine::ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveForward(s.value.asFloat()); }
+				[this](const ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveForward(s.value.asFloat()); }
 			);
 			ir->linkActionCallback(
 				"MoveBackward",
-				[this](const MEGEngine::ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveForward(s.value.asFloat()); }
+				[this](const ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveForward(s.value.asFloat()); }
 			);
 			ir->linkActionCallback(
 				"MoveRight",
-				[this](const MEGEngine::ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveRight(s.value.asFloat()); }
+				[this](const ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveRight(s.value.asFloat()); }
 			);
 			ir->linkActionCallback(
 				"MoveLeft",
-				[this](const MEGEngine::ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveRight(s.value.asFloat()); }
+				[this](const ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveRight(s.value.asFloat()); }
 			);
 
-			MEGEngine::Engine::instance().playerController()->possess(scene().camera());
+			Engine::instance().playerController()->possess(scene().camera());
 		}
 
-		scene().camera().getComponent<MEGEngine::Transform>()->setPosition({0, 0, -10});
+		scene().camera().getComponent<Transform>()->setPosition({0, 0, -10});
 
-		auto& light = scene().createEntity<MEGEngine::Light>();
+		auto& light = scene().createEntity<Light>();
 		light.setColour({1.0, 1.0, 1.0, 1.0});
-		MEGEngine::modelLoader.loadModelFromData(light, MEGEngine::Cube::vertices(), MEGEngine::Cube::indices());
-		light.getComponent<MEGEngine::MeshRenderer>()->setMaterial(std::make_shared<MEGEngine::Material>(MEGEngine::ShaderManager::getShader("light")));
-		light.getComponent<MEGEngine::MeshRenderer>()->material()->setColour({1.0, 1.0, 1.0, 1.0});
+		modelLoader.loadModelFromData(light, Cube::vertices(), Cube::indices());
+		light.getComponent<MeshRenderer>()->setMaterial(std::make_shared<Material>(ShaderManager::getShader("light")));
+		light.getComponent<MeshRenderer>()->material()->setColour({1.0, 1.0, 1.0, 1.0});
 
-		auto& sword = scene().createEntity<MEGEngine::Entity>();
-		MEGEngine::modelLoader.loadModelFromFile(sword, (MEGEngine::settings.general().modelDirectory + "/sword/sword.gltf").c_str());
-		sword.getComponent<MEGEngine::Transform>()->setPosition(MEGEngine::Vec3(5, -5, 0));
-		sword.getComponent<MEGEngine::Transform>()->setOrientation(MEGEngine::Quat(0, 0, 0, 1));
-		sword.getComponent<MEGEngine::Transform>()->setScale(0.2);
-		sword.addComponent<MEGEngine::InputReceiver>();
+		auto& sword = scene().createEntity<Entity>();
+		modelLoader.loadModelFromFile(sword, (settings.general().modelDirectory + "/sword/sword.gltf").c_str());
+		sword.getComponent<Transform>()->setPosition(Vec3(5, -5, 0));
+		sword.getComponent<Transform>()->setOrientation(Quat(0, 0, 0, 1));
+		sword.getComponent<Transform>()->setScale(0.2);
+		sword.addComponent<InputReceiver>();
 
-		if (auto swordIr = sword.getComponent<MEGEngine::InputReceiver>()) {
-			auto camIr = scene().camera().getComponent<MEGEngine::InputReceiver>();
+		if (auto swordIr = sword.getComponent<InputReceiver>()) {
+			auto camIr = scene().camera().getComponent<InputReceiver>();
 			camIr->linkActionCallback(
 				"SwapPlayer",
-				[&](const MEGEngine::ActionState& s){
-					MEGEngine::Log(LogLevel::DBG, "Possessing sword");
-					MEGEngine::Engine::instance().playerController()->possess(sword);
+				[&](const ActionState& s){
+					Log(LogLevel::DBG, "Possessing sword");
+					Engine::instance().playerController()->possess(sword);
 				}
 			);
 
 			swordIr->linkActionCallback(
 				"MoveForward",
-				[&](const MEGEngine::ActionState& s){
-					MEGEngine::Log(LogLevel::DBG, "Moving Sword forward");
-					auto pos = sword.getComponent<MEGEngine::Transform>()->position();
-					sword.getComponent<MEGEngine::Transform>()->setPosition({pos.x, pos.y, pos.z + s.value.asFloat()});
+				[&](const ActionState& s){
+					Log(LogLevel::DBG, "Moving Sword forward");
+					auto pos = sword.getComponent<Transform>()->position();
+					sword.getComponent<Transform>()->setPosition({pos.x, pos.y, pos.z + s.value.asFloat()});
 				}
 			);
 
 			swordIr->linkActionCallback(
 				"MoveBackward",
-				[&](const MEGEngine::ActionState& s){
-					MEGEngine::Log(LogLevel::DBG, "Moving Sword backward");
-					auto pos = sword.getComponent<MEGEngine::Transform>()->position();
-					sword.getComponent<MEGEngine::Transform>()->setPosition({pos.x, pos.y, pos.z + s.value.asFloat()});
+				[&](const ActionState& s){
+					Log(LogLevel::DBG, "Moving Sword backward");
+					auto pos = sword.getComponent<Transform>()->position();
+					sword.getComponent<Transform>()->setPosition({pos.x, pos.y, pos.z + s.value.asFloat()});
 				}
 			);
 		}
 
-		auto& floor = scene().createEntity<MEGEngine::Entity>();
-		MEGEngine::modelLoader.loadModelFromData(floor, MEGEngine::Cube::vertices(), MEGEngine::Cube::indices());
-		floor.getComponent<MEGEngine::MeshRenderer>()->setMaterial(std::make_shared<MEGEngine::Material>());
-		floor.getComponent<MEGEngine::Transform>()->setPosition(MEGEngine::Vec3(0, -30, 0));
-		floor.getComponent<MEGEngine::Transform>()->setScale(MEGEngine::Vec3(100, 0.1, 100));
+		auto& floor = scene().createEntity<Entity>();
+		modelLoader.loadModelFromData(floor, Cube::vertices(), Cube::indices());
+		floor.getComponent<MeshRenderer>()->setMaterial(std::make_shared<Material>());
+		floor.getComponent<Transform>()->setPosition(Vec3(0, -30, 0));
+		floor.getComponent<Transform>()->setScale(Vec3(100, 0.1, 100));
 
 	}
 
 	void onUpdate() override {
 		// once per frame
-		MEGEngine::EventManager::processEvents();
+		EventManager::processEvents();
 		inputSystem.update();
 	}
 };
 
 int main() {
-	MEGEngine::ApplicationConfig appConfig;
+	ApplicationConfig appConfig;
 	appConfig = {
 		.windowTitle = "Test Game",
 		.width = 1280,

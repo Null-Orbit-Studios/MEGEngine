@@ -5,17 +5,17 @@
 #include "MEGEngine/entity.h"
 #include "MEGEngine/input/input_receiver.h"
 
-namespace MEGEngine {
-    class ENGINE_API PlayerController {
-    public:
-        void possess(Entity& player);
-        void update();
-        InputReceiver* inputReceiver();
 
-    private:
-        InputReceiver* _inputReceiver = nullptr;
+class ENGINE_API PlayerController {
+public:
+    void possess(Entity& player);
+    void update();
+    InputReceiver* inputReceiver();
 
-    };
-} // MEGEngine
+private:
+    InputReceiver* _inputReceiver = nullptr;
+
+};
+
 
 #endif //MEGENGINEPROJECT_PLAYER_CONTROLLER_H

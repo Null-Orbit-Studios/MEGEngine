@@ -1,17 +1,16 @@
 #include "input_manager.h"
 
-namespace MEGEngine {
-    void InputManager::addDevice(std::unique_ptr<Base_InputDevice> device) {
-        Log(LogLevel::DBG, "Device added to input manager");
-        device->initialise(_bus);
-        _devices.push_back(std::move(device));
+
+void InputManager::addDevice(std::unique_ptr<Base_InputDevice> device) {
+    Log(LogLevel::DBG, "Device added to input manager");
+    device->initialise(_bus);
+    _devices.push_back(std::move(device));
+}
+
+void InputManager::update() {
+    for (auto& device : _devices) {
+        device->poll();
     }
 
-    void InputManager::update() {
-        for (auto& device : _devices) {
-            device->poll();
-        }
-
-        _bus.dispatch();
-    }
-} // MEGEngine
+    _bus.dispatch();
+}

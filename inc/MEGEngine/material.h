@@ -8,29 +8,29 @@
 #include "MEGEngine/texture.h"
 #include "MEGEngine/colour.h"
 
-namespace MEGEngine {
-    class ENGINE_API Material {
-    public:
-        explicit Material(class Shader* shader);
-        Material();
 
-        void bind();
+class ENGINE_API Material {
+public:
+    explicit Material(class Shader* shader);
+    Material();
 
-        void setTextures(std::unordered_map<TexType, std::shared_ptr<Texture>> textureList);
-        void setTexture(std::shared_ptr<Texture> texture);
+    void bind();
 
-        Shader* shader();
-        std::unordered_map<TexType, std::shared_ptr<Texture>> textures();
-        std::shared_ptr<Texture> texture(TexType type);
+    void setTextures(std::unordered_map<TexType, std::shared_ptr<Texture>> textureList);
+    void setTexture(std::shared_ptr<Texture> texture);
 
-        void setColour(Colour colour);
-        Colour colour();
+    Shader* shader();
+    std::unordered_map<TexType, std::shared_ptr<Texture>> textures();
+    std::shared_ptr<Texture> texture(TexType type);
 
-    private:
-        Colour _colour = {0.3, 0.3, 0.3, 1};
-        Shader* _shader;
-        std::unordered_map<TexType, std::shared_ptr<Texture>> _textures;
-    };
-} // MEGEngine
+    void setColour(Colour colour);
+    Colour colour();
+
+private:
+    Colour _colour = {0.3, 0.3, 0.3, 1};
+    Shader* _shader;
+    std::unordered_map<TexType, std::shared_ptr<Texture>> _textures;
+};
+
 
 #endif //MEGENGINEPROJECT_MATERIAL_H

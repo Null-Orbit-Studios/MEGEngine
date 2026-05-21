@@ -12,8 +12,8 @@ enum class ENGINE_API LogLevel {
     ERR
 };
 
-namespace MEGEngine {
-    void ENGINE_API Log(LogLevel level, const std::string& format, ...);
-}
+
+void ENGINE_API Log(LogLevel level, const std::string& format, ...);
+
 
 #endif //MEGENGINEPROJECT_LOG_H

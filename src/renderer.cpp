@@ -12,119 +12,118 @@
 
 #include "MEGEngine/utils/log.h"
 
-namespace MEGEngine {
-    struct Renderer::RenderGroup {
-        Shader* shader = nullptr;
-        std::vector<Entity*> entities;
-    };
 
-    void Renderer::init() {
-        if (!gladLoadGL())
-            throw std::runtime_error("GLAD initialization failed");
+struct Renderer::RenderGroup {
+    Shader* shader = nullptr;
+    std::vector<Entity*> entities;
+};
 
-        glEnable(GL_DEPTH_TEST);
-        glDepthFunc(GL_LESS);
+void Renderer::init() {
+    if (!gladLoadGL())
+        throw std::runtime_error("GLAD initialization failed");
 
-        _initialised = true;
-    }
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
-    void Renderer::render(const Scene& scene) {
-        if (!_initialised)
-            return;
+    _initialised = true;
+}
 
-        glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void Renderer::render(const Scene& scene) {
+    if (!_initialised)
+        return;
 
-        std::vector<RenderGroup> renderQueue;
+    glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        for (auto& entity : scene.entities()) {
-            if (entity->hasComponent<MeshRenderer>()) { // loop through render groups to store entities in order of shader
-                if (renderQueue.empty()) {
+    std::vector<RenderGroup> renderQueue;
+
+    for (auto& entity : scene.entities()) {
+        if (entity->hasComponent<MeshRenderer>()) { // loop through render groups to store entities in order of shader
+            if (renderQueue.empty()) {
+                RenderGroup newGroup;
+                newGroup.shader = entity->getComponent<MeshRenderer>()->material()->shader();
+                renderQueue.push_back(newGroup);
+            }
+
+            for (int i = 0; i < renderQueue.size(); i++) {
+                if (entity->getComponent<MeshRenderer>()->material()->shader()->ID() == renderQueue[i].shader->ID()) {
+                    renderQueue[i].entities.push_back(entity.get());
+                }
+                else if (i == renderQueue.size() - 1) {
                     RenderGroup newGroup;
                     newGroup.shader = entity->getComponent<MeshRenderer>()->material()->shader();
+                    newGroup.entities.push_back(entity.get());
                     renderQueue.push_back(newGroup);
                 }
-
-                for (int i = 0; i < renderQueue.size(); i++) {
-                    if (entity->getComponent<MeshRenderer>()->material()->shader()->ID() == renderQueue[i].shader->ID()) {
-                        renderQueue[i].entities.push_back(entity.get());
-                    }
-                    else if (i == renderQueue.size() - 1) {
-                        RenderGroup newGroup;
-                        newGroup.shader = entity->getComponent<MeshRenderer>()->material()->shader();
-                        newGroup.entities.push_back(entity.get());
-                        renderQueue.push_back(newGroup);
-                    }
-                }
-            }
-        }
-
-        for (RenderGroup& group : renderQueue) {
-            glUseProgram(group.shader->ID());
-            for (auto entity : group.entities) {
-                draw(*entity, scene);
             }
         }
     }
 
-    void Renderer::draw(Entity& entity, const Scene& scene) {
-        auto mr = entity.getComponent<MeshRenderer>();
-
-        if (!mr->material()->shader()) {
-            Log(LogLevel::WRN, "Attempt to draw failed. Shader is null");
-            return;
+    for (RenderGroup& group : renderQueue) {
+        glUseProgram(group.shader->ID());
+        for (auto entity : group.entities) {
+            draw(*entity, scene);
         }
+    }
+}
 
-        mr->material()->bind();
-        mr->mesh()->bind();
+void Renderer::draw(Entity& entity, const Scene& scene) {
+    auto mr = entity.getComponent<MeshRenderer>();
 
-        // Keep track of how many of each type of textures we have
-        unsigned int numDiffuse = 0;
-        unsigned int numSpecular = 0;
+    if (!mr->material()->shader()) {
+        Log(LogLevel::WRN, "Attempt to draw failed. Shader is null");
+        return;
+    }
 
-        // for (unsigned int i = 0; i < entity.meshRenderer()->material()->textures().size(); i++)
-        unsigned int slot = 0;
-        for (auto& pair : mr->material()->textures())
+    mr->material()->bind();
+    mr->mesh()->bind();
+
+    // Keep track of how many of each type of textures we have
+    unsigned int numDiffuse = 0;
+    unsigned int numSpecular = 0;
+
+    // for (unsigned int i = 0; i < entity.meshRenderer()->material()->textures().size(); i++)
+    unsigned int slot = 0;
+    for (auto& pair : mr->material()->textures())
+    {
+        TexType type = pair.first;
+        std::shared_ptr<Texture> texture = pair.second;
+        std::string num;
+        std::string uniformName;
+        if (type == TexType::ALBEDO) // TODO: add support for other texture types
         {
-            TexType type = pair.first;
-            std::shared_ptr<Texture> texture = pair.second;
-            std::string num;
-            std::string uniformName;
-            if (type == TexType::ALBEDO) // TODO: add support for other texture types
-            {
-                num = std::to_string(numDiffuse++);
-                uniformName = "diffuse" + num;
-            }
-            else if (type == TexType::SPECULAR)
-            {
-                num = std::to_string(numSpecular++);
-                uniformName = "specular" + num;
-            }
-            texture->texUnit(*mr->material()->shader(), (uniformName).c_str(), slot++);
-            texture->bind();
+            num = std::to_string(numDiffuse++);
+            uniformName = "diffuse" + num;
         }
-        mr->material()->shader()->setUniform("camPos", scene.camera().getComponent<Transform>()->position());
-        mr->material()->shader()->setUniform("camMatrix", scene.camera().camMatrix());
-
-        // Create matrices
-        Mat4 trans = Mat4::translation(entity.getComponent<Transform>()->position());
-        Mat4 rot = entity.getComponent<Transform>()->orientation().toMatrix();
-        Mat4 sca = Mat4::scale(entity.getComponent<Transform>()->scale());
-
-        // Push the matrices to the vertex shader
-        Mat4 modelMatrix = entity.getComponent<Transform>()->modelMatrix();
-        mr->material()->shader()->setUniform("model",  modelMatrix);
-        mr->material()->shader()->setUniform("translation", trans);
-        mr->material()->shader()->setUniform("rotation", rot);
-        mr->material()->shader()->setUniform("scale", sca);
-
-        // TODO: shader support for multiple light sources
-        mr->material()->shader()->setUniform("lightData", scene.lightData()[0]);
-        if (auto* light = dynamic_cast<Light*>(&entity)) { // if this entity is the light, set its translation in vert shader
-            mr->material()->shader()->setUniform("translation", Mat4::translation(scene.lightData()[0].position));
+        else if (type == TexType::SPECULAR)
+        {
+            num = std::to_string(numSpecular++);
+            uniformName = "specular" + num;
         }
-
-        // Draw the actual mesh
-        glDrawElements(GL_TRIANGLES, mr->mesh()->numIndices(), GL_UNSIGNED_INT, 0);
+        texture->texUnit(*mr->material()->shader(), (uniformName).c_str(), slot++);
+        texture->bind();
     }
-} // MEGEngine
+    mr->material()->shader()->setUniform("camPos", scene.camera().getComponent<Transform>()->position());
+    mr->material()->shader()->setUniform("camMatrix", scene.camera().camMatrix());
+
+    // Create matrices
+    Mat4 trans = Mat4::translation(entity.getComponent<Transform>()->position());
+    Mat4 rot = entity.getComponent<Transform>()->orientation().toMatrix();
+    Mat4 sca = Mat4::scale(entity.getComponent<Transform>()->scale());
+
+    // Push the matrices to the vertex shader
+    Mat4 modelMatrix = entity.getComponent<Transform>()->modelMatrix();
+    mr->material()->shader()->setUniform("model",  modelMatrix);
+    mr->material()->shader()->setUniform("translation", trans);
+    mr->material()->shader()->setUniform("rotation", rot);
+    mr->material()->shader()->setUniform("scale", sca);
+
+    // TODO: shader support for multiple light sources
+    mr->material()->shader()->setUniform("lightData", scene.lightData()[0]);
+    if (auto* light = dynamic_cast<Light*>(&entity)) { // if this entity is the light, set its translation in vert shader
+        mr->material()->shader()->setUniform("translation", Mat4::translation(scene.lightData()[0].position));
+    }
+
+    // Draw the actual mesh
+    glDrawElements(GL_TRIANGLES, mr->mesh()->numIndices(), GL_UNSIGNED_INT, 0);
+}

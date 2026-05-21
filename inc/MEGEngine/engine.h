@@ -5,30 +5,29 @@
 #include "MEGEngine/input.h"
 #include "MEGEngine/player_controller.h"
 
-namespace MEGEngine {
-    class ENGINE_API Engine {
-        public:
-        static Engine& instance() {
-            static Engine instance;
-            return instance;
-        }
 
-        void setInputSystem(InputSystem* inputSystem) {
-            _inputSystem = inputSystem;
-        }
-        // Returns null if no input system is set. Make sure to set and initialise input system before use
-        InputSystem* inputSystem() {
-            return _inputSystem;
-        }
+class ENGINE_API Engine {
+    public:
+    static Engine& instance() {
+        static Engine instance;
+        return instance;
+    }
 
-        PlayerController* playerController() {
-            return &_playerController;
-        }
+    void setInputSystem(InputSystem* inputSystem) {
+        _inputSystem = inputSystem;
+    }
+    // Returns null if no input system is set. Make sure to set and initialise input system before use
+    InputSystem* inputSystem() {
+        return _inputSystem;
+    }
 
-    private:
-        InputSystem* _inputSystem = nullptr;
-        PlayerController _playerController;
-    };
-}
+    PlayerController* playerController() {
+        return &_playerController;
+    }
+
+private:
+    InputSystem* _inputSystem = nullptr;
+    PlayerController _playerController;
+};
 
 #endif //MEGENGINEPROJECT_ENGINE_H

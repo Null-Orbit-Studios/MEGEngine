@@ -5,20 +5,20 @@
 
 #include "MEGEngine/common.h"
 
-namespace MEGEngine {
-    class ENGINE_API Timer {
-    public:
-        static float deltaTime();
-    private:
-        friend class Application;
-        static void setDeltaTime(auto& lastTime) {
-            auto now = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<float> delta = now - lastTime;
-            lastTime = now;
-            _deltaTime = delta.count();
-        }
-        inline static float _deltaTime;
-    };
-} // MEGEngine
+
+class ENGINE_API Timer {
+public:
+    static float deltaTime();
+private:
+    friend class Application;
+    static void setDeltaTime(auto& lastTime) {
+        auto now = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<float> delta = now - lastTime;
+        lastTime = now;
+        _deltaTime = delta.count();
+    }
+    inline static float _deltaTime;
+};
+
 
 #endif //MEGENGINEPROJECT_TIMER_H

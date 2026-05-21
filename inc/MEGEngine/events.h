@@ -7,45 +7,45 @@
 
 #include "MEGEngine/common.h"
 
-namespace MEGEngine {
-    class ENGINE_API Event {
-    public:
-        Event() = default;
-    };
-    
-    class ENGINE_API EventListener {
-    public:
-        EventListener(class Entity& parent);
-        virtual ~EventListener() = default;
 
-        virtual void onEvent() {};
+class ENGINE_API Event {
+public:
+    Event() = default;
+};
 
-        Entity& parent();
+class ENGINE_API EventListener {
+public:
+    EventListener(class Entity& parent);
+    virtual ~EventListener() = default;
 
-    protected:
-        Entity& _parent;
-    };
+    virtual void onEvent() {};
 
-    class ENGINE_API EventManager {
-    public:
-        static void processEvents();
+    Entity& parent();
 
-        template <typename EventType>
-        static void addListener(EventListener& listener) {
-            static_assert(std::is_base_of_v<Event, EventType>);
-            _listeners[typeid(EventType)].push_back(&listener);
-        }
+protected:
+    Entity& _parent;
+};
 
-        template<typename EventType>
-        static void triggerEvent()
-        {
-            _eventQueue.emplace_back(typeid(EventType));
-        }
+class ENGINE_API EventManager {
+public:
+    static void processEvents();
 
-    private:
-        inline static std::vector<std::type_index> _eventQueue;
-        inline static std::unordered_map<std::type_index, std::vector<EventListener*>> _listeners;
-    };
-} // MEGEngine
+    template <typename EventType>
+    static void addListener(EventListener& listener) {
+        static_assert(std::is_base_of_v<Event, EventType>);
+        _listeners[typeid(EventType)].push_back(&listener);
+    }
+
+    template<typename EventType>
+    static void triggerEvent()
+    {
+        _eventQueue.emplace_back(typeid(EventType));
+    }
+
+private:
+    inline static std::vector<std::type_index> _eventQueue;
+    inline static std::unordered_map<std::type_index, std::vector<EventListener*>> _listeners;
+};
+
 
 #endif //MEGENGINEPROJECT_EVENTS_H

@@ -8,21 +8,21 @@
 #include "MEGEngine/vertex.h"
 #include "MEGEngine/texture.h"
 
-namespace MEGEngine {
-	class ENGINE_API Mesh {
-	public:
-		Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
-		void bind();
-		size_t numIndices();
 
-	private:
-		VAO vao;
+class ENGINE_API Mesh {
+public:
+	Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+	void bind();
+	size_t numIndices();
 
-		std::vector<Vertex> vertices;
-		std::vector<unsigned int> indices;
-		std::vector<Texture> textures;
-	};
-}
+private:
+	VAO vao;
+
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+	std::vector<Texture> textures;
+};
+
 
 
 #endif //MESH_H

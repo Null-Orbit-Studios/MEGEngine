@@ -3,29 +3,29 @@
 
 #include "MEGEngine/common.h"
 
-namespace MEGEngine {
-    class ENGINE_API Quat {
-    public:
-        float x, y, z, w;
 
-        Quat();
-        Quat(float x, float y, float z, float w);
+class ENGINE_API Quat {
+public:
+    float x, y, z, w;
 
-        static Quat identity();
-        static Quat fromAxisAngle(const class Vec3& axis, float radians);
-        static Quat fromEuler(float pitch, float yaw, float roll);
-        static Vec3 toEuler(const Quat& q);
-        Vec3 toEuler(); // called as member function
+    Quat();
+    Quat(float x, float y, float z, float w);
 
-        Quat normalised() const;
-        Quat inverse() const;
+    static Quat identity();
+    static Quat fromAxisAngle(const class Vec3& axis, float radians);
+    static Quat fromEuler(float pitch, float yaw, float roll);
+    static Vec3 toEuler(const Quat& q);
+    Vec3 toEuler(); // called as member function
 
-        class Mat4 toMatrix() const;
+    Quat normalised() const;
+    Quat inverse() const;
 
-        Vec3 rotate(const Vec3& v) const;
+    class Mat4 toMatrix() const;
 
-        Quat operator*(const Quat& rhs) const;
-    };
-} // MEGEngine
+    Vec3 rotate(const Vec3& v) const;
+
+    Quat operator*(const Quat& rhs) const;
+};
+
 
 #endif //MEGENGINEPROJECT_QUAT_H

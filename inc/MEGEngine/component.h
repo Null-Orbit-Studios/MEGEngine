@@ -5,25 +5,25 @@
 
 #include "MEGEngine/common.h"
 
-namespace MEGEngine {
 
-    class Entity; // forward declared to avoid circular dependency
 
-    // Base class for all entity components
-    class ENGINE_API Component {
-    public:
-        virtual ~Component() = default;
+class Entity; // forward declared to avoid circular dependency
 
-        Entity* parent() const {
-            return _parent;
-        }
+// Base class for all entity components
+class ENGINE_API Component {
+public:
+    virtual ~Component() = default;
 
-    private:
-        friend class Entity;
-        Entity* _parent = nullptr;
-    };
+    Entity* parent() const {
+        return _parent;
+    }
 
-    using ComponentTypeID = std::type_index;
-}
+private:
+    friend class Entity;
+    Entity* _parent = nullptr;
+};
+
+using ComponentTypeID = std::type_index;
+
 
 #endif //MEGENGINEPROJECT_COMPONENT_H

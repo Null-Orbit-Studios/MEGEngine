@@ -3,7 +3,7 @@
 
 #include "MEGEngine/common.h"
 
-class ENGINE_API ScriptedBehaviour : public MEGEngine::Component {
+class ENGINE_API ScriptedBehaviour : public Component {
 public:
     virtual void onStart() {}; // called when entity owning script is instantiated
     virtual void onUpdate() {}; // called each frame

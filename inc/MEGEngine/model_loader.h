@@ -11,41 +11,41 @@
 #include "MEGEngine/math/vec4.h"
 #include "MEGEngine/math/mat4.h"
 
-namespace MEGEngine {
-    class Entity;
-    struct JSONImpl;
-    class ENGINE_API ModelLoader {
-    public:
-        static ModelLoader& instance();
-        void loadModelFromFile(Entity& model, const char* file);
-        void loadModelFromData(Entity& model, const std::vector<class Vertex>& vertices, const std::vector<unsigned int>& indices);
+
+class Entity;
+struct JSONImpl;
+class ENGINE_API ModelLoader {
+public:
+    static ModelLoader& instance();
+    void loadModelFromFile(Entity& model, const char* file);
+    void loadModelFromData(Entity& model, const std::vector<class Vertex>& vertices, const std::vector<unsigned int>& indices);
 
 
 
-    private:
-        ModelLoader();
+private:
+    ModelLoader();
 
-        const char* _file = nullptr;
-        std::vector<unsigned char> _data;
-        std::unique_ptr<JSONImpl> _impl;
+    const char* _file = nullptr;
+    std::vector<unsigned char> _data;
+    std::unique_ptr<JSONImpl> _impl;
 
-        std::unordered_map<TexType, std::shared_ptr<Texture>> _textures;
+    std::unordered_map<TexType, std::shared_ptr<Texture>> _textures;
 
-        class MeshRenderer loadMeshRenderer(unsigned int indMesh);
+    class MeshRenderer loadMeshRenderer(unsigned int indMesh);
 
-        void traverseNode(Entity& model, unsigned int nextNode, Mat4 matrix = Mat4(1.0f));
+    void traverseNode(Entity& model, unsigned int nextNode, Mat4 matrix = Mat4(1.0f));
 
-        std::vector<unsigned char> getData();
-        std::unordered_map<TexType, std::shared_ptr<Texture>> getTextures();
+    std::vector<unsigned char> getData();
+    std::unordered_map<TexType, std::shared_ptr<Texture>> getTextures();
 
-        std::vector<struct Vertex> assembleVertices(std::vector<Vec3> positions, std::vector<Vec3> normals, std::vector<Vec2> texUVs);
+    std::vector<struct Vertex> assembleVertices(std::vector<Vec3> positions, std::vector<Vec3> normals, std::vector<Vec2> texUVs);
 
-        std::vector<Vec2> groupFloatsVec2(std::vector<float> floatVec);
-        std::vector<Vec3> groupFloatsVec3(std::vector<float> floatVec);
-        std::vector<Vec4> groupFloatsVec4(std::vector<float> floatVec);
-    };
+    std::vector<Vec2> groupFloatsVec2(std::vector<float> floatVec);
+    std::vector<Vec3> groupFloatsVec3(std::vector<float> floatVec);
+    std::vector<Vec4> groupFloatsVec4(std::vector<float> floatVec);
+};
 
-    inline ENGINE_API ModelLoader& modelLoader = ModelLoader::instance();
-} // MEGEngine
+inline ENGINE_API ModelLoader& modelLoader = ModelLoader::instance();
+
 
 #endif //MEGENGINEPROJECT_MODEL_LOADER_H

@@ -5,17 +5,17 @@
 
 #include "MEGEngine/vertex.h"
 
-namespace MEGEngine {
-    class VBO {
-    public:
-        unsigned int ID;
-        VBO(const std::vector<Vertex>& vertices);
 
-        void bind();
-        void unbind();
-        void del();
-    };
-}
+class VBO {
+public:
+    unsigned int ID;
+    VBO(const std::vector<Vertex>& vertices);
+
+    void bind();
+    void unbind();
+    void del();
+};
+
 
 
 

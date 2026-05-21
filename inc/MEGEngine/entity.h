@@ -10,89 +10,89 @@
 #include "MEGEngine/mesh_renderer.h"
 #include "utils/log.h"
 
-namespace MEGEngine {
-	class ENGINE_API Entity {
-	public:
-		Entity();
-		virtual ~Entity() = default;
 
-		void addChild(Entity& child);
-		[[nodiscard]] const std::vector<Entity*>& children() const;
-		[[nodiscard]] Entity* parent() const;
+class ENGINE_API Entity {
+public:
+	Entity();
+	virtual ~Entity() = default;
 
-		template<typename T>
-		bool hasComponent() {
-			return _componentLookup.find(typeid(T)) != _componentLookup.end();
+	void addChild(Entity& child);
+	[[nodiscard]] const std::vector<Entity*>& children() const;
+	[[nodiscard]] Entity* parent() const;
+
+	template<typename T>
+	bool hasComponent() {
+		return _componentLookup.find(typeid(T)) != _componentLookup.end();
+	}
+
+	template<typename T>
+	T* getComponent() {
+		auto it = _componentLookup.find(typeid(T));
+		if (it == _componentLookup.end()) {
+			Log(LogLevel::WRN, "Entity::getComponent<%s>(): Component not found", typeid(T).name());
+			return nullptr;
 		}
 
-		template<typename T>
-		T* getComponent() {
-			auto it = _componentLookup.find(typeid(T));
-			if (it == _componentLookup.end()) {
-				Log(LogLevel::WRN, "Entity::getComponent<%s>(): Component not found", typeid(T).name());
-				return nullptr;
-			}
+		return static_cast<T*>(it->second);
+	}
 
-			return static_cast<T*>(it->second);
+	const std::vector<std::unique_ptr<Component>>& getComponents() const {
+		return _components;
+	}
+
+	template<typename T, typename... Args>
+	T* addComponent(Args&&... args) {
+		if (hasComponent<T>()) {
+			Log(LogLevel::WRN, "Entity::addComponent<%s>(): Component already registered", typeid(T).name());
+			return nullptr;
 		}
 
-		const std::vector<std::unique_ptr<Component>>& getComponents() const {
-			return _components;
+		auto component = std::make_unique<T>(std::forward<Args>(args)...);
+		T* ptr = component.get();
+
+		_componentLookup[typeid(T)] = ptr;
+		_components.push_back(std::move(component));
+
+		_componentLookup[typeid(T)]->_parent = this;
+
+		// if component inherits ScriptBehaviour, call the onStart() function
+		callOnStart(typeid(T));
+
+		return ptr;
+	}
+
+	template<typename T>
+	void removeComponent() {
+		auto mapIt = _componentLookup.find(typeid(T));
+		if (mapIt == _componentLookup.end()) {
+			Log(LogLevel::WRN, "Entity::removeComponent<%s>(): Component not found", typeid(T).name());
+			return;
 		}
 
-		template<typename T, typename... Args>
-		T* addComponent(Args&&... args) {
-			if (hasComponent<T>()) {
-				Log(LogLevel::WRN, "Entity::addComponent<%s>(): Component already registered", typeid(T).name());
-				return nullptr;
-			}
+		Component* rawPtr = mapIt->second;
 
-			auto component = std::make_unique<T>(std::forward<Args>(args)...);
-			T* ptr = component.get();
+		// match raw pointer to remove from vector
+		auto vecIt = std::ranges::find_if(_components, [rawPtr](const std::unique_ptr<Component>& c) {
+			return c.get() == rawPtr;
+		});
 
-			_componentLookup[typeid(T)] = ptr;
-			_components.push_back(std::move(component));
-
-			_componentLookup[typeid(T)]->_parent = this;
-
-			// if component inherits ScriptBehaviour, call the onStart() function
-			callOnStart(typeid(T));
-
-			return ptr;
+		if (vecIt != _components.end()) {
+			_components.erase(vecIt);
 		}
 
-		template<typename T>
-		void removeComponent() {
-			auto mapIt = _componentLookup.find(typeid(T));
-			if (mapIt == _componentLookup.end()) {
-				Log(LogLevel::WRN, "Entity::removeComponent<%s>(): Component not found", typeid(T).name());
-				return;
-			}
+		_componentLookup.erase(mapIt);
+	}
 
-			Component* rawPtr = mapIt->second;
+protected:
+	Entity* _parent = nullptr;
+	std::vector<Entity*> _children;
 
-			// match raw pointer to remove from vector
-			auto vecIt = std::ranges::find_if(_components, [rawPtr](const std::unique_ptr<Component>& c) {
-				return c.get() == rawPtr;
-			});
+	std::vector<std::unique_ptr<Component>> _components;
+	std::unordered_map<ComponentTypeID, Component*> _componentLookup;
 
-			if (vecIt != _components.end()) {
-				_components.erase(vecIt);
-			}
+	void callOnStart(std::type_index type);
+};
 
-			_componentLookup.erase(mapIt);
-		}
-
-	protected:
-		Entity* _parent = nullptr;
-		std::vector<Entity*> _children;
-
-		std::vector<std::unique_ptr<Component>> _components;
-		std::unordered_map<ComponentTypeID, Component*> _componentLookup;
-
-		void callOnStart(std::type_index type);
-	};
-}
 
 
 #endif //MODEL_H

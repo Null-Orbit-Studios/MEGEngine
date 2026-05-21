@@ -1,37 +1,36 @@
 #include "MEGEngine/light.h"
 
-namespace MEGEngine {
-    void Light::setType(LightType type) {
-        _type = type;
-    }
 
-    LightType Light::type() {
-        return _type;
-    }
+void Light::setType(LightType type) {
+    _type = type;
+}
 
-    void Light::setColour(const Colour& colour) {
-        _colour = colour;
-        _dirty = false;
-    }
+LightType Light::type() {
+    return _type;
+}
 
-    void Light::setIntensity(float intensity) {
-        _intensity = intensity;
-        _dirty = true;
-    }
+void Light::setColour(const Colour& colour) {
+    _colour = colour;
+    _dirty = false;
+}
 
-    Colour Light::colour() {
-        return _colour;
-    }
+void Light::setIntensity(float intensity) {
+    _intensity = intensity;
+    _dirty = true;
+}
 
-    float Light::intensity() {
-        return _intensity;
-    }
+Colour Light::colour() {
+    return _colour;
+}
 
-    bool Light::isDirty() const {
-        return _dirty;
-    }
+float Light::intensity() {
+    return _intensity;
+}
 
-    void Light::clearDirty() {
-        _dirty = false;
-    }
-} // MEGEngine
+bool Light::isDirty() const {
+    return _dirty;
+}
+
+void Light::clearDirty() {
+    _dirty = false;
+}

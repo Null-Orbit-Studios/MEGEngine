@@ -10,29 +10,29 @@
 #include "MEGEngine/input/input_action.h"
 #include "MEGEngine/input/player_action_bus.h"
 
-namespace MEGEngine {
-    class ENGINE_API InputSystem {
-    public:
-        InputAction& createAction(std::string name, InputAction::Type type);
-        std::vector<std::shared_ptr<InputAction>>& actions();
-        InputAction* findAction(std::string name);
-        std::shared_ptr<InputContext> createContext();
-        void bind(InputContext& ctx, InputAction& action, InputSource src, float scale = 1.0f);
-        void pushContext(std::shared_ptr<InputContext> ctx);
-        void subscribe(InputAction& action, PlayerActionBus::Callback cb);
-        void unsubscribe(InputAction& action);
-        void update();
-        InputManager& manager() { return _manager; }
-        InputMappingSystem& mapping() { return _mapping; };
-        void init();
 
-    private:
-        InputManager _manager;
-        InputMappingSystem _mapping;
-        PlayerActionBus _actionBus;
+class ENGINE_API InputSystem {
+public:
+    InputAction& createAction(std::string name, InputAction::Type type);
+    std::vector<std::shared_ptr<InputAction>>& actions();
+    InputAction* findAction(std::string name);
+    std::shared_ptr<InputContext> createContext();
+    void bind(InputContext& ctx, InputAction& action, InputSource src, float scale = 1.0f);
+    void pushContext(std::shared_ptr<InputContext> ctx);
+    void subscribe(InputAction& action, PlayerActionBus::Callback cb);
+    void unsubscribe(InputAction& action);
+    void update();
+    InputManager& manager() { return _manager; }
+    InputMappingSystem& mapping() { return _mapping; };
+    void init();
 
-        std::vector<std::shared_ptr<InputAction>> _actions;
-    };
-} // MEGEngine
+private:
+    InputManager _manager;
+    InputMappingSystem _mapping;
+    PlayerActionBus _actionBus;
+
+    std::vector<std::shared_ptr<InputAction>> _actions;
+};
+
 
 #endif //MEGENGINEPROJECT_INPUT_SYSTEM_H

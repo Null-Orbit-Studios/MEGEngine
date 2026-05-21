@@ -8,27 +8,27 @@
 #include "MEGEngine/math/mat4.h"
 #include "MEGEngine/math/vec3.h"
 
-namespace MEGEngine {
-    class ENGINE_API Transform : public Component {
-    public:
-        Transform();
 
-        void setPosition(const Vec3& position);
-        void setOrientation(const Quat& orientation);
-        void setScale(const Vec3& scale);
-        void setScale(float scale);
+class ENGINE_API Transform : public Component {
+public:
+    Transform();
 
-        Vec3 position() const;
-        Quat orientation() const;
-        Vec3 scale() const;
+    void setPosition(const Vec3& position);
+    void setOrientation(const Quat& orientation);
+    void setScale(const Vec3& scale);
+    void setScale(float scale);
 
-        Mat4 modelMatrix() const;
+    Vec3 position() const;
+    Quat orientation() const;
+    Vec3 scale() const;
 
-    private:
-        Vec3 _position = Vec3(0, 0, 0);
-        Quat _orientation = Quat::identity();
-        Vec3 _scale = Vec3(1, 1, 1);
-    };
-} // MEGEngine
+    Mat4 modelMatrix() const;
+
+private:
+    Vec3 _position = Vec3(0, 0, 0);
+    Quat _orientation = Quat::identity();
+    Vec3 _scale = Vec3(1, 1, 1);
+};
+
 
 #endif //MEGENGINEPROJECT_TRANSFORM_H

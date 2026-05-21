@@ -14,100 +14,99 @@
 
 #include "MEGEngine/utils/log.h"
 
-namespace MEGEngine {
 
-    struct WindowImpl {
-        GLFWwindow* impl;
-    };
 
-    Camera::Camera(int width, int height) :
-        _width(static_cast<float>(width)),
-        _height(static_cast<float>(height)),
-        _fov(75.0f),
-        _nearZ(0.1f),
-        _farZ(1000.0f),
-        initialMouseX(float(width)),
-        initialMouseY(float(height)),
-        lastMouseInputState(GLFW_RELEASE) {}
+struct WindowImpl {
+    GLFWwindow* impl;
+};
 
-    void Camera::updateCamMatrix() {
-        Vec3 camForward = this->getComponent<Transform>()->orientation().rotate(Vec3::worldForward());
-        Mat4 view = Mat4::lookAt(
-            this->getComponent<Transform>()->position(),
-            this->getComponent<Transform>()->position() + camForward,
-            Vec3::worldUp()
-            );
+Camera::Camera(int width, int height) :
+    _width(static_cast<float>(width)),
+    _height(static_cast<float>(height)),
+    _fov(75.0f),
+    _nearZ(0.1f),
+    _farZ(1000.0f),
+    initialMouseX(float(width)),
+    initialMouseY(float(height)),
+    lastMouseInputState(GLFW_RELEASE) {}
 
-        Mat4 projection = Mat4::perspective(_fov, _width/_height, _nearZ, _farZ);
+void Camera::updateCamMatrix() {
+    Vec3 camForward = this->getComponent<Transform>()->orientation().rotate(Vec3::worldForward());
+    Mat4 view = Mat4::lookAt(
+        this->getComponent<Transform>()->position(),
+        this->getComponent<Transform>()->position() + camForward,
+        Vec3::worldUp()
+        );
 
-        _camMatrix = projection * view;
-    }
+    Mat4 projection = Mat4::perspective(_fov, _width/_height, _nearZ, _farZ);
 
-    Mat4 Camera::camMatrix() const {
-        return _camMatrix;
-    }
-
-    void Camera::processInputs(Window& window) {
-        WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
-
-        if (glfwGetMouseButton(glfwWindow->impl, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-            glfwSetInputMode(glfwWindow->impl, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-            // Prevents camera from jumping on the first click
-            if (firstClick)
-            {
-                glfwGetCursorPos(glfwWindow->impl, &initialMouseX, &initialMouseY);
-                glfwSetCursorPos(glfwWindow->impl, (_width / 2), (_height / 2));
-                firstClick = false;
-            }
-
-            double mouseX, mouseY;
-            glfwGetCursorPos(glfwWindow->impl, &mouseX, &mouseY);
-
-            float rotX = sensitivity * ((float)mouseY - (_height/2)) / _height;
-            float rotY = sensitivity * ((float)mouseX - (_width/2)) / _width;
-
-            // Calculates upcoming vertical change in the Orientation
-            Quat tmpOrientation = this->getComponent<Transform>()->orientation();
-
-            Vec3 camRight = this->getComponent<Transform>()->orientation().rotate(Vec3::worldRight());
-            Quat pitch = Quat::fromAxisAngle(camRight, glm::radians(rotX));
-            tmpOrientation = pitch * tmpOrientation;
-
-            Vec3 camForward = tmpOrientation.rotate(Vec3::worldForward());
-            float pitchAngle = glm::degrees(std::asin(glm::clamp(camForward.y, -1.0f, 1.0f)));
-
-            // Decides whether or not the next vertical Orientation is legal or not
-            if (pitchAngle > -85.0f && pitchAngle < 85.0f)
-            {
-                this->getComponent<Transform>()->setOrientation(tmpOrientation);
-            }
-
-            // Rotates the Orientation left and right
-            Quat yaw = Quat::fromAxisAngle(Vec3::worldUp(), glm::radians(rotY));
-            this->getComponent<Transform>()->setOrientation(yaw * this->getComponent<Transform>()->orientation().normalised());
-
-            // Sets mouse cursor to the middle of the screen so that it doesn't end up roaming around
-            glfwSetCursorPos(glfwWindow->impl, (_width / 2), (_height / 2));
-
-            lastMouseInputState = GLFW_PRESS;
-        }
-        else if (glfwGetMouseButton(glfwWindow->impl, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
-
-            // only need to process this if the state has just changed, not constantly when button not pressed
-            if (lastMouseInputState == GLFW_PRESS) {
-                // Makes sure the next time the camera looks around it doesn't jump
-                firstClick = true;
-
-                // return cursor to position it was in
-                glfwSetCursorPos(glfwWindow->impl, initialMouseX, initialMouseY);
-
-                glfwSetInputMode(glfwWindow->impl, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
-                lastMouseInputState = GLFW_RELEASE;
-            }
-
-        }
-    }
-
+    _camMatrix = projection * view;
 }
+
+Mat4 Camera::camMatrix() const {
+    return _camMatrix;
+}
+
+void Camera::processInputs(Window& window) {
+    WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
+
+    if (glfwGetMouseButton(glfwWindow->impl, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+        glfwSetInputMode(glfwWindow->impl, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+        // Prevents camera from jumping on the first click
+        if (firstClick)
+        {
+            glfwGetCursorPos(glfwWindow->impl, &initialMouseX, &initialMouseY);
+            glfwSetCursorPos(glfwWindow->impl, (_width / 2), (_height / 2));
+            firstClick = false;
+        }
+
+        double mouseX, mouseY;
+        glfwGetCursorPos(glfwWindow->impl, &mouseX, &mouseY);
+
+        float rotX = sensitivity * ((float)mouseY - (_height/2)) / _height;
+        float rotY = sensitivity * ((float)mouseX - (_width/2)) / _width;
+
+        // Calculates upcoming vertical change in the Orientation
+        Quat tmpOrientation = this->getComponent<Transform>()->orientation();
+
+        Vec3 camRight = this->getComponent<Transform>()->orientation().rotate(Vec3::worldRight());
+        Quat pitch = Quat::fromAxisAngle(camRight, glm::radians(rotX));
+        tmpOrientation = pitch * tmpOrientation;
+
+        Vec3 camForward = tmpOrientation.rotate(Vec3::worldForward());
+        float pitchAngle = glm::degrees(std::asin(glm::clamp(camForward.y, -1.0f, 1.0f)));
+
+        // Decides whether or not the next vertical Orientation is legal or not
+        if (pitchAngle > -85.0f && pitchAngle < 85.0f)
+        {
+            this->getComponent<Transform>()->setOrientation(tmpOrientation);
+        }
+
+        // Rotates the Orientation left and right
+        Quat yaw = Quat::fromAxisAngle(Vec3::worldUp(), glm::radians(rotY));
+        this->getComponent<Transform>()->setOrientation(yaw * this->getComponent<Transform>()->orientation().normalised());
+
+        // Sets mouse cursor to the middle of the screen so that it doesn't end up roaming around
+        glfwSetCursorPos(glfwWindow->impl, (_width / 2), (_height / 2));
+
+        lastMouseInputState = GLFW_PRESS;
+    }
+    else if (glfwGetMouseButton(glfwWindow->impl, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
+
+        // only need to process this if the state has just changed, not constantly when button not pressed
+        if (lastMouseInputState == GLFW_PRESS) {
+            // Makes sure the next time the camera looks around it doesn't jump
+            firstClick = true;
+
+            // return cursor to position it was in
+            glfwSetCursorPos(glfwWindow->impl, initialMouseX, initialMouseY);
+
+            glfwSetInputMode(glfwWindow->impl, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
+            lastMouseInputState = GLFW_RELEASE;
+        }
+
+    }
+}
+

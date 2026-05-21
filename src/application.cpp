@@ -15,107 +15,106 @@
 
 #include "MEGEngine/utils/log.h"
 
-namespace MEGEngine {
-	Application::Application(const ApplicationConfig& appConfig) {
-		this->config = appConfig;
-		
-		Settings::instance().general().windowTitle = appConfig.windowTitle;
-		Settings::instance().graphics().windowWidth = appConfig.width;
-		Settings::instance().graphics().windowHeight = appConfig.height;
-		Settings::instance().graphics().fullscreen = appConfig.fullscreen;
-		Settings::instance().graphics().vsyncEnabled = appConfig.vsync;
-	}
 
-	Application::~Application() {
-		if (running) shutdown();
-	}
+Application::Application(const ApplicationConfig& appConfig) {
+	this->config = appConfig;
+	
+	Settings::instance().general().windowTitle = appConfig.windowTitle;
+	Settings::instance().graphics().windowWidth = appConfig.width;
+	Settings::instance().graphics().windowHeight = appConfig.height;
+	Settings::instance().graphics().fullscreen = appConfig.fullscreen;
+	Settings::instance().graphics().vsyncEnabled = appConfig.vsync;
+}
 
-	Application::Application(Application &&) noexcept = default;
-	Application& Application::operator=(Application &&) noexcept = default;
+Application::~Application() {
+	if (running) shutdown();
+}
 
-	void Application::run() {
-		init();
-		running = true;
+Application::Application(Application &&) noexcept = default;
+Application& Application::operator=(Application &&) noexcept = default;
 
-		auto lastFrame = std::chrono::high_resolution_clock::now();
+void Application::run() {
+	init();
+	running = true;
 
-		while (running) {
-			_scene->update();
-			_scene->camera().processInputs(window());
+	auto lastFrame = std::chrono::high_resolution_clock::now();
 
-	    	_renderer->render(*_scene);
+	while (running) {
+		_scene->update();
+		_scene->camera().processInputs(window());
 
-	    	_window->display();
-	    	_window->pollEvents();
+		_renderer->render(*_scene);
 
-	    	if (_window->shouldClose())
-	    		requestQuit();
+		_window->display();
+		_window->pollEvents();
 
-	        // Limit FPS and set deltaTime
-			uint32_t maxFps = Settings::instance().graphics().maxFps;
-			if (!maxFps) {
-				maxFps = 60;
-			}
-	    	std::this_thread::sleep_for(std::chrono::milliseconds(1000) / maxFps);
+		if (_window->shouldClose())
+			requestQuit();
 
-	    	Timer::setDeltaTime(lastFrame);
-			onUpdate();
-	    }
-
-	    // close
-	    shutdown();
-
-	}
-
-	void Application::requestQuit() {
-		running = false;
-	}
-
-	Window& Application::window() {
-		return *_window;
-	}
-
-	Scene& Application::scene() {
-		return *_scene;
-	}
-
-	Renderer& Application::renderer() {
-		return *_renderer;
-	}
-
-	void Application::init() {
-		settings.init();
-
-		_window = std::make_unique<Window>();
-		_window->create(config.windowTitle, config.width, config.height);
-
-		// load glad for access to GL functions
-		int status = gladLoadGL();
-		if (!status) {
-			glfwTerminate();
-			throw std::runtime_error("Failed to initialize GLAD");
+		// Limit FPS and set deltaTime
+		uint32_t maxFps = Settings::instance().graphics().maxFps;
+		if (!maxFps) {
+			maxFps = 60;
 		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000) / maxFps);
 
-		// set the viewport
-		glViewport(0, 0, config.width, config.height);
-
-		// enables depth perception - prevents incorrect overlapping triangles
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
-
-		_renderer = std::make_unique<Renderer>();
-		_renderer->init();
-
-		_scene = std::make_unique<Scene>(config.width, config.height);
-
-		onInit();
+		Timer::setDeltaTime(lastFrame);
+		onUpdate();
 	}
 
-	void Application::shutdown() {
-		onShutdown();
+	// close
+	shutdown();
 
-		_scene.reset();
-		_renderer.reset();
-		_window.reset();
+}
+
+void Application::requestQuit() {
+	running = false;
+}
+
+Window& Application::window() {
+	return *_window;
+}
+
+Scene& Application::scene() {
+	return *_scene;
+}
+
+Renderer& Application::renderer() {
+	return *_renderer;
+}
+
+void Application::init() {
+	settings.init();
+
+	_window = std::make_unique<Window>();
+	_window->create(config.windowTitle, config.width, config.height);
+
+	// load glad for access to GL functions
+	int status = gladLoadGL();
+	if (!status) {
+		glfwTerminate();
+		throw std::runtime_error("Failed to initialize GLAD");
 	}
-} // MEGEngine
+
+	// set the viewport
+	glViewport(0, 0, config.width, config.height);
+
+	// enables depth perception - prevents incorrect overlapping triangles
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
+	_renderer = std::make_unique<Renderer>();
+	_renderer->init();
+
+	_scene = std::make_unique<Scene>(config.width, config.height);
+
+	onInit();
+}
+
+void Application::shutdown() {
+	onShutdown();
+
+	_scene.reset();
+	_renderer.reset();
+	_window.reset();
+}

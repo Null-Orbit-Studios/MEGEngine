@@ -4,13 +4,13 @@
 #include "MEGEngine/events.h"
 #include "MEGEngine/utils/log.h"
 
-class TestEvent : public MEGEngine::Event {};
-class TestEventListener : public MEGEngine::EventListener {
+class TestEvent : public Event {};
+class TestEventListener : public EventListener {
 public:
-    TestEventListener(MEGEngine::Entity& parent) : EventListener(parent) {}
+    TestEventListener(Entity& parent) : EventListener(parent) {}
 
     void onEvent() override {
-        MEGEngine::Log(LogLevel::DBG, "Test Event Listener received trigger");
+        Log(LogLevel::DBG, "Test Event Listener received trigger");
     }
 };
 

@@ -2,8 +2,7 @@
 
 #include "MEGEngine/timer.h"
 
-namespace MEGEngine {
-    float Timer::deltaTime() {
-        return _deltaTime;
-    }
-} // MEGEngine
+
+float Timer::deltaTime() {
+    return _deltaTime;
+}

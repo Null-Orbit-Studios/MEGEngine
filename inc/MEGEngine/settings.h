@@ -6,45 +6,45 @@
 #include "MEGEngine/common.h"
 
 struct ENGINE_API GeneralSettings {
-	std::string shaderDirectory;
-	std::string modelDirectory;
-	std::string windowTitle;
+std::string shaderDirectory;
+std::string modelDirectory;
+std::string windowTitle;
 };
 
 struct ENGINE_API GraphicsSettings {
-	uint32_t maxFps;
-	uint32_t windowWidth;
-	uint32_t windowHeight;
-	bool fullscreen;
-	bool vsyncEnabled;
+uint32_t maxFps;
+uint32_t windowWidth;
+uint32_t windowHeight;
+bool fullscreen;
+bool vsyncEnabled;
 };
 
-namespace MEGEngine {
-	class ENGINE_API Settings {
-	public:
-		static Settings& instance();
-		void init();
-		bool isInitialized();
 
-		const GeneralSettings& general() const;
-		GeneralSettings& general();
+class ENGINE_API Settings {
+public:
+	static Settings& instance();
+	void init();
+	bool isInitialized();
 
-		const GraphicsSettings& graphics() const;
-		GraphicsSettings& graphics();
+	const GeneralSettings& general() const;
+	GeneralSettings& general();
+
+	const GraphicsSettings& graphics() const;
+	GraphicsSettings& graphics();
 
 
-	private: // private first for the struct definitions
-		Settings() = default;
-		bool _initialized = false;
+private: // private first for the struct definitions
+	Settings() = default;
+	bool _initialized = false;
 
-		GeneralSettings _general;
-		GraphicsSettings _graphics;
+	GeneralSettings _general;
+	GraphicsSettings _graphics;
 
-	};
+};
 
-	inline ENGINE_API Settings& settings = Settings::instance();
+inline ENGINE_API Settings& settings = Settings::instance();
 
-}
+
 
 
 #endif //SETTINGS_H
