@@ -8,10 +8,15 @@
 struct ENGINE_API GeneralSettings {
 	std::string shaderDirectory;
 	std::string modelDirectory;
+	std::string windowTitle;
 };
 
 struct ENGINE_API GraphicsSettings {
-	int maxFps;
+	uint32_t maxFps;
+	uint32_t windowWidth;
+	uint32_t windowHeight;
+	bool fullscreen;
+	bool vsyncEnabled;
 };
 
 namespace MEGEngine {

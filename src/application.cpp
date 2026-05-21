@@ -18,7 +18,12 @@
 namespace MEGEngine {
 	Application::Application(const ApplicationConfig& appConfig) {
 		this->config = appConfig;
-		// TODO: store app config values in settings for global use throughout application
+		
+		Settings::instance().general().windowTitle = appConfig.windowTitle;
+		Settings::instance().graphics().windowWidth = appConfig.width;
+		Settings::instance().graphics().windowHeight = appConfig.height;
+		Settings::instance().graphics().fullscreen = appConfig.fullscreen;
+		Settings::instance().graphics().vsyncEnabled = appConfig.vsync;
 	}
 
 	Application::~Application() {
