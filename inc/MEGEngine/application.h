@@ -23,11 +23,6 @@ class ENGINE_API Application {
 public:
 	ApplicationConfig config;
 
-	static Application& instance() {
-        static Application instance;
-        return instance;
-    }
-
 	// Create instance using ApplicationConfig structure
 	explicit Application(const ApplicationConfig& config);
 	// Create instance using default configuration

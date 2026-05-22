@@ -5,6 +5,6 @@
     },
 
     "Graphics": {
-        "maxFps": 60
+        "maxFps": 120
     }
 }

@@ -18,19 +18,27 @@ protected:
 		inputSystem.init();
 		Engine::instance().setInputSystem(&inputSystem); // for access throughout the application
 		KeyboardDevice keyboard(&window());
+		MouseDevice mouse(&window());
 		inputSystem.manager().addDevice(std::make_unique<KeyboardDevice>(keyboard));
+		inputSystem.manager().addDevice(std::make_unique<MouseDevice>(mouse));
 		// TODO: Have a single move action that takes a Vec2 or Vec3?
 		auto& moveFwd = inputSystem.createAction("MoveForward", InputAction::Type::FLOAT);
 		auto& moveBwd = inputSystem.createAction("MoveBackward", InputAction::Type::FLOAT);
 		auto& moveRgt = inputSystem.createAction("MoveRight", InputAction::Type::FLOAT);
 		auto& moveLft = inputSystem.createAction("MoveLeft", InputAction::Type::FLOAT);
 		auto& swapPlayer = inputSystem.createAction("SwapPlayer", InputAction::Type::BOOL);
+		auto& look = inputSystem.createAction("Look", InputAction::Type::VEC2);
+		auto& captureMouse = inputSystem.createAction("CaptureMouse", InputAction::Type::BOOL);
+		auto& escapeMouse = inputSystem.createAction("EscapeMouse", InputAction::Type::BOOL);
 		auto gameplay = inputSystem.createContext();
 		inputSystem.bind(*gameplay, moveFwd, InputSource{InputSource::Type::KEY, KeyCode::W}, +1);
 		inputSystem.bind(*gameplay, moveLft, InputSource{InputSource::Type::KEY, KeyCode::A}, -1);
 		inputSystem.bind(*gameplay, moveBwd, InputSource{InputSource::Type::KEY, KeyCode::S}, -1);
 		inputSystem.bind(*gameplay, moveRgt, InputSource{InputSource::Type::KEY, KeyCode::D}, +1);
-		inputSystem.bind(*gameplay, swapPlayer, InputSource{InputSource::Type::KEY, KeyCode::T}, +1);
+		inputSystem.bind(*gameplay, swapPlayer, InputSource{InputSource::Type::KEY, KeyCode::T});
+		inputSystem.bind(*gameplay, look, InputSource{InputSource::Type::MOUSE_DELTA});
+		inputSystem.bind(*gameplay, captureMouse, InputSource{InputSource::Type::KEY, KeyCode::MOUSE_BUTTON_1});
+		inputSystem.bind(*gameplay, escapeMouse, InputSource{InputSource::Type::KEY, KeyCode::ESCAPE});
 		inputSystem.pushContext(gameplay);
 
 		scene().camera().addComponent<MoveCamera>();
@@ -51,6 +59,22 @@ protected:
 			ir->linkActionCallback(
 				"MoveLeft",
 				[this](const ActionState& s){ scene().camera().getComponent<MoveCamera>()->moveRight(s.value.asFloat()); }
+			);
+			ir->linkActionCallback(
+				"Look",
+				[this](const ActionState& s){ scene().camera().getComponent<MoveCamera>()->look( s.value.asVec2()); }
+			);
+			ir->linkActionCallback(
+				"CaptureMouse",
+				[this](const ActionState& s){
+					setInputMode(window(), InputMode::CURSOR, InputModeValue::CURSOR_DISABLED);
+				}
+			);
+			ir->linkActionCallback(
+				"EscapeMouse",
+				[this](const ActionState& s){
+					setInputMode(window(), InputMode::CURSOR, InputModeValue::CURSOR_NORMAL);
+				}
 			);
 
 			Engine::instance().playerController()->possess(scene().camera());

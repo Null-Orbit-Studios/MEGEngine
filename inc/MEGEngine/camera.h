@@ -12,7 +12,6 @@ public:
 	void updateCamMatrix();
 
 	Mat4 camMatrix() const;
-	void processInputs(class Window& window);
 
 private:
 	float _width;
