@@ -4,6 +4,7 @@
 #include "MEGEngine/common.h"
 #include "MEGEngine/input.h"
 #include "MEGEngine/player_controller.h"
+#include "MEGEngine/application.h"
 
 
 class ENGINE_API Engine {
@@ -25,9 +26,18 @@ class ENGINE_API Engine {
         return &_playerController;
     }
 
+    void setApplication(Application* application) {
+        _application = application;
+    }
+
+    Application& application() {
+        return *_application;
+    }
+
 private:
     InputSystem* _inputSystem = nullptr;
     PlayerController _playerController;
+    Application* _application = nullptr;
 };
 
 #endif //MEGENGINEPROJECT_ENGINE_H
