@@ -49,6 +49,7 @@ private:
 
     // 8 is GLFW_MOUSE_BUTTON_LAST+1
     std::array<bool, 8> _previous{};
+    bool isMoving = false;
 };
 
 // TODO: add gamepad device for controller support

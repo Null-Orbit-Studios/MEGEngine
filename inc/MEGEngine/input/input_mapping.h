@@ -21,9 +21,11 @@ public:
 private:
     void apply(InputAction* action, ActionValue v);
     void release(InputAction* action);
+    void stop(InputAction* action);
     void onKeyPressed(const KeyPressedEvent& e);
     void onKeyReleased(const KeyReleasedEvent& e);
     void onMouseMoved(const MouseMovedEvent& e);
+    void onMouseStopped();
 
     std::stack<std::shared_ptr<InputContext>> _contexts;
     std::unordered_map<InputAction*, ActionState> _states;

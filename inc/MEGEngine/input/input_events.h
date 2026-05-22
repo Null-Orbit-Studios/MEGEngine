@@ -121,6 +121,11 @@ struct MouseMovedEvent {
     float dy;
 };
 
+struct MouseStoppedEvent {
+    float x;
+    float y;
+};
+
 class Base_QueuedEvent {
 public:
     virtual ~Base_QueuedEvent() = default;
