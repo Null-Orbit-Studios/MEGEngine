@@ -42,6 +42,11 @@ void MouseDevice::poll() {
 
     if (dx != 0 || dy != 0) {
         _bus->queueEvent(MouseMovedEvent{.x = float(x), .y = float(y), .dx = dx, .dy = dy});
+        isMoving = true;
+    }
+    else if ((dx == 0 && dy == 0) && isMoving) {
+        _bus->queueEvent(MouseStoppedEvent{.x = float(x), .y = float(y)});
+        isMoving = false;
     }
 
     _lastX = x;
