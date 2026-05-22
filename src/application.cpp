@@ -4,7 +4,7 @@
 #include "GLFW/glfw3.h"
 
 #include "MEGEngine/application.h"
-
+#include "MEGEngine/engine.h"
 #include "MEGEngine/timer.h"
 #include "MEGEngine/window.h"
 #include "MEGEngine/scene.h"
@@ -41,7 +41,6 @@ void Application::run() {
 
 	while (running) {
 		_scene->update();
-		_scene->camera().processInputs(window());
 
 		_renderer->render(*_scene);
 
@@ -107,6 +106,8 @@ void Application::init() {
 	_renderer->init();
 
 	_scene = std::make_unique<Scene>(config.width, config.height);
+
+	Engine::instance().setApplication(this);
 
 	onInit();
 }
