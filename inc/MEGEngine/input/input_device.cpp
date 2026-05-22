@@ -46,4 +46,17 @@ void MouseDevice::poll() {
 
     _lastX = x;
     _lastY = y;
+
+    for (int button = GLFW_MOUSE_BUTTON_1; button <= GLFW_MOUSE_BUTTON_LAST; ++button) {
+        bool isDown = glfwGetMouseButton(glfwWindow->handle, button) == GLFW_PRESS;
+
+        if (isDown && !_previous[button]) {
+            _bus->queueEvent(KeyPressedEvent{.key = GLFWKeyTranslator::translate(button)});
+        }
+        else if (!isDown && _previous[button]) {
+            _bus->queueEvent(KeyReleasedEvent{.key = GLFWKeyTranslator::translate(button)});
+        }
+
+        _previous[button] = isDown;
+    }
 }

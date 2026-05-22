@@ -26,6 +26,17 @@ private:
         std::array<KeyCode, GLFW_KEY_LAST> table{};
 
         table.fill(KeyCode::UNKNOWN);
+        table[GLFW_MOUSE_BUTTON_1] = KeyCode::MOUSE_BUTTON_1;
+        table[GLFW_MOUSE_BUTTON_2] = KeyCode::MOUSE_BUTTON_2;
+        table[GLFW_MOUSE_BUTTON_3] = KeyCode::MOUSE_BUTTON_3;
+        table[GLFW_MOUSE_BUTTON_4] = KeyCode::MOUSE_BUTTON_4;
+        table[GLFW_MOUSE_BUTTON_5] = KeyCode::MOUSE_BUTTON_5;
+        table[GLFW_MOUSE_BUTTON_6] = KeyCode::MOUSE_BUTTON_6;
+        table[GLFW_MOUSE_BUTTON_7] = KeyCode::MOUSE_BUTTON_7;
+        table[GLFW_MOUSE_BUTTON_8] = KeyCode::MOUSE_BUTTON_8;
+        table[GLFW_MOUSE_BUTTON_LEFT] = KeyCode::MOUSE_BUTTON_1;
+        table[GLFW_MOUSE_BUTTON_RIGHT] = KeyCode::MOUSE_BUTTON_2;
+        table[GLFW_MOUSE_BUTTON_MIDDLE] = KeyCode::MOUSE_BUTTON_3;
         table[GLFW_KEY_SPACE] = KeyCode::SPACE;
         table[GLFW_KEY_APOSTROPHE] = KeyCode::APOSTROPHE;
         table[GLFW_KEY_COMMA] = KeyCode::COMMA;
