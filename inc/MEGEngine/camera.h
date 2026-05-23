@@ -22,15 +22,6 @@ private:
 	float _farZ;
 
 	Mat4 _camMatrix = Mat4(1.0f);
-
-	// Used to check if input state has just changed from PRESS to RELEASE, and return mouse to it's initial position
-	int lastMouseInputState;
-	double initialMouseX, initialMouseY;
-
-	// Used to prevent camera from jumping on click
-	bool firstClick = true;
-	
-	float sensitivity = 100.0f;
 };
 
 
