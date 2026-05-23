@@ -3,11 +3,12 @@
 
 
 void PlayerController::possess(Entity& player) {
-    auto receiver = player.getComponent<InputReceiver>();
-    if (!receiver) {
+    if (!player.hasComponent<InputReceiver>()) {
         Log(LogLevel::ERR, "Cannot possess entity as it does not have an InputReceiver component");
         return;
     }
+
+    auto receiver = player.getComponent<InputReceiver>();
 
     // unsubscribe all actions of previous receiver
     if (_inputReceiver) {

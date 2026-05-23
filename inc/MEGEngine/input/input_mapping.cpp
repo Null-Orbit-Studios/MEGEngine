@@ -19,6 +19,12 @@ void InputMappingSystem::popContext() {
         _contexts.pop();
 }
 
+InputContext* InputMappingSystem::activeContext() {
+    if (_contexts.empty()) return nullptr;
+
+    return _contexts.top().get();
+}
+
 void InputMappingSystem::beginFrame() {
     for (auto& [a, s] : _states) {
         s.started = false;

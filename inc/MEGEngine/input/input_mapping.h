@@ -15,6 +15,7 @@ public:
     void attachBus(RawInputEventBus& bus);
     void pushContext(std::shared_ptr<InputContext> context);
     void popContext();
+    InputContext* activeContext();
     void beginFrame();
     const std::unordered_map<InputAction*, ActionState>& states() const;
 

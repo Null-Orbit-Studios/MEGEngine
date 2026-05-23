@@ -35,7 +35,36 @@ void InputSystem::bind(InputContext& ctx, InputAction& action, InputSource src, 
 }
 
 void InputSystem::pushContext(std::shared_ptr<InputContext> ctx) {
+    auto* activeCtx = _mapping.activeContext();
+    if (activeCtx) {
+        for (const auto& pair : activeCtx->actionCallbacks) {
+            unsubscribe(*pair.action);
+        }
+    }
+
     _mapping.pushContext(ctx);
+
+    for (const auto& pair : _mapping.activeContext()->actionCallbacks) {
+        subscribe(*pair.action, pair.callback);
+    }
+}
+
+void InputSystem::popContext() {
+    auto* activeCtx = _mapping.activeContext();
+    if (activeCtx) {
+        for (const auto& pair : activeCtx->actionCallbacks) {
+            unsubscribe(*pair.action);
+        }
+    }
+
+    _mapping.popContext();
+
+    activeCtx = _mapping.activeContext();
+    if (activeCtx) {
+        for (const auto& pair : activeCtx->actionCallbacks) {
+            subscribe(*pair.action, pair.callback);
+        }
+    }
 }
 
 void InputSystem::subscribe(InputAction &action, PlayerActionBus::Callback cb) {

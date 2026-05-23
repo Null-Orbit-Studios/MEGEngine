@@ -41,6 +41,19 @@ protected:
 		inputSystem.bind(*gameplay, escapeMouse, InputSource{InputSource::Type::KEY, KeyCode::ESCAPE});
 		inputSystem.pushContext(gameplay);
 
+		gameplay->linkActionCallback(
+			"CaptureMouse",
+			[this](const ActionState& s){
+				setInputMode(window(), InputMode::CURSOR, InputModeValue::CURSOR_DISABLED);
+			}
+		);
+		gameplay->linkActionCallback(
+			"EscapeMouse",
+			[this](const ActionState& s){
+				setInputMode(window(), InputMode::CURSOR, InputModeValue::CURSOR_NORMAL);
+			}
+		);
+
 		scene().camera().addComponent<MoveCamera>();
 
 		if (auto ir = scene().camera().addComponent<InputReceiver>()) {
@@ -63,18 +76,6 @@ protected:
 			ir->linkActionCallback(
 				"Look",
 				[this](const ActionState& s){ scene().camera().getComponent<MoveCamera>()->look( s.value.asVec2()); }
-			);
-			ir->linkActionCallback(
-				"CaptureMouse",
-				[this](const ActionState& s){
-					setInputMode(window(), InputMode::CURSOR, InputModeValue::CURSOR_DISABLED);
-				}
-			);
-			ir->linkActionCallback(
-				"EscapeMouse",
-				[this](const ActionState& s){
-					setInputMode(window(), InputMode::CURSOR, InputModeValue::CURSOR_NORMAL);
-				}
 			);
 
 			Engine::instance().playerController()->possess(scene().camera());

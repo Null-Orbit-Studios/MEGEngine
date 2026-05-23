@@ -5,6 +5,7 @@
 #include "MEGEngine/common.h"
 #include "MEGEngine/input/input_events.h"
 #include "MEGEngine/input/input_action.h"
+#include "MEGEngine/input/player_action_bus.h"
 
 
 class InputContext;
@@ -30,11 +31,23 @@ struct ENGINE_API InputBinding {
 
 class ENGINE_API InputContext {
 public:
-    void addBinding(const InputBinding& binding) { _bindings.push_back(binding); }
-    const std::vector<InputBinding>& bindings() const { return _bindings; }
+    void addBinding(const InputBinding& binding);
+    const std::vector<InputBinding>& bindings() const;
+
+    void linkActionCallback(std::string actionName, PlayerActionBus::Callback callback);
 
 private:
+    // TODO: add bindingsMap with string name as key and binding as value
     std::vector<InputBinding> _bindings;
+
+    // used for persistent bindings which are associated with a context, not an input receiver
+    friend class InputSystem;
+    struct actionCallback {
+        InputAction* action;
+        PlayerActionBus::Callback callback;
+    };
+
+    std::vector<actionCallback> actionCallbacks;
 };
 
 
