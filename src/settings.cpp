@@ -33,7 +33,6 @@ void Settings::init() {
     // TODO: Handle exceptions when entry isn't found in json
 
     general().shaderDirectory = json["General"]["shaderDirectory"];
-    general().modelDirectory = json["General"]["modelDirectory"];
 
     graphics().maxFps = json["Graphics"]["maxFps"];
 

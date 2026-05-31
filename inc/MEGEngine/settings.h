@@ -7,7 +7,6 @@
 
 struct ENGINE_API GeneralSettings {
 std::string shaderDirectory;
-std::string modelDirectory;
 std::string windowTitle;
 };
 
