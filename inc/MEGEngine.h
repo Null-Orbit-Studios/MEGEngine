@@ -21,7 +21,7 @@
 #include "MEGEngine/Core/settings.h"
 #include "MEGEngine/Core/model_loader.h"
 
-#include "MEGEngine/events.h"
+#include "MEGEngine/Core/events.h"
 #include "MEGEngine/Input.h"
 #include "MEGEngine/Core/player_controller.h"
 

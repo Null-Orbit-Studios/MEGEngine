@@ -1,7 +1,7 @@
 #ifndef CUSTOMEVENTS_H
 #define CUSTOMEVENTS_H
 
-#include "MEGEngine/events.h"
+#include "MEGEngine/Core/events.h"
 #include "MEGEngine/Utils/log.h"
 
 class TestEvent : public Event {};
