@@ -1,6 +1,6 @@
 #include "GLAD/glad.h"
 
-#include "MEGEngine/vbo.h"
+#include "MEGEngine/Core/vbo.h"
 
 
 // Constructor generates a vertex buffer object, binds it and links the vertices

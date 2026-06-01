@@ -1,6 +1,7 @@
-#include "MEGEngine/shader_manager.h"
+#include "MEGEngine/Core/shader_manager.h"
+#include "MEGEngine/Core/settings.h"
+
 #include "MEGEngine/Utils/log.h"
-#include "MEGEngine/settings.h"
 
 
 // initialise static members

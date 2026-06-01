@@ -1,6 +1,6 @@
 #include "GLFW/glfw3.h"
 #include "MEGEngine/Input.h"
-#include "MEGEngine/settings.h"
+#include "MEGEngine/Core/settings.h"
 
 struct WindowImpl {
     GLFWwindow* handle = nullptr;

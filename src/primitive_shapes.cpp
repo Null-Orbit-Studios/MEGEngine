@@ -1,4 +1,4 @@
-#include "MEGEngine/primitive_shapes.h"
+#include "MEGEngine/Core/primitive_shapes.h"
 
 
 std::vector<Vertex> Cube::_vertices =

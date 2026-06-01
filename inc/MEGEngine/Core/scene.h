@@ -5,9 +5,9 @@
 #include <vector>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/entity.h"
-#include "MEGEngine/light.h"
-#include "MEGEngine/camera.h"
+#include "MEGEngine/Core/entity.h"
+#include "MEGEngine/Core/light.h"
+#include "MEGEngine/Core/camera.h"
 
 
 class ENGINE_API Scene {

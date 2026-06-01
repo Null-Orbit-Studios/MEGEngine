@@ -4,9 +4,9 @@
 #include <vector>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/vao.h"
-#include "MEGEngine/vertex.h"
-#include "MEGEngine/texture.h"
+#include "MEGEngine/Core/vao.h"
+#include "MEGEngine/Core/vertex.h"
+#include "MEGEngine/Core/texture.h"
 
 
 class ENGINE_API Mesh {

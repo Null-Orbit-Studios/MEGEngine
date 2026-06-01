@@ -1,4 +1,4 @@
-#include "MEGEngine/light.h"
+#include "MEGEngine/Core/light.h"
 
 
 void Light::setType(LightType type) {

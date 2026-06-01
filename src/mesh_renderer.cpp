@@ -1,6 +1,6 @@
-#include "MEGEngine/mesh_renderer.h"
-#include "MEGEngine/material.h"
-#include "MEGEngine/mesh.h"
+#include "MEGEngine/Core/mesh_renderer.h"
+#include "MEGEngine/Core/material.h"
+#include "MEGEngine/Core/mesh.h"
 
 
 MeshRenderer::MeshRenderer(std::shared_ptr<Mesh> mesh, std::shared_ptr<Material> material)

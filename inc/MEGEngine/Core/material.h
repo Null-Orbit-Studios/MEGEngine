@@ -5,8 +5,8 @@
 #include <unordered_map>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/texture.h"
-#include "MEGEngine/colour.h"
+#include "MEGEngine/Core/texture.h"
+#include "MEGEngine/Core/colour.h"
 
 
 class ENGINE_API Material {

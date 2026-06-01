@@ -3,8 +3,8 @@
 
 #include "MEGEngine/common.h"
 #include "MEGEngine/Input.h"
-#include "MEGEngine/player_controller.h"
-#include "MEGEngine/application.h"
+#include "MEGEngine/Core/player_controller.h"
+#include "MEGEngine/Core/application.h"
 
 
 class ENGINE_API Engine {

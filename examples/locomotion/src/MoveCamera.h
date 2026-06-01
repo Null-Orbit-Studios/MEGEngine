@@ -1,9 +1,9 @@
 #include <cmath>
 
 #include "MEGEngine.h"
-#include "MEGEngine/timer.h"
+#include "MEGEngine/Core/timer.h"
 #include "MEGEngine/Math.h"
-#include "MEGEngine/application.h"
+#include "MEGEngine/Core/application.h"
 
 class MoveCamera : public ScriptedBehaviour {
 public:

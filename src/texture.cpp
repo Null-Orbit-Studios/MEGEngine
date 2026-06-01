@@ -3,8 +3,8 @@
 #include "GLAD/glad.h"
 #include "STB/stb_image.h"
 
-#include "MEGEngine/texture.h"
-#include "MEGEngine/shader.h"
+#include "MEGEngine/Core/texture.h"
+#include "MEGEngine/Core/shader.h"
 #include "MEGEngine/Utils/log.h"
 
 

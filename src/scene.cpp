@@ -1,6 +1,6 @@
-#include "MEGEngine/scene.h"
-#include "MEGEngine/camera.h"
-#include "MEGEngine/scripted_behaviour.h"
+#include "MEGEngine/Core/scene.h"
+#include "MEGEngine/Core/camera.h"
+#include "MEGEngine/Core/scripted_behaviour.h"
 
 
 Scene::Scene(float width, float height) {

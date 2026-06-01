@@ -1,5 +1,5 @@
-#include "MEGEngine/mesh.h"
-#include "MEGEngine/ebo.h"
+#include "MEGEngine/Core/mesh.h"
+#include "MEGEngine/Core/ebo.h"
 
 
 Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices) {

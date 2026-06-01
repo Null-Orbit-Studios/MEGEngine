@@ -2,7 +2,7 @@
 
 #include "MEGEngine/Input/input_device.h"
 #include "MEGEngine/Input/raw_input_event_bus.h"
-#include "MEGEngine/window.h"
+#include "MEGEngine/Core/window.h"
 #include "MEGEngine/Input/glfw_key_translator.h"
 
 

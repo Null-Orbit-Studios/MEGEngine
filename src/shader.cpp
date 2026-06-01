@@ -4,15 +4,15 @@
 #include "GLAD/glad.h"
 #include "GLM/gtc/type_ptr.hpp"
 
-#include "MEGEngine/shader.h"
-
 #include "MEGEngine/Math/glm_conversions.h"
 #include "MEGEngine/Math/vec2.h"
 #include "MEGEngine/Math/vec3.h"
 #include "MEGEngine/Math/vec4.h"
 #include "MEGEngine/Math/mat4.h"
-#include "MEGEngine/colour.h"
-#include "MEGEngine/light.h"
+
+#include "MEGEngine/Core/shader.h"
+#include "MEGEngine/Core/colour.h"
+#include "MEGEngine/Core/light.h"
 
 
 // Reads a text file and outputs a string with everything in the text file

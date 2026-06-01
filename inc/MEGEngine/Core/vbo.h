@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "MEGEngine/vertex.h"
+#include "MEGEngine/Core/vertex.h"
 
 
 class VBO {

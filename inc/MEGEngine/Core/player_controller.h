@@ -2,7 +2,7 @@
 #define MEGENGINEPROJECT_PLAYER_CONTROLLER_H
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/entity.h"
+#include "MEGEngine/Core/entity.h"
 #include "MEGEngine/Input/input_receiver.h"
 
 

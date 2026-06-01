@@ -4,16 +4,16 @@
 
 #include <JSON/json.hpp>
 
-#include "MEGEngine/model_loader.h"
-#include "MEGEngine/entity.h"
-#include "MEGEngine/texture.h"
-#include "MEGEngine/mesh_renderer.h"
-#include "MEGEngine/mesh.h"
-#include "MEGEngine/material.h"
-#include "MEGEngine/texture.h"
-#include "MEGEngine/shader.h"
-#include "MEGEngine/shader_manager.h"
-#include "MEGEngine/vertex.h"
+#include "MEGEngine/Core/model_loader.h"
+#include "MEGEngine/Core/entity.h"
+#include "MEGEngine/Core/texture.h"
+#include "MEGEngine/Core/mesh_renderer.h"
+#include "MEGEngine/Core/mesh.h"
+#include "MEGEngine/Core/material.h"
+#include "MEGEngine/Core/texture.h"
+#include "MEGEngine/Core/shader.h"
+#include "MEGEngine/Core/shader_manager.h"
+#include "MEGEngine/Core/vertex.h"
 
 #include "MEGEngine/Math/glm_conversions.h"
 

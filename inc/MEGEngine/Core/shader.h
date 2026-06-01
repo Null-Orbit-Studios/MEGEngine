@@ -5,7 +5,7 @@
 #include <sstream>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/settings.h"
+#include "MEGEngine/Core/settings.h"
 
 
 

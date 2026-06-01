@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/texture.h"
+#include "MEGEngine/Core/texture.h"
 
 #include "MEGEngine/Math/vec2.h"
 #include "MEGEngine/Math/vec3.h"

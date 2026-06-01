@@ -2,7 +2,7 @@
 #define CAMERA_H
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/entity.h"
+#include "MEGEngine/Core/entity.h"
 #include "MEGEngine/Math/mat4.h"
 
 

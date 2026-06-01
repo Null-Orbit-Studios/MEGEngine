@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/component.h"
+#include "MEGEngine/Core/component.h"
 
 
 class ENGINE_API MeshRenderer : public Component {

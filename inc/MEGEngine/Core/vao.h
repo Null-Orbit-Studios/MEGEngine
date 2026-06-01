@@ -1,7 +1,7 @@
 #ifndef VAO_H
 #define VAO_H
 
-#include "MEGEngine/vbo.h"
+#include "MEGEngine/Core/vbo.h"
 
 
 class VAO {

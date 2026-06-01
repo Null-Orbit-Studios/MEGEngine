@@ -1,9 +1,10 @@
 #ifndef MEGENGINEPROJECT_LIGHT_H
 #define MEGENGINEPROJECT_LIGHT_H
 
-#include "MEGEngine/colour.h"
+
 #include "MEGEngine/common.h"
-#include "MEGEngine/entity.h"
+#include "MEGEngine/Core/colour.h"
+#include "MEGEngine/Core/entity.h"
 
 
 

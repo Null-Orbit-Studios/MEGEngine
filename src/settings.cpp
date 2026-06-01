@@ -4,7 +4,7 @@
 #include "JSON/json.hpp"
 
 #include "MEGEngine/Utils/log.h"
-#include "MEGEngine/settings.h"
+#include "MEGEngine/Core/settings.h"
 
 using JSON = nlohmann::json;
 

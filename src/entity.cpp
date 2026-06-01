@@ -1,9 +1,9 @@
-#include "MEGEngine/entity.h"
-#include "MEGEngine/transform.h"
-#include "MEGEngine/mesh_renderer.h"
-#include "MEGEngine/Utils/log.h"
+#include "MEGEngine/Core/entity.h"
+#include "MEGEngine/Core/transform.h"
+#include "MEGEngine/Core/mesh_renderer.h"
+#include "MEGEngine/Core/scripted_behaviour.h"
 
-#include "MEGEngine/scripted_behaviour.h"
+#include "MEGEngine/Utils/log.h"
 
 
 Entity::Entity() {

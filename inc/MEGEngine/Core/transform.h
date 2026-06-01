@@ -1,8 +1,9 @@
 #ifndef MEGENGINEPROJECT_TRANSFORM_H
 #define MEGENGINEPROJECT_TRANSFORM_H
 
-#include "MEGEngine/component.h"
+
 #include "MEGEngine/common.h"
+#include "MEGEngine/Core/component.h"
 
 #include "MEGEngine/Math/quat.h"
 #include "MEGEngine/Math/mat4.h"

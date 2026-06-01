@@ -1,8 +1,7 @@
-#include "MEGEngine/material.h"
-
-#include "MEGEngine/shader.h"
-#include "MEGEngine/shader_manager.h"
-#include "MEGEngine/texture.h"
+#include "MEGEngine/Core/material.h"
+#include "MEGEngine/Core/shader.h"
+#include "MEGEngine/Core/shader_manager.h"
+#include "MEGEngine/Core/texture.h"
 #include "MEGEngine/Utils/log.h"
 
 

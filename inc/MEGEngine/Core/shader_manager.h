@@ -7,7 +7,7 @@
 #include <memory>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/shader.h"
+#include "MEGEngine/Core/shader.h"
 
 
 class ENGINE_API ShaderManager {

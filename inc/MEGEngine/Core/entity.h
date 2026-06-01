@@ -5,10 +5,10 @@
 #include <unordered_map>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/component.h"
-#include "MEGEngine/transform.h"
-#include "MEGEngine/mesh_renderer.h"
-#include "Utils/log.h"
+#include "MEGEngine/Core/component.h"
+#include "MEGEngine/Core/transform.h"
+#include "MEGEngine/Core/mesh_renderer.h"
+#include "MEGEngine/Utils/log.h"
 
 
 class ENGINE_API Entity {

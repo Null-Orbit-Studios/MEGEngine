@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/vertex.h"
+#include "MEGEngine/Core/vertex.h"
 
 
 class ENGINE_API Cube {

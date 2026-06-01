@@ -2,7 +2,7 @@
 #define MEGENGINEPROJECT_INPUT_RECEIVER_H
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/component.h"
+#include "MEGEngine/Core/component.h"
 #include "MEGEngine/Input.h"
 
 

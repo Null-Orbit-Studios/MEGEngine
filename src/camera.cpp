@@ -3,13 +3,13 @@
 #include "GLM/gtx/rotate_vector.hpp"
 #include "GLM/gtx/vector_angle.hpp"
 
-#include "MEGEngine/camera.h"
-#include "MEGEngine/window.h"
-#include "MEGEngine/timer.h"
+#include "MEGEngine/Core/camera.h"
+#include "MEGEngine/Core/window.h"
+#include "MEGEngine/Core/timer.h"
+#include "MEGEngine/Core/engine.h"
 
 #include "MEGEngine/Math/glm_conversions.h"
 
-#include "MEGEngine/engine.h"
 
 #include "MEGEngine/Utils/log.h"
 

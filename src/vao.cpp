@@ -1,6 +1,6 @@
 #include "GLAD/glad.h"
 
-#include "MEGEngine/vao.h"
+#include "MEGEngine/Core/vao.h"
 
 
 VAO::VAO() {

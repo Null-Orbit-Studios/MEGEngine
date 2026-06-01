@@ -11,7 +11,7 @@
 #include "MEGEngine/Input/raw_input_event_bus.h"
 #include "MEGEngine/Input/player_action_bus.h"
 #include "MEGEngine/Input/input_receiver.h"
-#include "MEGEngine/window.h"
+#include "MEGEngine/Core/window.h"
 
 #include "MEGEngine/common.h"
 
