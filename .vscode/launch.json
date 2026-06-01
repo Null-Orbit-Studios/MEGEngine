@@ -5,7 +5,7 @@
             "name": "Launch Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${command:cmake.launchTargetPath}",
+            "program": "${workspaceFolder}/build/examples/locomotion/locomotion",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build",

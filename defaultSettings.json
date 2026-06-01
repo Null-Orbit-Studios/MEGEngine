@@ -1,7 +1,6 @@
 {
     "General": {
-        "shaderDirectory": "/home/will/developer/proj/meg-engine/shaders",
-        "modelDirectory": "/home/will/developer/proj/meg-engine/examples/locomotion/models"
+        "shaderDirectory": "/home/will/developer/proj/meg-engine/shaders"
     },
 
     "Graphics": {

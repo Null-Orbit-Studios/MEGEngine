@@ -53,10 +53,12 @@ unset(CMAKE_BUILD_TYPE CACHE) # Can be overwritten but resets to debug on next b
 
 option(BUILD_EXAMPLES OFF)
 if(BUILD_EXAMPLES STREQUAL "ON")
+        message("BUILDING EXAMPLES")
         add_subdirectory(examples)
 endif()
 
 option(BUILD_TESTS ON)
 if(BUILD_TESTS STREQUAL "ON")
+        message("BUILDING TESTS")
         add_subdirectory(tests)
 endif()
