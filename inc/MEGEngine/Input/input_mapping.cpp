@@ -75,7 +75,17 @@ void InputMappingSystem::onKeyPressed(const KeyPressedEvent& e) {
 
     for (auto& b : _contexts.top()->bindings()) {
         if (b.source.type == InputSource::Type::KEY && b.source.key == e.key) {
-            apply(b.action, ActionValue(b.scale));
+            switch (b.action->type()) {
+                case InputAction::Type::BOOL:
+                    apply(b.action, ActionValue(b.value.asBool()));
+                    break;
+                case InputAction::Type::FLOAT:
+                    apply(b.action, ActionValue(b.value.asFloat()));
+                    break;
+                case InputAction::Type::VEC2:
+                    apply(b.action, ActionValue(b.value.asVec2()));
+                    break;
+            }
         }
     }
 }

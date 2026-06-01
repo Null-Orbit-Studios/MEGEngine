@@ -26,7 +26,7 @@ struct ENGINE_API InputSource {
 struct ENGINE_API InputBinding {
     InputAction* action; // can be null if no action is bound
     InputSource source; // cannot be null, must have a source that triggers it
-    float scale = 1.0f;
+    ActionValue value;
 };
 
 class ENGINE_API InputContext {

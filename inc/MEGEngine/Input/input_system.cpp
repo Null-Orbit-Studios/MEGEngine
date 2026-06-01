@@ -30,8 +30,8 @@ std::shared_ptr<InputContext> InputSystem::createContext() {
     return std::make_shared<InputContext>();
 }
 
-void InputSystem::bind(InputContext& ctx, InputAction& action, InputSource src, float scale) {
-    ctx.addBinding(InputBinding{&action, src, scale});
+void InputSystem::bind(InputContext& ctx, InputAction& action, InputSource src, ActionValue value) {
+    ctx.addBinding(InputBinding{.action = &action, .source = src, .value = value});
 }
 
 void InputSystem::pushContext(std::shared_ptr<InputContext> ctx) {

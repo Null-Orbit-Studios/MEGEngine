@@ -17,7 +17,7 @@ public:
     std::vector<std::shared_ptr<InputAction>>& actions();
     InputAction* findAction(std::string name);
     std::shared_ptr<InputContext> createContext();
-    void bind(InputContext& ctx, InputAction& action, InputSource src, float scale = 1.0f);
+    void bind(InputContext& ctx, InputAction& action, InputSource src, ActionValue value = true);
     void pushContext(std::shared_ptr<InputContext> ctx);
     void popContext();
     void subscribe(InputAction& action, PlayerActionBus::Callback cb);

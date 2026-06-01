@@ -15,6 +15,7 @@ public:
     ActionValue() : _value(false) {}
     ActionValue(bool v) : _value(v) {}
     ActionValue(float v) : _value(v) {}
+    ActionValue(int v) : _value(float(v)) {}
     ActionValue(Vec2 v) : _value(v) {}
 
     const bool asBool() const {
@@ -66,6 +67,7 @@ public:
     InputAction(std::string name, Type type) : _name(std::move(name)), _type(type) {}
 
     std::string name() const { return _name; }
+    Type type() const {return _type; }
 
 private:
     std::string _name;
