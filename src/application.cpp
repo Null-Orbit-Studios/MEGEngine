@@ -13,7 +13,7 @@
 #include "MEGEngine/settings.h"
 #include "MEGEngine/Input.h"
 
-#include "MEGEngine/utils/log.h"
+#include "MEGEngine/Utils/log.h"
 
 
 Application::Application(const ApplicationConfig& appConfig) {

@@ -3,7 +3,7 @@
 #include "MEGEngine/shader.h"
 #include "MEGEngine/shader_manager.h"
 #include "MEGEngine/texture.h"
-#include "MEGEngine/utils/log.h"
+#include "MEGEngine/Utils/log.h"
 
 
 Material::Material(Shader* shader) : _shader(shader) {}

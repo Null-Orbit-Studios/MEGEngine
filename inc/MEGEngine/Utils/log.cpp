@@ -2,7 +2,7 @@
 #include <iostream>
 #include <chrono>
 
-#include "MEGEngine/utils/log.h"
+#include "MEGEngine/Utils/log.h"
 
 #ifdef __linux // _vscprintf is a windows function, not available on linux so defined here
 int _vscprintf (const char * format, va_list pargs) {

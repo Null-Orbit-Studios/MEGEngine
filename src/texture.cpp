@@ -5,7 +5,7 @@
 
 #include "MEGEngine/texture.h"
 #include "MEGEngine/shader.h"
-#include "MEGEngine/utils/log.h"
+#include "MEGEngine/Utils/log.h"
 
 
 Texture::Texture(const char *image, TexType texType, unsigned int slot) {

@@ -1,7 +1,7 @@
 #include "MEGEngine/entity.h"
 #include "MEGEngine/transform.h"
 #include "MEGEngine/mesh_renderer.h"
-#include "MEGEngine/utils/log.h"
+#include "MEGEngine/Utils/log.h"
 
 #include "MEGEngine/scripted_behaviour.h"
 

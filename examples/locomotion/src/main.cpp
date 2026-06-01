@@ -2,7 +2,7 @@
 
 #include "MEGEngine.h"
 #include "MEGEngine/Math/quat.h"
-#include "MEGEngine/utils/log.h"
+#include "MEGEngine/Utils/log.h"
 
 #include "CustomEvents.h"
 #include "MoveCamera.h"

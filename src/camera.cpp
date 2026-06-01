@@ -11,7 +11,7 @@
 
 #include "MEGEngine/engine.h"
 
-#include "MEGEngine/utils/log.h"
+#include "MEGEngine/Utils/log.h"
 
 
 Camera::Camera(int width, int height) :
