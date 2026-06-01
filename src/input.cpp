@@ -1,5 +1,5 @@
 #include "GLFW/glfw3.h"
-#include "MEGEngine/input.h"
+#include "MEGEngine/Input.h"
 #include "MEGEngine/settings.h"
 
 struct WindowImpl {

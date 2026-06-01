@@ -1,7 +1,7 @@
 #include <memory>
 
 #include "MEGEngine.h"
-#include "MEGEngine/math/quat.h"
+#include "MEGEngine/Math/quat.h"
 #include "MEGEngine/utils/log.h"
 
 #include "CustomEvents.h"

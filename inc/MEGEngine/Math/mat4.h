@@ -2,7 +2,7 @@
 #define MEGENGINEPROJECT_MAT4_H
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/math/vec3.h"
+#include "MEGEngine/Math/vec3.h"
 
 
 class ENGINE_API Mat4 {

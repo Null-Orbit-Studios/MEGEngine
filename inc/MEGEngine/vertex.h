@@ -3,8 +3,8 @@
 
 #include "MEGEngine/common.h"
 
-#include "MEGEngine/math/vec3.h"
-#include "MEGEngine/math/vec2.h"
+#include "MEGEngine/Math/vec3.h"
+#include "MEGEngine/Math/vec2.h"
 
 
 class ENGINE_API Vertex {

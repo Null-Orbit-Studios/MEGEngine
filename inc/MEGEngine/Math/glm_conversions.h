@@ -10,11 +10,11 @@
 #include "GLM/gtc/quaternion.hpp"
 #include "GLM/gtx/quaternion.hpp"
 
-#include "MEGEngine/math/vec2.h"
-#include "MEGEngine/math/vec3.h"
-#include "MEGEngine/math/vec4.h"
-#include "MEGEngine/math/mat4.h"
-#include "MEGEngine/math/quat.h"
+#include "MEGEngine/Math/vec2.h"
+#include "MEGEngine/Math/vec3.h"
+#include "MEGEngine/Math/vec4.h"
+#include "MEGEngine/Math/mat4.h"
+#include "MEGEngine/Math/quat.h"
 
 namespace Private {
 

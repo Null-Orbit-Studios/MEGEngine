@@ -1,7 +1,7 @@
 #include "GLM/gtx/transform.hpp"
 
-#include "MEGEngine/math/mat4.h"
-#include "MEGEngine/math/glm_conversions.h"
+#include "MEGEngine/Math/mat4.h"
+#include "MEGEngine/Math/glm_conversions.h"
 
 
 Mat4::Mat4() {

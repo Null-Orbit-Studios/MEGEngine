@@ -7,7 +7,7 @@
 #include "MEGEngine/window.h"
 #include "MEGEngine/timer.h"
 
-#include "MEGEngine/math/glm_conversions.h"
+#include "MEGEngine/Math/glm_conversions.h"
 
 #include "MEGEngine/engine.h"
 

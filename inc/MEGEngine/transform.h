@@ -4,9 +4,9 @@
 #include "MEGEngine/component.h"
 #include "MEGEngine/common.h"
 
-#include "MEGEngine/math/quat.h"
-#include "MEGEngine/math/mat4.h"
-#include "MEGEngine/math/vec3.h"
+#include "MEGEngine/Math/quat.h"
+#include "MEGEngine/Math/mat4.h"
+#include "MEGEngine/Math/vec3.h"
 
 
 class ENGINE_API Transform : public Component {

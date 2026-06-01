@@ -3,7 +3,7 @@
 
 #include "MEGEngine/common.h"
 #include "MEGEngine/component.h"
-#include "MEGEngine/input.h"
+#include "MEGEngine/Input.h"
 
 
 

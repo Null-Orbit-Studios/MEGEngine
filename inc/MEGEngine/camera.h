@@ -3,7 +3,7 @@
 
 #include "MEGEngine/common.h"
 #include "MEGEngine/entity.h"
-#include "MEGEngine/math/mat4.h"
+#include "MEGEngine/Math/mat4.h"
 
 
 class ENGINE_API Camera : public Entity {

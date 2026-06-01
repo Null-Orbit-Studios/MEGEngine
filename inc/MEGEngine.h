@@ -22,7 +22,7 @@
 #include "MEGEngine/model_loader.h"
 
 #include "MEGEngine/events.h"
-#include "MEGEngine/input.h"
+#include "MEGEngine/Input.h"
 #include "MEGEngine/player_controller.h"
 
 #include "MEGEngine/component.h"

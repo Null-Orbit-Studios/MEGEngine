@@ -2,7 +2,7 @@
 #define MEGENGINEPROJECT_ENGINE_H
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/input.h"
+#include "MEGEngine/Input.h"
 #include "MEGEngine/player_controller.h"
 #include "MEGEngine/application.h"
 

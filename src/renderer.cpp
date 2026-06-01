@@ -8,7 +8,7 @@
 #include "MEGEngine/scene.h"
 #include "MEGEngine/texture.h"
 
-#include "MEGEngine/math/glm_conversions.h"
+#include "MEGEngine/Math/glm_conversions.h"
 
 #include "MEGEngine/utils/log.h"
 

@@ -6,11 +6,11 @@
 
 #include "MEGEngine/shader.h"
 
-#include "MEGEngine/math/glm_conversions.h"
-#include "MEGEngine/math/vec2.h"
-#include "MEGEngine/math/vec3.h"
-#include "MEGEngine/math/vec4.h"
-#include "MEGEngine/math/mat4.h"
+#include "MEGEngine/Math/glm_conversions.h"
+#include "MEGEngine/Math/vec2.h"
+#include "MEGEngine/Math/vec3.h"
+#include "MEGEngine/Math/vec4.h"
+#include "MEGEngine/Math/mat4.h"
 #include "MEGEngine/colour.h"
 #include "MEGEngine/light.h"
 

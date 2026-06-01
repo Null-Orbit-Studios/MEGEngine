@@ -15,7 +15,7 @@
 #include "MEGEngine/shader_manager.h"
 #include "MEGEngine/vertex.h"
 
-#include "MEGEngine/math/glm_conversions.h"
+#include "MEGEngine/Math/glm_conversions.h"
 
 #include "MEGEngine/utils/log.h"
 

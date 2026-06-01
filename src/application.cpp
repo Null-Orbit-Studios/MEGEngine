@@ -11,7 +11,7 @@
 #include "MEGEngine/renderer.h"
 #include "MEGEngine/camera.h"
 #include "MEGEngine/settings.h"
-#include "MEGEngine/input.h"
+#include "MEGEngine/Input.h"
 
 #include "MEGEngine/utils/log.h"
 

@@ -6,10 +6,10 @@
 #include "MEGEngine/common.h"
 #include "MEGEngine/texture.h"
 
-#include "MEGEngine/math/vec2.h"
-#include "MEGEngine/math/vec3.h"
-#include "MEGEngine/math/vec4.h"
-#include "MEGEngine/math/mat4.h"
+#include "MEGEngine/Math/vec2.h"
+#include "MEGEngine/Math/vec3.h"
+#include "MEGEngine/Math/vec4.h"
+#include "MEGEngine/Math/mat4.h"
 
 
 class Entity;

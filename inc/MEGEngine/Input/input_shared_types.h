@@ -9,6 +9,6 @@
 #include <string>
 #include <stack>
 
-#include "MEGEngine/math/vec2.h"
+#include "MEGEngine/Math/vec2.h"
 
 #endif //MEGENGINEPROJECT_INPUT_SHARED_TYPES_H

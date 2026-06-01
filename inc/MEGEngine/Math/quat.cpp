@@ -2,10 +2,10 @@
 #include "GLM/gtc/quaternion.hpp"
 #include "GLM/gtx/quaternion.hpp"
 
-#include "MEGEngine/math/quat.h"
-#include "MEGEngine/math/mat4.h"
-#include "MEGEngine/math/vec3.h"
-#include "MEGEngine/math/glm_conversions.h"
+#include "MEGEngine/Math/quat.h"
+#include "MEGEngine/Math/mat4.h"
+#include "MEGEngine/Math/vec3.h"
+#include "MEGEngine/Math/glm_conversions.h"
 
 
 Quat::Quat() : x(0), y(0), z(0), w(1) {}

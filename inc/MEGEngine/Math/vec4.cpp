@@ -1,7 +1,7 @@
 #include "GLM/glm.hpp"
 
-#include "MEGEngine/math/vec4.h"
-#include "MEGEngine/math/glm_conversions.h"
+#include "MEGEngine/Math/vec4.h"
+#include "MEGEngine/Math/glm_conversions.h"
 
 
 

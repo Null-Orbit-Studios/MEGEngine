@@ -1,5 +1,5 @@
-#include "MEGEngine/math/vec2.h"
-#include "MEGEngine/math/glm_conversions.h"
+#include "MEGEngine/Math/vec2.h"
+#include "MEGEngine/Math/glm_conversions.h"
 
 #include "GLM/glm.hpp"
 
