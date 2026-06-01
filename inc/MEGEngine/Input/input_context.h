@@ -3,9 +3,9 @@
 
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/input/input_events.h"
-#include "MEGEngine/input/input_action.h"
-#include "MEGEngine/input/player_action_bus.h"
+#include "MEGEngine/Input/input_events.h"
+#include "MEGEngine/Input/input_action.h"
+#include "MEGEngine/Input/player_action_bus.h"
 
 
 class InputContext;

@@ -5,7 +5,7 @@
 
 #include "GLFW/glfw3.h"
 
-#include "MEGEngine/input/input_events.h"
+#include "MEGEngine/Input/input_events.h"
 
 
 class GLFWKeyTranslator

@@ -2,8 +2,8 @@
 #define MEGENGINEPROJECT_INPUT_MANAGER_H
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/input/raw_input_event_bus.h"
-#include "MEGEngine/input/input_device.h"
+#include "MEGEngine/Input/raw_input_event_bus.h"
+#include "MEGEngine/Input/input_device.h"
 
 
 class ENGINE_API InputManager {

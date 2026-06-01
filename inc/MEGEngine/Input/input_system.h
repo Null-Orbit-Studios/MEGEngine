@@ -7,8 +7,8 @@
 #include "input_manager.h"
 #include "input_mapping.h"
 #include "MEGEngine/common.h"
-#include "MEGEngine/input/input_action.h"
-#include "MEGEngine/input/player_action_bus.h"
+#include "MEGEngine/Input/input_action.h"
+#include "MEGEngine/Input/player_action_bus.h"
 
 
 class ENGINE_API InputSystem {

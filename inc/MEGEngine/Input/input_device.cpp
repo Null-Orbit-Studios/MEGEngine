@@ -1,9 +1,9 @@
 #include "GLFW/glfw3.h"
 
-#include "MEGEngine/input/input_device.h"
-#include "MEGEngine/input/raw_input_event_bus.h"
+#include "MEGEngine/Input/input_device.h"
+#include "MEGEngine/Input/raw_input_event_bus.h"
 #include "MEGEngine/window.h"
-#include "MEGEngine/input/glfw_key_translator.h"
+#include "MEGEngine/Input/glfw_key_translator.h"
 
 
 struct WindowImpl {

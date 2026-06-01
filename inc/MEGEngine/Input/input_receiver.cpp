@@ -1,4 +1,4 @@
-#include "MEGEngine/input/input_receiver.h"
+#include "MEGEngine/Input/input_receiver.h"
 #include "MEGEngine/engine.h"
 
 
