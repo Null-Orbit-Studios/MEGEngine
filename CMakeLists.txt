@@ -14,22 +14,18 @@ add_library(MEGEngine SHARED ${ENGINE_SOURCES})
 # COMPILE TIME DEFINTIONS
 # -----------------------------------------------------
 
-if(NOT CMAKE_BUILD_TYPE)
-        set(CMAKE_BUILD_TYPE Debug) # default to a debug build
-endif()
-unset(CMAKE_BUILD_TYPE CACHE) # Can be overwritten but resets to debug on next build
-
 if (CMAKE_BUILD_TYPE STREQUAL "Release")
         target_compile_definitions(MEGEngine PRIVATE
                 RELEASE
         )
         message("-- Building in RELEASE mode")
-else
+else()
         target_compile_definitions(MEGEngine PRIVATE
                 DEBUG
         )
         message("-- Building in DEBUG mode")
 endif()
+unset(CMAKE_BUILD_TYPE CACHE)
 
 target_compile_definitions(MEGEngine PRIVATE
         ENGINE_BUILD
