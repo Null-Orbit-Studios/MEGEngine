@@ -57,6 +57,13 @@ public:
     void display() override;
 
     /**
+     * @brief Terminate the window and destroy all stored objects.
+     * 
+     * @return void
+     */
+    void terminate() override;
+
+    /**
      * @brief DEPRECATED - USE `handle()` INSTEAD
      * 
      * Get the real implementation object of the window

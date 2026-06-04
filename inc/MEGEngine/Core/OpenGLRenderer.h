@@ -10,7 +10,7 @@
 
 class ENGINE_API OpenGLRenderer : public IRenderer {
 public:
-    OpenGLRenderer() {};
+    OpenGLRenderer(int width, int height) : _width(width), _height(height) {};
     ~OpenGLRenderer() override = default;
 
     /**
@@ -18,9 +18,9 @@ public:
      * 
      * Initialises the renderer using an OpenGL GLAD backend
      * 
-     * @returns void
+     * @returns bool indicating success (True) or error (False)
      */
-    void init() override;
+    bool init() override;
 
     /**
      * @brief Renders the scene on the screen
@@ -37,6 +37,8 @@ private:
     void draw(Entity& entity, const Scene& scene) override;
 
     bool _initialised = false;
+    int _width;
+    int _height;
     struct RenderGroup;
 };
 

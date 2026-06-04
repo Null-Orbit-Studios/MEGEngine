@@ -1,8 +1,5 @@
 #include <thread>
 
-#include "GLAD/glad.h"
-#include "GLFW/glfw3.h"
-
 #include "MEGEngine/Core/Application.h"
 #include "MEGEngine/Core/engine.h"
 #include "MEGEngine/Core/timer.h"
@@ -85,22 +82,13 @@ void Application::init() {
 	_window = std::make_unique<Window>();
 	_window->create(config.windowTitle, config.width, config.height);
 
-	// load glad for access to GL functions
-	int status = gladLoadGL();
+	_renderer = std::make_unique<OpenGLRenderer>(config.width, config.height);
+	uint16_t status = _renderer->init();
 	if (!status) {
-		glfwTerminate();
-		throw std::runtime_error("Failed to initialize GLAD");
+		_window->terminate();
+		LOG_ERR("Failed to initialise GLAD");
+		exit(1);
 	}
-
-	// set the viewport
-	glViewport(0, 0, config.width, config.height);
-
-	// enables depth perception - prevents incorrect overlapping triangles
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
-
-	_renderer = std::make_unique<OpenGLRenderer>();
-	_renderer->init();
 
 	_scene = std::make_unique<Scene>(config.width, config.height);
 

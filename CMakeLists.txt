@@ -44,7 +44,6 @@ target_compile_options(MEGEngine PRIVATE
         -fPIC
         -Wall
         -Wextra
-        -O2
 )
 
 if (UNIX)

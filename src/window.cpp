@@ -58,6 +58,10 @@ void Window::display() {
     glfwSwapBuffers(_handle->ptr);
 }
 
+void Window::terminate() {
+    glfwTerminate();
+}
+
 Window::Impl& Window::impl() {
     return *_impl;
 }

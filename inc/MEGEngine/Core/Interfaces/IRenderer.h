@@ -7,7 +7,7 @@
 class IRenderer {
 public:
     virtual ~IRenderer() {};
-    virtual void init() = 0;
+    virtual bool init() = 0;
     virtual void render(const Scene& scene) = 0;
 
 protected:

@@ -13,6 +13,7 @@ public:
     virtual void pollEvents() = 0;
     virtual bool shouldClose() const = 0;
     virtual void display() = 0;
+    virtual void terminate() = 0;
 
     virtual Impl& impl() = 0;
     virtual WindowHandle& handle() = 0;

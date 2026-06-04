@@ -38,10 +38,10 @@ private:
     static const std::string get_log_level_str(LogLevel level);
 };
 
-#define LOG_DBG(format, ...) Logger::log(LogLevel::DBG, __FILE__, __LINE__, __FUNC_NAME__, format, __VA_ARGS__)
-#define LOG_INF(format, ...) Logger::log(LogLevel::INF, __FILE__, __LINE__, __FUNC_NAME__, format, __VA_ARGS__)
-#define LOG_WRN(format, ...) Logger::log(LogLevel::WRN, __FILE__, __LINE__, __FUNC_NAME__, format, __VA_ARGS__)
-#define LOG_ERR(format, ...) Logger::log(LogLevel::ERR, __FILE__, __LINE__, __FUNC_NAME__, format, __VA_ARGS__)
+#define LOG_DBG(format, ...) Logger::log(LogLevel::DBG, __FILE__, __LINE__, __FUNC_NAME__, format __VA_OPT__(, __VA_ARGS__))
+#define LOG_INF(format, ...) Logger::log(LogLevel::INF, __FILE__, __LINE__, __FUNC_NAME__, format __VA_OPT__(, __VA_ARGS__))
+#define LOG_WRN(format, ...) Logger::log(LogLevel::WRN, __FILE__, __LINE__, __FUNC_NAME__, format __VA_OPT__(, __VA_ARGS__))
+#define LOG_ERR(format, ...) Logger::log(LogLevel::ERR, __FILE__, __LINE__, __FUNC_NAME__, format __VA_OPT__(, __VA_ARGS__))
 
 
 #endif //MEGENGINEPROJECT_LOG_H

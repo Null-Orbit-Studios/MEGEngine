@@ -1,4 +1,5 @@
 #include "GLAD/glad.h"
+#include "GLFW/glfw3.h"
 
 #include "MEGEngine/Core/OpenGLRenderer.h"
 #include "MEGEngine/Core/camera.h"
@@ -18,14 +19,18 @@ struct OpenGLRenderer::RenderGroup {
     std::vector<Entity*> entities;
 };
 
-void OpenGLRenderer::init() {
-    if (!gladLoadGL())
-        throw std::runtime_error("GLAD initialization failed");
+bool OpenGLRenderer::init() {
+    int status = gladLoadGL();
+    if (!status)
+        return false;
 
+	glViewport(0, 0, _width, _height);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
     _initialised = true;
+
+    return true;
 }
 
 void OpenGLRenderer::render(const Scene& scene) {
