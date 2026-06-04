@@ -4,11 +4,11 @@
 #include <memory>
 
 #include "MEGEngine/common.h"
-#include "Interfaces/IInputSystem.h"
+#include "Interfaces/IInput.h"
 #include "MEGEngine/Input/player_action_bus.h"
 
 
-class ENGINE_API InputSystem : IInputSystem {
+class ENGINE_API InputSystem : IInput {
 public:
     InputAction& createAction(std::string name, InputAction::Type type) override;
     std::vector<std::shared_ptr<InputAction>>& actions() override;

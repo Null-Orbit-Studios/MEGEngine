@@ -1,5 +1,5 @@
-#ifndef MEGENGINE_IINPUT_SYSTEM_H
-#define MEGENGINE_IINPUT_SYSTEM_H
+#ifndef MEGENGINE_IINPUT_H
+#define MEGENGINE_IINPUT_H
 
 #include <string>
 #include <vector>
@@ -9,7 +9,7 @@
 #include "MEGEngine/Input/input_manager.h"
 #include "MEGEngine/Input/input_mapping.h"
 
-class IInputSystem {
+class IInput {
 public:
     virtual InputAction& createAction(std::string name, InputAction::Type type) = 0;
     virtual std::vector<std::shared_ptr<InputAction>>& actions() = 0;
