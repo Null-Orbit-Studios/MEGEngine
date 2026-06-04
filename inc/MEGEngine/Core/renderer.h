@@ -13,7 +13,24 @@ public:
     Renderer() {};
     ~Renderer() override = default;
 
+    /**
+     * @brief Initialises the renderer
+     * 
+     * Initialises the renderer using an OpenGL GLAD backend
+     * 
+     * @returns void
+     */
     void init() override;
+
+    /**
+     * @brief Renders the scene on the screen
+     * 
+     * Sorts and groups the entities in a scene by the shaders they use
+     * to minimise shader switching. After grouping, each group is then
+     * drawn to the screen.
+     * 
+     * @returns void
+     */
     void render(const Scene& scene) override;
 
 private:
