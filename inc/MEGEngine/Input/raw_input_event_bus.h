@@ -23,7 +23,7 @@ public:
     // Queue an event, with a list of its listeners attached
     template<typename Event>
     static void queueEvent(const Event& e) {
-        Log(LogLevel::DBG, "Queue event of type %s to RawInputEventBus", typeid(Event).name());
+        // Log(LogLevel::DBG, "Queue event of type %s to RawInputEventBus", typeid(Event).name());
         auto& vec = listeners<Event>();
         _eventQueue.push_back(std::make_unique<QueuedEvent<Event>>(e, vec));
     }
