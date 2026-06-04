@@ -3,29 +3,26 @@
 
 #include <memory>
 
-#include "input_context.h"
-#include "input_manager.h"
-#include "input_mapping.h"
 #include "MEGEngine/common.h"
-#include "MEGEngine/Input/input_action.h"
+#include "Interfaces/IInputSystem.h"
 #include "MEGEngine/Input/player_action_bus.h"
 
 
-class ENGINE_API InputSystem {
+class ENGINE_API InputSystem : IInputSystem {
 public:
-    InputAction& createAction(std::string name, InputAction::Type type);
-    std::vector<std::shared_ptr<InputAction>>& actions();
-    InputAction* findAction(std::string name);
-    std::shared_ptr<InputContext> createContext();
-    void bind(InputContext& ctx, InputAction& action, InputSource src, ActionValue value = true);
-    void pushContext(std::shared_ptr<InputContext> ctx);
-    void popContext();
-    void subscribe(InputAction& action, PlayerActionBus::Callback cb);
-    void unsubscribe(InputAction& action);
-    void update();
-    InputManager& manager() { return _manager; }
-    InputMappingSystem& mapping() { return _mapping; };
-    void init();
+    InputAction& createAction(std::string name, InputAction::Type type) override;
+    std::vector<std::shared_ptr<InputAction>>& actions() override;
+    InputAction* findAction(std::string name) override;
+    std::shared_ptr<InputContext> createContext() override;
+    void bind(InputContext& ctx, InputAction& action, InputSource src, ActionValue value = true) override;
+    void pushContext(std::shared_ptr<InputContext> ctx) override;
+    void popContext() override;
+    void subscribe(InputAction& action, PlayerActionBus::Callback cb) override;
+    void unsubscribe(InputAction& action) override;
+    void update() override;
+    InputManager& manager() override { return _manager; }
+    InputMappingSystem& mapping() override { return _mapping; };
+    void init() override;
 
 private:
     InputManager _manager;

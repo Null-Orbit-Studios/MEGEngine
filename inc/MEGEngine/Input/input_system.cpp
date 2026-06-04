@@ -14,6 +14,10 @@ InputAction& InputSystem::createAction(std::string name, InputAction::Type type)
     return *_actions.back();
 }
 
+std::vector<std::shared_ptr<InputAction>>& InputSystem::actions() {
+    return _actions;
+}
+
 // Returns action if name matches one in the list. Returns null if not found
 InputAction* InputSystem::findAction(std::string name) {
     if (this) {
