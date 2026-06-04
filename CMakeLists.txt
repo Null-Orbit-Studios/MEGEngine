@@ -15,15 +15,18 @@ add_library(MEGEngine SHARED ${ENGINE_SOURCES})
 # -----------------------------------------------------
 
 if (CMAKE_BUILD_TYPE STREQUAL "Release")
+        message("-- Building in RELEASE mode")
         target_compile_definitions(MEGEngine PRIVATE
                 RELEASE
         )
-        message("-- Building in RELEASE mode")
 else()
+        message("-- Building in DEBUG mode")
         target_compile_definitions(MEGEngine PRIVATE
                 DEBUG
         )
-        message("-- Building in DEBUG mode")
+        target_compile_options(MEGEngine PRIVATE
+                -g
+        )
 endif()
 unset(CMAKE_BUILD_TYPE CACHE)
 

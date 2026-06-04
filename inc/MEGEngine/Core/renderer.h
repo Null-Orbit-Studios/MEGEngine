@@ -5,19 +5,19 @@
 #include <vector>
 
 #include "MEGEngine/common.h"
+#include "Interfaces/IRenderer.h"
 
 
-class ENGINE_API Renderer {
+class ENGINE_API Renderer : public IRenderer {
 public:
-    Renderer() = default;
-    ~Renderer() = default;
+    Renderer() {};
+    ~Renderer() override = default;
 
-    void init();
-    void render(const class Scene& scene);
+    void init() override;
+    void render(const Scene& scene) override;
 
 private:
-    void draw(class Entity& entity, const class Scene& scene);
-    void drawMeshes(std::vector<std::unique_ptr<class Entity>&> entities);
+    void draw(Entity& entity, const Scene& scene) override;
 
     bool _initialised = false;
     struct RenderGroup;

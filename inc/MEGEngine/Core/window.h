@@ -4,10 +4,10 @@
 #include <string>
 
 #include "MEGEngine/common.h"
+#include "MEGEngine/Core/Interfaces/IWindow.h"
 
 
-class ENGINE_API Window {
-    struct Impl;
+class ENGINE_API Window : public IWindow {
 public:
     Window();
     ~Window();
@@ -16,22 +16,65 @@ public:
     Window(const Window&) = delete;
     Window& operator=(const Window&) = delete;
 
-    // Create and display a blank window
+    /**
+     * @brief Create and display a blank window
+     * 
+     * Creates a blank window using the width and height specified, or defaulting
+     * to 1280x720 pixels. Title defaults to 'MEGEngine Window' if not specified.
+     * 
+     * @param [in] title The title of the window
+     * @param [in] width The width of the window in pixels
+     * @param [in] height The height of the window in pixels
+     */
     void create(const std::string& title = "MEGEngine Window",
                 int width = 1280,
-                int height = 720);
+                int height = 720) override;
 
-    // Check for events that need to be processed. Key or mouse clicks etc.
-    void pollEvents();
-    // Check if an action has happened that should cause the application to close
-    bool shouldClose() const;
-    // Display what has been rendered on the window
-    void display();
+    /**
+     * @brief Checks for and registers events that need to be processed
+     * 
+     * Detects inputs or events of any kind. Sets flags that can indicate
+     * whether should close etc.
+     * 
+     * @return void
+     */
+    void pollEvents() override;
 
-    Impl& impl();
+    /**
+     * @brief Checks if an action has happened that should cause the application to close
+     * 
+     * @returns bool
+     * @retval True - Window should close
+     * @retval False - Window does not need to close
+     */
+    bool shouldClose() const override;
+
+    /**
+     * @brief Display what has been rendered on the window
+     * 
+     * @return void
+     */
+    void display() override;
+
+    /**
+     * @brief DEPRECATED - USE `handle()` INSTEAD
+     * 
+     * Get the real implementation object of the window
+     * 
+     * @return Structure containing handle pointer to window object
+     */
+    Impl& impl() override;
+
+    /**
+     * @brief Get the real implementation object of the window
+     * 
+     * @return Handle structure containing pointer to window object
+     */
+    WindowHandle& handle() override;
 
 private:
     // Private wrapper for GLFWwindow to keep it hidden from public headers
+    WindowHandle* _handle;
     Impl* _impl;
 };
 
