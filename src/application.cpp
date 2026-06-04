@@ -30,9 +30,6 @@ Application::~Application() {
 	if (running) shutdown();
 }
 
-Application::Application(Application &&) noexcept = default;
-Application& Application::operator=(Application &&) noexcept = default;
-
 void Application::run() {
 	init();
 	running = true;
@@ -70,7 +67,7 @@ void Application::requestQuit() {
 	running = false;
 }
 
-Window& Application::window() {
+IWindow& Application::window() {
 	return *_window;
 }
 
@@ -78,7 +75,7 @@ Scene& Application::scene() {
 	return *_scene;
 }
 
-Renderer& Application::renderer() {
+IRenderer& Application::renderer() {
 	return *_renderer;
 }
 
@@ -115,7 +112,7 @@ void Application::init() {
 void Application::shutdown() {
 	onShutdown();
 
-	_scene.reset();
-	_renderer.reset();
-	_window.reset();
+	_scene = nullptr;
+	_renderer = nullptr;
+	_window = nullptr;
 }

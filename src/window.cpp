@@ -9,7 +9,11 @@ struct Window::Impl {
     GLFWwindow* handle = nullptr;
 };
 
-Window::Window() : _impl(new Impl()) {}
+struct Window::WindowHandle {
+    GLFWwindow* ptr = nullptr;
+};
+
+Window::Window() : _impl(new Impl()), _handle(new WindowHandle()) {}
 
 Window::~Window() {
     if (_impl->handle)
@@ -29,26 +33,35 @@ void Window::create(const std::string& title, int width, int height) {
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     // create window object
-    _impl->handle = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-    if (!_impl->handle) {
+
+    // _impl->handle = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+    _handle->ptr = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+    if (!_handle->ptr) {
         glfwTerminate();
         throw std::runtime_error("Failed to create GLFW window");
     }
 
+    // _impl is deprecated but either _handle or _impl can be used
+    _impl->handle = _handle->ptr;
+
     // apply actions to this window (make it the current context)
-    glfwMakeContextCurrent(_impl->handle);
+    glfwMakeContextCurrent(_handle->ptr);
 }
 
 void Window::pollEvents() {
     glfwPollEvents();
 }
 bool Window::shouldClose() const {
-    return glfwWindowShouldClose(_impl->handle);
+    return glfwWindowShouldClose(_handle->ptr);
 }
 void Window::display() {
-    glfwSwapBuffers(_impl->handle);
+    glfwSwapBuffers(_handle->ptr);
 }
 
 Window::Impl& Window::impl() {
     return *_impl;
+}
+
+Window::WindowHandle& Window::handle() {
+    return *_handle;
 }

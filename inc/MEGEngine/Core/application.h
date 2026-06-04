@@ -5,11 +5,9 @@
 #include <string>
 
 #include "MEGEngine/common.h"
-
-
-class Window;
-class Scene;
-class Renderer;
+#include "MEGEngine/Core/scene.h"
+#include "Interfaces/IWindow.h"
+#include "Interfaces/IRenderer.h"
 
 struct ENGINE_API ApplicationConfig {
 	std::string windowTitle = "MEGEngine Game";
@@ -23,41 +21,79 @@ class ENGINE_API Application {
 public:
 	ApplicationConfig config;
 
-	// Create instance using ApplicationConfig structure
 	explicit Application(const ApplicationConfig& config);
-	// Create instance using default configuration
 	Application() = default;
-	// Overwritable destructor so instance can handle its own clean-up
 	virtual ~Application();
 
-	// Prevents copying of the instance
+	
+	// Prevents copying or moving of the instance
+
 	Application(const Application&) = delete;
 	Application& operator=(const Application&) = delete;
+	Application(Application&&) noexcept = default;
+	Application& operator=(Application&&) noexcept = default;
 
-	// Prevents moving the instance
-	Application(Application&&) noexcept;
-	Application& operator=(Application&&) noexcept;
-
-	// Handles the main loop
+	/**
+     * @brief Contains the main application loop.
+     * 
+     * Initialises and then enters game loop. Updates scene, renderer, window,
+     * polls for events, handles FPS limiting, calls onUpdate each loop.
+     * 
+     * @return void
+     */
 	void run();
-	// Handles application exit
+
+	/**
+     * @brief Exits the game loop.
+     * 
+     * Causes the game loop to stop at the end of the current loop
+	 * and the application closes.
+     * 
+     * @return void
+     */
 	void requestQuit();
 
-	// Return window object owned by the application
-	Window& window();
+	/**
+     * @brief Gets a reference to the application window.
+     * 
+     * @return IWindow& - Address of window object
+     */
+	IWindow& window();
 
-	// Return scene object owned by the application
+	/**
+     * @brief Gets a reference to the active scene.
+     * 
+     * @return IScene& - Address of scene object
+     */
 	Scene& scene();
 
-	// Return renderer object owned by the application
-	Renderer& renderer();
+	/**
+     * @brief Gets a reference to the application renderer.
+     * 
+     * @return IRenderer& - Address of renderer object
+     */
+	IRenderer& renderer();
 
 protected:
-	// Virtual function, overwritten by objects of this class. Called on application startup
+	/**
+     * @brief Called once on application startup.
+	 * 
+	 * @return void
+     */
 	virtual void onInit() {}
-	// Virtual function, overwritten by objects of this class. Called on each frame
+
+	/**
+     * @brief Called once per frame.
+	 * 
+	 * @return void
+     */
 	virtual void onUpdate() {};
-	// Virtual function, overwritten by objects of this class. Called on application exit
+
+	/**
+     * @brief Called once on application shutdown.
+	 * 
+	 * @return void
+     */
 	virtual void onShutdown() {};
 
 private:
@@ -68,8 +104,8 @@ private:
 
 	bool running = false;
 
-	std::unique_ptr<Window> _window;
-	std::unique_ptr<Renderer> _renderer;
+	std::unique_ptr<IWindow> _window;
+	std::unique_ptr<IRenderer> _renderer;
 	std::unique_ptr<Scene> _scene;
 };
 

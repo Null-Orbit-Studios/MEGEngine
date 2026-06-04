@@ -61,18 +61,18 @@ InputModeValue toMEG(int value) {
     }
 }
 
-void setCursorPosition(Window& window, float x, float y) {
+void setCursorPosition(IWindow& window, float x, float y) {
     WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
     glfwSetCursorPos(glfwWindow->handle, x, y);
 }
-void setCursorPosition(Window& window, Vec2 pos) {
+void setCursorPosition(IWindow& window, Vec2 pos) {
     WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
     Vec2 center = Vec2(Settings::instance().graphics().windowWidth/2, Settings::instance().graphics().windowHeight/2);
     Log(LogLevel::DBG, "Settings cursor position: %f, %f", center.x, center.y);
     glfwSetCursorPos(glfwWindow->handle, pos.x, pos.y);
 }
 
-Vec2 getCursorPosition(Window& window, Vec2* pos) {
+Vec2 getCursorPosition(IWindow& window, Vec2* pos) {
     WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
     double x, y;
     glfwGetCursorPos(glfwWindow->handle, &x, &y);
@@ -81,7 +81,7 @@ Vec2 getCursorPosition(Window& window, Vec2* pos) {
     return *pos;
 }
 
-void setInputMode(Window& window, InputMode mode, InputModeValue value) {
+void setInputMode(IWindow& window, InputMode mode, InputModeValue value) {
     WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
     if (toGLFW(mode) < 0) {
         Log(LogLevel::WRN, "setInputMode(): InputMode provided is invalid");
@@ -94,7 +94,7 @@ void setInputMode(Window& window, InputMode mode, InputModeValue value) {
     glfwSetInputMode(glfwWindow->handle, toGLFW(mode), toGLFW(value));
 }
 
-InputModeValue ENGINE_API getInputMode(Window& window, InputMode mode) {
+InputModeValue ENGINE_API getInputMode(IWindow& window, InputMode mode) {
     WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
     return toMEG(glfwGetInputMode(glfwWindow->handle, toGLFW(mode)));
 }

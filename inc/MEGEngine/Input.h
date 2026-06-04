@@ -33,12 +33,12 @@ enum class InputModeValue {
     VOID
 };
 
-void ENGINE_API setCursorPosition(Window& window, float x, float y);
-void ENGINE_API setCursorPosition(Window& window, Vec2 pos);
+void ENGINE_API setCursorPosition(IWindow& window, float x, float y);
+void ENGINE_API setCursorPosition(IWindow& window, Vec2 pos);
 
-Vec2 ENGINE_API getCursorPosition(Window& window, Vec2* pos);
+Vec2 ENGINE_API getCursorPosition(IWindow& window, Vec2* pos);
 
-void ENGINE_API setInputMode(Window& window, InputMode mode, InputModeValue value);
-InputModeValue ENGINE_API getInputMode(Window& window, InputMode mode);
+void ENGINE_API setInputMode(IWindow& window, InputMode mode, InputModeValue value);
+InputModeValue ENGINE_API getInputMode(IWindow& window, InputMode mode);
 
 #endif //MEGENGINEPROJECT_INPUT_H

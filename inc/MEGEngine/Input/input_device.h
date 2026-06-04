@@ -26,11 +26,11 @@ protected:
 
 class ENGINE_API KeyboardDevice : public Base_InputDevice {
 public:
-    KeyboardDevice(class Window* window) : _window(window) {}
+    KeyboardDevice(class IWindow* window) : _window(window) {}
     void poll() override;
 
 private:
-    Window* _window;
+    IWindow* _window;
 
     // 349 is GLFW_KEY_LAST+1
     std::array<bool, 349> _previous{};
@@ -38,12 +38,12 @@ private:
 
 class ENGINE_API MouseDevice : public Base_InputDevice {
 public:
-    MouseDevice(class Window* window) : _window(window) {}
+    MouseDevice(class IWindow* window) : _window(window) {}
     void initialise(class RawInputEventBus& bus) override;
     void poll() override;
 
 private:
-    Window* _window;
+    IWindow* _window;
     double _lastX = 0;
     double _lastY = 0;
 
