@@ -81,8 +81,8 @@ public:
 
 private:
     // Private wrapper for GLFWwindow to keep it hidden from public headers
-    WindowHandle* _handle;
     Impl* _impl;
+    WindowHandle* _handle;
 };
 
 

@@ -9,7 +9,7 @@ void InputMappingSystem::attachBus(RawInputEventBus &bus) {
 
     bus.subscribe<MouseMovedEvent>([this](auto& e) { onMouseMoved(e); });
 
-    bus.subscribe<MouseStoppedEvent>([this](auto& e) { onMouseStopped(); });
+    bus.subscribe<MouseStoppedEvent>([this](auto& e) { onMouseStopped(e); });
 }
 
 void InputMappingSystem::pushContext(std::shared_ptr<InputContext> context) { _contexts.push(context); }
@@ -59,14 +59,14 @@ void InputMappingSystem::release(InputAction* action) {
     }
 }
 
-void InputMappingSystem::stop(InputAction* action) {
+void InputMappingSystem::stop(InputAction* action, ActionValue v) {
     auto& state = _states[action];
 
     if (state.ongoing)
     {
         state.ongoing = false;
         state.completed = true;
-        state.value = ActionValue(Vec2{0, 0});
+        state.value = v;
     }
 }
 
@@ -110,12 +110,12 @@ void InputMappingSystem::onMouseMoved(const MouseMovedEvent& e) {
     }
 }
 
-void InputMappingSystem::onMouseStopped() {
+void InputMappingSystem::onMouseStopped(const MouseStoppedEvent& e) {
     if (_contexts.empty()) return;
 
     for (auto& b : _contexts.top()->bindings()) {
         if (b.source.type == InputSource::Type::MOUSE_DELTA) {
-            stop(b.action);
+            stop(b.action, ActionValue(Vec2(e.dx, e.dy)));
         }
     }
 }

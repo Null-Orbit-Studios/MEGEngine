@@ -94,7 +94,8 @@ void Shader::compileErrors(unsigned int shader, const char* type) {
 	GLint hasCompiled;
 	// Character array to store error message in
 	char infoLog[1024];
-	if (type != "PROGRAM")
+	std::string program = "PROGRAM";
+	if (type != program)
 	{
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &hasCompiled);
 		if (hasCompiled == GL_FALSE)

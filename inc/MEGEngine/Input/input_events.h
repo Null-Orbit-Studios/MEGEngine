@@ -124,6 +124,8 @@ struct MouseMovedEvent {
 struct MouseStoppedEvent {
     float x;
     float y;
+    const float dx = 0;
+    const float dy = 0;
 };
 
 class Base_QueuedEvent {

@@ -1,8 +1,3 @@
-#include "GLAD/glad.h"
-#include "GLM/gtc/type_ptr.hpp"
-#include "GLM/gtx/rotate_vector.hpp"
-#include "GLM/gtx/vector_angle.hpp"
-
 #include "MEGEngine/Core/camera.h"
 #include "MEGEngine/Core/window.h"
 #include "MEGEngine/Core/timer.h"

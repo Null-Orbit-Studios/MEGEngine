@@ -18,7 +18,7 @@ public:
     ActionValue(int v) : _value(float(v)) {}
     ActionValue(Vec2 v) : _value(v) {}
 
-    const bool asBool() const {
+    bool asBool() const {
         const bool* val = std::get_if<bool>(&_value);
         if (val)
             return *val;
@@ -26,7 +26,7 @@ public:
             return false;
     }
 
-    const float asFloat() const {
+    float asFloat() const {
         const float* val = std::get_if<float>(&_value);
         if (val)
             return *val;

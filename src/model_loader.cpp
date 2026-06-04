@@ -300,7 +300,7 @@ std::unordered_map<TexType, std::shared_ptr<Texture>> ModelLoader::getTextures()
 
 std::vector<Vertex> ModelLoader::assembleVertices(std::vector<Vec3> positions, std::vector<Vec3> normals, std::vector<Vec2> texUVs) {
     std::vector<Vertex> vertices;
-    for (int i = 0; i < positions.size(); i++)
+    for (size_t i = 0; i < positions.size(); i++)
     {
         vertices.emplace_back(positions[i], normals[i], Vec3(1.0f, 1.0f, 1.0f), texUVs[i]);
     }
@@ -310,7 +310,7 @@ std::vector<Vertex> ModelLoader::assembleVertices(std::vector<Vec3> positions, s
 
 std::vector<Vec2> ModelLoader::groupFloatsVec2(std::vector<float> floatVec) {
     std::vector<Vec2> vectors;
-    for (int i = 0; i < floatVec.size(); i+=2) {
+    for (size_t i = 0; i < floatVec.size(); i+=2) {
         vectors.emplace_back(floatVec[i], floatVec[i+1]);
     }
     return vectors;
@@ -318,7 +318,7 @@ std::vector<Vec2> ModelLoader::groupFloatsVec2(std::vector<float> floatVec) {
 
 std::vector<Vec3> ModelLoader::groupFloatsVec3(std::vector<float> floatVec) {
     std::vector<Vec3> vectors;
-    for (int i = 0; i < floatVec.size(); i+=3) {
+    for (size_t i = 0; i < floatVec.size(); i+=3) {
         vectors.emplace_back(floatVec[i], floatVec[i+1], floatVec[i+2]);
     }
     return vectors;
@@ -326,7 +326,7 @@ std::vector<Vec3> ModelLoader::groupFloatsVec3(std::vector<float> floatVec) {
 
 std::vector<Vec4> ModelLoader::groupFloatsVec4(std::vector<float> floatVec) {
     std::vector<Vec4> vectors;
-    for (int i = 0; i < floatVec.size(); i+=4) {
+    for (size_t i = 0; i < floatVec.size(); i+=4) {
         vectors.emplace_back(floatVec[i], floatVec[i+1], floatVec[i+2], floatVec[i+3]);
     }
     return vectors;

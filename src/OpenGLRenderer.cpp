@@ -21,8 +21,7 @@ struct OpenGLRenderer::RenderGroup {
 
 bool OpenGLRenderer::init() {
     int status = gladLoadGL();
-    if (!status)
-        return false;
+    if (!status) { return false; }
 
 	glViewport(0, 0, _width, _height);
     glEnable(GL_DEPTH_TEST);
@@ -50,7 +49,7 @@ void OpenGLRenderer::render(const Scene& scene) {
                 renderQueue.push_back(newGroup);
             }
 
-            for (int i = 0; i < renderQueue.size(); i++) {
+            for (size_t i = 0; i < renderQueue.size(); i++) {
                 if (entity->getComponent<MeshRenderer>()->material()->shader()->ID() == renderQueue[i].shader->ID()) {
                     renderQueue[i].entities.push_back(entity.get());
                 }
@@ -125,7 +124,10 @@ void OpenGLRenderer::draw(Entity& entity, const Scene& scene) {
 
     // TODO: shader support for multiple light sources
     mr->material()->shader()->setUniform("lightData", scene.lightData()[0]);
-    if (auto* light = dynamic_cast<Light*>(&entity)) { // if this entity is the light, set its translation in vert shader
+    
+    // if this entity is the light, set its translation in vert shader
+    auto* light = dynamic_cast<Light*>(&entity);
+    if (light) {
         mr->material()->shader()->setUniform("translation", Mat4::translation(scene.lightData()[0].position));
     }
 

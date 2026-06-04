@@ -20,11 +20,9 @@ std::vector<std::shared_ptr<InputAction>>& InputSystem::actions() {
 
 // Returns action if name matches one in the list. Returns null if not found
 InputAction* InputSystem::findAction(std::string name) {
-    if (this) {
-        for (auto& action : _actions) {
-            if (strcmp(action->name().c_str(), name.c_str()) == 0) {
-                return action.get();
-            }
+    for (auto& action : _actions) {
+        if (strcmp(action->name().c_str(), name.c_str()) == 0) {
+            return action.get();
         }
     }
     return nullptr;
