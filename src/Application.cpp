@@ -3,12 +3,12 @@
 #include "GLAD/glad.h"
 #include "GLFW/glfw3.h"
 
-#include "MEGEngine/Core/application.h"
+#include "MEGEngine/Core/Application.h"
 #include "MEGEngine/Core/engine.h"
 #include "MEGEngine/Core/timer.h"
 #include "MEGEngine/Core/window.h"
 #include "MEGEngine/Core/scene.h"
-#include "MEGEngine/Core/renderer.h"
+#include "MEGEngine/Core/OpenGLRenderer.h"
 #include "MEGEngine/Core/camera.h"
 #include "MEGEngine/Core/settings.h"
 #include "MEGEngine/Input.h"
@@ -99,7 +99,7 @@ void Application::init() {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	_renderer = std::make_unique<Renderer>();
+	_renderer = std::make_unique<OpenGLRenderer>();
 	_renderer->init();
 
 	_scene = std::make_unique<Scene>(config.width, config.height);

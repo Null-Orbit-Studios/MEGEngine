@@ -1,6 +1,6 @@
 #include "GLAD/glad.h"
 
-#include "MEGEngine/Core/renderer.h"
+#include "MEGEngine/Core/OpenGLRenderer.h"
 #include "MEGEngine/Core/camera.h"
 #include "MEGEngine/Core/material.h"
 #include "MEGEngine/Core/mesh.h"
@@ -13,12 +13,12 @@
 #include "MEGEngine/Utils/log.h"
 
 
-struct Renderer::RenderGroup {
+struct OpenGLRenderer::RenderGroup {
     Shader* shader = nullptr;
     std::vector<Entity*> entities;
 };
 
-void Renderer::init() {
+void OpenGLRenderer::init() {
     if (!gladLoadGL())
         throw std::runtime_error("GLAD initialization failed");
 
@@ -28,7 +28,7 @@ void Renderer::init() {
     _initialised = true;
 }
 
-void Renderer::render(const Scene& scene) {
+void OpenGLRenderer::render(const Scene& scene) {
     if (!_initialised)
         return;
 
@@ -67,7 +67,7 @@ void Renderer::render(const Scene& scene) {
     }
 }
 
-void Renderer::draw(Entity& entity, const Scene& scene) {
+void OpenGLRenderer::draw(Entity& entity, const Scene& scene) {
     auto mr = entity.getComponent<MeshRenderer>();
 
     if (!mr->material()->shader()) {

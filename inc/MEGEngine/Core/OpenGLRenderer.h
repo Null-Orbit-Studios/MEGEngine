@@ -8,10 +8,10 @@
 #include "Interfaces/IRenderer.h"
 
 
-class ENGINE_API Renderer : public IRenderer {
+class ENGINE_API OpenGLRenderer : public IRenderer {
 public:
-    Renderer() {};
-    ~Renderer() override = default;
+    OpenGLRenderer() {};
+    ~OpenGLRenderer() override = default;
 
     /**
      * @brief Initialises the renderer

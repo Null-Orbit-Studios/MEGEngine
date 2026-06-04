@@ -1,7 +1,7 @@
 #ifndef MEGENGINE_CORE_H
 #define MEGENGINE_CORE_H
 
-#include "MEGEngine/Core/application.h"
+#include "MEGEngine/Core/Application.h"
 #include "MEGEngine/Core/camera.h"
 #include "MEGEngine/Core/colour.h"
 #include "MEGEngine/Core/component.h"
@@ -16,7 +16,7 @@
 #include "MEGEngine/Core/model_loader.h"
 #include "MEGEngine/Core/player_controller.h"
 #include "MEGEngine/Core/primitive_shapes.h"
-#include "MEGEngine/Core/renderer.h"
+#include "MEGEngine/Core/OpenGLRenderer.h"
 #include "MEGEngine/Core/scene.h"
 #include "MEGEngine/Core/scripted_behaviour.h"
 #include "MEGEngine/Core/settings.h"
