@@ -4,8 +4,9 @@
 #include <functional>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/Platform/Input/input_action.h"
 
+struct ActionState;
+class InputAction;
 
 class ENGINE_API PlayerActionBus {
 public:

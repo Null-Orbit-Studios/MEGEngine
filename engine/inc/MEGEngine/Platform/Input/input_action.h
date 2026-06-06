@@ -7,6 +7,8 @@
 #include "MEGEngine/common.h"
 #include "MEGEngine/Math/vec2.h"
 
+#include "MEGEngine/Platform/Input/player_action_bus.h"
+
 
 class ENGINE_API ActionValue {
 public:
@@ -72,6 +74,12 @@ public:
 private:
     std::string _name;
     Type _type;
+};
+
+
+struct ENGINE_API ActionCallback {
+    InputAction* action;
+    PlayerActionBus::Callback callback;
 };
 
 

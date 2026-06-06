@@ -1,4 +1,5 @@
 #include "MEGEngine/Platform/Input/player_action_bus.h"
+#include "MEGEngine/Platform/Input/input_action.h"
 
 
 void PlayerActionBus::subscribe(InputAction *action, Callback cb) {

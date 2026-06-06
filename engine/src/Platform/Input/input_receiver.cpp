@@ -9,16 +9,21 @@ void InputReceiver::linkActionCallback(std::string actionName, PlayerActionBus::
         return;
     }
     
-    actionCallback ac = {
+    ActionCallback ac = {
         .action = action,
         .callback = callback,
     };
-    actionCallbacks.push_back(ac);
+    _actionCallbacks.push_back(ac);
     Log(LogLevel::DBG, "Action '%s' linked to callback function", actionName.c_str());
 
+    // TODO: Instead publish an event - PlayerController belongs in game logic and user can implement subscription to that event
     // if this entity is currently possessed, update the player controller to subscribe the new action
     PlayerController* pc = Engine::instance().playerController();
     if (pc->inputReceiver() == this) {
         pc->update();
     }
+}
+
+std::vector<ActionCallback>& InputReceiver::actionCallbacks() {
+    return _actionCallbacks;
 }

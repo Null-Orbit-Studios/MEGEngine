@@ -12,7 +12,7 @@ void PlayerController::possess(Entity& player) {
 
     // unsubscribe all actions of previous receiver
     if (_inputReceiver) {
-        for (const auto& pair : _inputReceiver->actionCallbacks) {
+        for (const auto& pair : _inputReceiver->actionCallbacks()) {
             Engine::instance().inputSystem()->unsubscribe(*pair.action);
         }
     }
@@ -20,7 +20,7 @@ void PlayerController::possess(Entity& player) {
 
     // set new receiver and subscribe all actions
     _inputReceiver = receiver;
-    for (const auto& pair : _inputReceiver->actionCallbacks) {
+    for (const auto& pair : _inputReceiver->actionCallbacks()) {
         Engine::instance().inputSystem()->subscribe(*pair.action, pair.callback);
     }
 
@@ -31,12 +31,12 @@ void PlayerController::possess(Entity& player) {
 void PlayerController::update() {
     if (_inputReceiver) {
         // unsubscribe all actions of receiver
-        for (const auto& pair : _inputReceiver->actionCallbacks) {
+        for (const auto& pair : _inputReceiver->actionCallbacks()) {
             Engine::instance().inputSystem()->unsubscribe(*pair.action);
         }
 
         // subscribe to all actions of input receiver
-        for (const auto& pair : _inputReceiver->actionCallbacks) {
+        for (const auto& pair : _inputReceiver->actionCallbacks()) {
             Engine::instance().inputSystem()->subscribe(*pair.action, pair.callback);
         }
     }
