@@ -2,6 +2,11 @@
 #include "MEGEngine/Core/engine.h"
 
 
+PlayerController& PlayerController::instance() {
+    static PlayerController instance;
+    return instance;
+}
+
 void PlayerController::possess(Entity& player) {
     if (!player.hasComponent<InputReceiver>()) {
         Log(LogLevel::ERR, "Cannot possess entity as it does not have an InputReceiver component");

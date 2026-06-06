@@ -79,7 +79,7 @@ protected:
 				[this](const ActionState& s){ scene().camera().getComponent<MoveCamera>()->look( s.value.asVec2()); }
 			);
 
-			Engine::instance().playerController()->possess(scene().camera());
+			PlayerController::instance().possess(scene().camera());
 		}
 
 		scene().camera().getComponent<Transform>()->setPosition({0, 0, -10});
@@ -103,7 +103,7 @@ protected:
 				"SwapPlayer",
 				[&](const ActionState& s){
 					Log(LogLevel::DBG, "Possessing sword");
-					Engine::instance().playerController()->possess(sword);
+					PlayerController::instance().possess(sword);
 				}
 			);
 

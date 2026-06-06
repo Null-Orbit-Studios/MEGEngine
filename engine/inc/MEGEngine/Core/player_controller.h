@@ -8,6 +8,7 @@
 
 class ENGINE_API PlayerController {
 public:
+    static PlayerController& instance();
     void possess(Entity& player);
     void update();
     InputReceiver* inputReceiver();

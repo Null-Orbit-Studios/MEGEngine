@@ -18,9 +18,9 @@ void InputReceiver::linkActionCallback(std::string actionName, PlayerActionBus::
 
     // TODO: Instead publish an event - PlayerController belongs in game logic and user can implement subscription to that event
     // if this entity is currently possessed, update the player controller to subscribe the new action
-    PlayerController* pc = Engine::instance().playerController();
-    if (pc->inputReceiver() == this) {
-        pc->update();
+    PlayerController pc = PlayerController::instance();
+    if (pc.inputReceiver() == this) {
+        pc.update();
     }
 }
 

@@ -22,10 +22,6 @@ class ENGINE_API Engine {
         return _inputSystem;
     }
 
-    PlayerController* playerController() {
-        return &_playerController;
-    }
-
     void setApplication(Application* application) {
         _application = application;
     }
@@ -36,7 +32,6 @@ class ENGINE_API Engine {
 
 private:
     InputSystem* _inputSystem = nullptr;
-    PlayerController _playerController;
     Application* _application = nullptr;
 };
 
