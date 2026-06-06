@@ -35,19 +35,13 @@ public:
     const std::vector<InputBinding>& bindings() const;
 
     void linkActionCallback(std::string actionName, PlayerActionBus::Callback callback);
+    std::vector<ActionCallback>& actionCallbacks();
 
 private:
     // TODO: add bindingsMap with string name as key and binding as value
     std::vector<InputBinding> _bindings;
 
-    // used for persistent bindings which are associated with a context, not an input receiver
-    friend class InputSystem;
-    struct actionCallback {
-        InputAction* action;
-        PlayerActionBus::Callback callback;
-    };
-
-    std::vector<actionCallback> actionCallbacks;
+    std::vector<ActionCallback> _actionCallbacks;
 };
 
 

@@ -16,15 +16,19 @@ void InputContext::linkActionCallback(std::string actionName, PlayerActionBus::C
         return;
     }
     
-    actionCallback ac = {
+    ActionCallback ac = {
         .action = action,
         .callback = callback,
     };
-    actionCallbacks.push_back(ac);
+    _actionCallbacks.push_back(ac);
     Log(LogLevel::DBG, "Action '%s' linked to callback function", actionName.c_str());
 
     // if this context is currently active, subscribe the new action
     if (Engine::instance().inputSystem()->mapping().activeContext() == this) {
         Engine::instance().inputSystem()->subscribe(*ac.action, ac.callback);
     }
+}
+
+std::vector<ActionCallback>& InputContext::actionCallbacks() {
+    return _actionCallbacks;
 }
