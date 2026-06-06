@@ -98,25 +98,24 @@ endif()
 # -----------------------------------------------------
 
 include(GNUInstallDirs)
-
 install(
     TARGETS MEGEngine
     EXPORT MEGEngineTargets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 install(
     EXPORT MEGEngineTargets
     FILE MEGEngineTargets.cmake
     NAMESPACE MEGEngine::
-    DESTINATION lib/cmake/MEGEngine
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/MEGEngine
 )
 
 install(
     DIRECTORY inc/MEGEngine
-    DESTINATION include
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
 install(
