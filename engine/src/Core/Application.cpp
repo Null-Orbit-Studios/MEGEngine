@@ -3,12 +3,10 @@
 #include "MEGEngine/Core/Application.h"
 #include "MEGEngine/Core/engine.h"
 #include "MEGEngine/Core/timer.h"
-#include "MEGEngine/Core/window.h"
 #include "MEGEngine/Core/scene.h"
 #include "MEGEngine/Renderer/OpenGLRenderer.h"
 #include "MEGEngine/Core/camera.h"
 #include "MEGEngine/Core/settings.h"
-#include "MEGEngine/Input.h"
 
 #include "MEGEngine/Utils/log.h"
 
@@ -79,6 +77,8 @@ IRenderer& Application::renderer() {
 void Application::init() {
 	settings.init();
 
+	//TODO: Pass window & renderer in either to constructor or init
+
 	_window = std::make_unique<Window>();
 	_window->create(config.windowTitle, config.width, config.height);
 
@@ -90,6 +90,7 @@ void Application::init() {
 		exit(1);
 	}
 
+	// TODO: Set _scene with a loadScene func or similar
 	_scene = std::make_unique<Scene>(config.width, config.height);
 
 	Engine::instance().setApplication(this);

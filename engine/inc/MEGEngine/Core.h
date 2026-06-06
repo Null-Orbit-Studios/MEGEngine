@@ -15,6 +15,5 @@
 #include "MEGEngine/Core/settings.h"
 #include "MEGEngine/Core/timer.h"
 #include "MEGEngine/Core/transform.h"
-#include "MEGEngine/Core/window.h"
 
 #endif

@@ -7,7 +7,7 @@ else()
     set(LIBRARY_TYPE SHARED)
 endif()
 
-file(GLOB_RECURSE ENGINE_SOURCES src/*.cpp src/*.h src/*.hpp inc/*.cpp inc/*.h inc/*.hpp)
+file(GLOB_RECURSE ENGINE_SOURCES src/*.cpp)
 add_library(MEGEngine ${LIBRARY_TYPE} ${ENGINE_SOURCES})
 
 # -----------------------------------------------------

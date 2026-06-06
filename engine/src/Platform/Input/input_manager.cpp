@@ -1,4 +1,4 @@
-#include "MEGEngine/Input/input_manager.h"
+#include "MEGEngine/Platform/Input/input_manager.h"
 
 
 void InputManager::addDevice(std::unique_ptr<Base_InputDevice> device) {

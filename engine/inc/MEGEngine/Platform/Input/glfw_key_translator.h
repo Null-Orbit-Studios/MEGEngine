@@ -3,9 +3,11 @@
 
 // DO NOT INCLUDE IN ANY PUBLIC HEADERS!!!!! cpp files only
 
+//TODO: Move GLFW into a cpp file. Hardcode 348 in place of GLFW_KEY_LAST
+
 #include "GLFW/glfw3.h"
 
-#include "MEGEngine/Input/input_events.h"
+#include "MEGEngine/Platform/Input/input_events.h"
 
 
 class GLFWKeyTranslator

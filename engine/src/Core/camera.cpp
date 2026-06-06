@@ -1,5 +1,5 @@
 #include "MEGEngine/Core/camera.h"
-#include "MEGEngine/Core/window.h"
+#include "MEGEngine/Platform/window.h"
 #include "MEGEngine/Core/timer.h"
 #include "MEGEngine/Core/engine.h"
 

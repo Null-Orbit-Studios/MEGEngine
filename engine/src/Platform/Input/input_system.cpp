@@ -1,7 +1,7 @@
 
 #include <cstring>
 
-#include "MEGEngine/Input/input_system.h"
+#include "MEGEngine/Platform/Input/input_system.h"
 #include "MEGEngine/Core/engine.h"
 
 

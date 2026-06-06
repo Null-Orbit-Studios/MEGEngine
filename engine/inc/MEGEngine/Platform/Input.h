@@ -1,17 +1,17 @@
 #ifndef MEGENGINEPROJECT_INPUT_H
 #define MEGENGINEPROJECT_INPUT_H
 
-#include "MEGEngine/Input/input_action.h"
-#include "MEGEngine/Input/input_context.h"
-#include "MEGEngine/Input/input_device.h"
-#include "MEGEngine/Input/input_events.h"
-#include "MEGEngine/Input/input_manager.h"
-#include "MEGEngine/Input/input_mapping.h"
-#include "MEGEngine/Input/input_system.h"
-#include "MEGEngine/Input/raw_input_event_bus.h"
-#include "MEGEngine/Input/player_action_bus.h"
-#include "MEGEngine/Input/input_receiver.h"
-#include "MEGEngine/Core/window.h"
+#include "Input/input_action.h"
+#include "Input/input_context.h"
+#include "Input/input_device.h"
+#include "Input/input_events.h"
+#include "Input/input_manager.h"
+#include "Input/input_mapping.h"
+#include "Input/input_system.h"
+#include "Input/raw_input_event_bus.h"
+#include "Input/player_action_bus.h"
+#include "Input/input_receiver.h"
+#include "window.h"
 
 #include "MEGEngine/common.h"
 

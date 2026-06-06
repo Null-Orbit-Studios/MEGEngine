@@ -1,7 +1,7 @@
 #ifndef MEGENGINE_VULKAN_RENDERER_H
 #define MEGENGINE_VULKAN_RENDERER_H
 
-#include "MEGEngine/Renderer/Interfaces/IRenderer.h"
+#include "MEGEngine/Core/Interfaces/IRenderer.h"
 
 class VulkanRenderer : public IRenderer {
 public:

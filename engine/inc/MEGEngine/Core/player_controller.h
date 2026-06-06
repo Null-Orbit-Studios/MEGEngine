@@ -3,7 +3,7 @@
 
 #include "MEGEngine/common.h"
 #include "MEGEngine/Core/entity.h"
-#include "MEGEngine/Input/input_receiver.h"
+#include "MEGEngine/Platform/Input/input_receiver.h"
 
 
 class ENGINE_API PlayerController {

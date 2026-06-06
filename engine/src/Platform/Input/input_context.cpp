@@ -1,4 +1,4 @@
-#include "MEGEngine/Input/input_context.h"
+#include "MEGEngine/Platform/Input/input_context.h"
 #include "MEGEngine/Core/engine.h"
 
 void InputContext::addBinding(const InputBinding& binding) {

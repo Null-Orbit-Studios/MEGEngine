@@ -5,9 +5,9 @@
 #include <unordered_map>
 
 #include "MEGEngine/common.h"
-#include "MEGEngine/Input/input_action.h"
-#include "MEGEngine/Input/input_context.h"
-#include "MEGEngine/Input/raw_input_event_bus.h"
+#include "MEGEngine/Platform/Input/input_action.h"
+#include "MEGEngine/Platform/Input/input_context.h"
+#include "MEGEngine/Platform/Input/raw_input_event_bus.h"
 
 
 class ENGINE_API InputMappingSystem {

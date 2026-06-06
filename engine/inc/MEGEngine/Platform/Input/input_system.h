@@ -4,8 +4,8 @@
 #include <memory>
 
 #include "MEGEngine/common.h"
-#include "Interfaces/IInput.h"
-#include "MEGEngine/Input/player_action_bus.h"
+#include "MEGEngine/Core/Interfaces/IInput.h"
+#include "MEGEngine/Platform/Input/player_action_bus.h"
 
 
 class ENGINE_API InputSystem : IInput {

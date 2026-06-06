@@ -1,4 +1,4 @@
-#include "MEGEngine/Input/input_mapping.h"
+#include "MEGEngine/Platform/Input/input_mapping.h"
 
 
 void InputMappingSystem::attachBus(RawInputEventBus &bus) {

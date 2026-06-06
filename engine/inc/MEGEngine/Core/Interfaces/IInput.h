@@ -4,10 +4,10 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "MEGEngine/Input/input_action.h"
-#include "MEGEngine/Input/input_context.h"
-#include "MEGEngine/Input/input_manager.h"
-#include "MEGEngine/Input/input_mapping.h"
+#include "MEGEngine/Platform/Input/input_action.h"
+#include "MEGEngine/Platform/Input/input_context.h"
+#include "MEGEngine/Platform/Input/input_manager.h"
+#include "MEGEngine/Platform/Input/input_mapping.h"
 
 class IInput {
 public:

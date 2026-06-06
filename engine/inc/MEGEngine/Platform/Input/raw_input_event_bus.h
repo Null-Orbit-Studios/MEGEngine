@@ -1,8 +1,8 @@
 #ifndef MEGENGINEPROJECT_RAW_INPUT_EVENT_BUS_H
 #define MEGENGINEPROJECT_RAW_INPUT_EVENT_BUS_H
 
-#include "MEGEngine/Input/input_shared_types.h"
-#include "MEGEngine/Input/input_events.h"
+#include "MEGEngine/Platform/Input/input_shared_types.h"
+#include "MEGEngine/Platform/Input/input_events.h"
 
 #include "MEGEngine/Utils/log.h"
 
