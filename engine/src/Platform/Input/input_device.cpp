@@ -3,7 +3,7 @@
 #include "MEGEngine/Platform/Input/input_device.h"
 #include "MEGEngine/Platform/Input/raw_input_event_bus.h"
 #include "MEGEngine/Platform/window.h"
-#include "MEGEngine/Platform/Input/glfw_key_translator.h"
+#include "glfw_key_translator.h"
 
 
 struct WindowImpl {
