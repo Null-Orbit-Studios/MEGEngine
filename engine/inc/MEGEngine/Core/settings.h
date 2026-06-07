@@ -6,16 +6,16 @@
 #include "MEGEngine/common.h"
 
 struct ENGINE_API GeneralSettings {
-std::string shaderDirectory;
-std::string windowTitle;
+std::string shaderDirectory = "";
+std::string windowTitle = "";
 };
 
 struct ENGINE_API GraphicsSettings {
-uint32_t maxFps;
-uint32_t windowWidth;
-uint32_t windowHeight;
-bool fullscreen;
-bool vsyncEnabled;
+uint32_t maxFps = 60;
+uint32_t windowWidth = 1280;
+uint32_t windowHeight = 720;
+bool fullscreen = false;
+bool vsyncEnabled = false;
 };
 
 
@@ -32,7 +32,7 @@ public:
 	GraphicsSettings& graphics();
 
 
-private: // private first for the struct definitions
+private:
 	Settings() = default;
 	bool _initialized = false;
 

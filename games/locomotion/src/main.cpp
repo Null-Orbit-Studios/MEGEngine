@@ -110,7 +110,6 @@ protected:
 			swordIr->linkActionCallback(
 				"MoveForward",
 				[&](const ActionState& s){
-					Log(LogLevel::DBG, "Moving Sword forward");
 					auto pos = sword.getComponent<Transform>()->position();
 					sword.getComponent<Transform>()->setPosition({pos.x, pos.y, pos.z + s.value.asFloat()});
 				}
@@ -119,7 +118,6 @@ protected:
 			swordIr->linkActionCallback(
 				"MoveBackward",
 				[&](const ActionState& s){
-					Log(LogLevel::DBG, "Moving Sword backward");
 					auto pos = sword.getComponent<Transform>()->position();
 					sword.getComponent<Transform>()->setPosition({pos.x, pos.y, pos.z + s.value.asFloat()});
 				}

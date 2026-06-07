@@ -38,7 +38,6 @@ public:
     std::vector<ActionCallback>& actionCallbacks();
 
 private:
-    // TODO: add bindingsMap with string name as key and binding as value
     std::vector<InputBinding> _bindings;
 
     std::vector<ActionCallback> _actionCallbacks;
