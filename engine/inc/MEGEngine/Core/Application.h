@@ -19,9 +19,11 @@ struct ENGINE_API ApplicationConfig {
 
 class ENGINE_API Application {
 public:
-	ApplicationConfig config;
+	explicit Application(
+		std::unique_ptr<IRenderer> renderer,
+		std::unique_ptr<IWindow> window) :
+			_renderer(std::move(renderer)), _window(std::move(window)) {}
 
-	explicit Application(const ApplicationConfig& config);
 	Application() = default;
 	virtual ~Application();
 
@@ -74,6 +76,13 @@ public:
      */
 	IRenderer& renderer();
 
+	/**
+     * @brief Load a scene containing entities, a camera etc. to display to the screen.
+     * 
+     * @return void
+     */
+	void loadScene(std::shared_ptr<Scene> scene);
+
 protected:
 	/**
      * @brief Called once on application startup.
@@ -104,9 +113,9 @@ private:
 
 	bool running = false;
 
-	std::unique_ptr<IWindow> _window;
-	std::unique_ptr<IRenderer> _renderer;
-	std::unique_ptr<Scene> _scene;
+	std::unique_ptr<IRenderer> _renderer = nullptr;
+	std::unique_ptr<IWindow> _window = nullptr;
+	std::shared_ptr<Scene> _scene = nullptr;
 };
 
 

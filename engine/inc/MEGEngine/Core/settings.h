@@ -7,7 +7,7 @@
 
 struct ENGINE_API GeneralSettings {
 std::string shaderDirectory = "";
-std::string windowTitle = "";
+std::string windowTitle = "MEGEngine Game";
 };
 
 struct ENGINE_API GraphicsSettings {
@@ -15,7 +15,7 @@ uint32_t maxFps = 60;
 uint32_t windowWidth = 1280;
 uint32_t windowHeight = 720;
 bool fullscreen = false;
-bool vsyncEnabled = false;
+bool vsyncEnabled = true;
 };
 
 

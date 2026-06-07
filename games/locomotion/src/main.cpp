@@ -2,6 +2,7 @@
 
 #include "MEGEngine/Core.h"
 #include "MEGEngine/Renderer.h"
+#include "MEGEngine/Platform/window.h"
 #include "MEGEngine/Math/quat.h"
 #include "MEGEngine/Utils/log.h"
 
@@ -15,6 +16,9 @@ public:
 
 protected:
 	void onInit() override {
+		auto _scene = std::make_shared<Scene>();
+		_scene->createEntity<Camera>(settings.graphics().windowWidth, settings.graphics().windowHeight);
+		loadScene(_scene);
 		// once at start
 		inputSystem.init();
 		Engine::instance().setInputSystem(&inputSystem); // for access throughout the application
@@ -147,7 +151,10 @@ int main() {
 		.height = 720
 	};
 
-	ExampleGame game(appConfig);
+	auto renderer = std::make_unique<OpenGLRenderer>(appConfig.width, appConfig.height);
+	auto window = std::make_unique<Window>(appConfig.windowTitle, appConfig.width, appConfig.height);
+
+	ExampleGame game(std::move(renderer), std::move(window));
 	game.run();
 
     return 0;

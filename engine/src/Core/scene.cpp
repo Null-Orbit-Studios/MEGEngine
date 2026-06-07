@@ -1,11 +1,6 @@
 #include "MEGEngine/Core/scene.h"
 #include "MEGEngine/Core/scripted_behaviour.h"
 
-
-Scene::Scene(float width, float height) {
-    createEntity<Camera>(width, height);
-}
-
 template<typename T>
 T& Scene::createEntity(float width, float height) {
     static_assert(std::is_base_of_v<Entity, T>);

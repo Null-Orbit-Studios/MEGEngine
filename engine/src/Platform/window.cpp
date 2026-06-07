@@ -13,17 +13,18 @@ struct Window::WindowHandle {
     GLFWwindow* ptr = nullptr;
 };
 
-Window::Window() : _impl(new Impl()), _handle(new WindowHandle()) {}
+Window::Window(std::string title, uint32_t width, uint32_t height) :
+        _impl(new Impl()), _handle(new WindowHandle()), _windowTitle(title), _width(width), _height(height) {}
 
 Window::~Window() {
-    if (_impl->handle)
-        glfwDestroyWindow(_impl->handle);
+    if (_handle->ptr)
+        glfwDestroyWindow(_handle->ptr);
 
     glfwTerminate();
-    delete _impl;
+    delete _handle;
 }
 
-void Window::create(const std::string& title, int width, int height) {
+void Window::create() {
     // initialise GLFW and set some data for the window
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -35,7 +36,7 @@ void Window::create(const std::string& title, int width, int height) {
     // create window object
 
     // _impl->handle = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-    _handle->ptr = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+    _handle->ptr = glfwCreateWindow(_width, _height, _windowTitle.c_str(), nullptr, nullptr);
     if (!_handle->ptr) {
         glfwTerminate();
         throw std::runtime_error("Failed to create GLFW window");

@@ -12,7 +12,7 @@
 
 class ENGINE_API Scene {
 public:
-    Scene(float width, float height);
+    Scene() = default;
     ~Scene() = default;
 
     // Template allows for creation of entities AND entity sub-types.

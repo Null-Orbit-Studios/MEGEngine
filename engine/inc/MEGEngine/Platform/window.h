@@ -9,7 +9,7 @@
 
 class ENGINE_API Window : public IWindow {
 public:
-    Window();
+    Window(std::string title, uint32_t width, uint32_t height);
     ~Window();
 
     // Prevents copying of the instance
@@ -19,16 +19,12 @@ public:
     /**
      * @brief Create and display a blank window
      * 
-     * Creates a blank window using the width and height specified, or defaulting
-     * to 1280x720 pixels. Title defaults to 'MEGEngine Window' if not specified.
+     * Creates a blank window using the width, height and title it was
+     * constructed with
      * 
-     * @param [in] title The title of the window
-     * @param [in] width The width of the window in pixels
-     * @param [in] height The height of the window in pixels
+     * @return void
      */
-    void create(const std::string& title = "MEGEngine Window",
-                int width = 1280,
-                int height = 720) override;
+    void create() override;
 
     /**
      * @brief Checks for and registers events that need to be processed
@@ -83,6 +79,10 @@ private:
     // Private wrapper for GLFWwindow to keep it hidden from public headers
     Impl* _impl;
     WindowHandle* _handle;
+
+    std::string _windowTitle;
+    uint32_t _width;
+    uint32_t _height;
 };
 
 
