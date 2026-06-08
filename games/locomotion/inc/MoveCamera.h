@@ -24,13 +24,12 @@ public:
         _localMove = {0, 0, 0};
     }
 
-    void moveForward(float val) {
-        if (val)
-            _localMove.z += val;
-    }
-    void moveRight(float val) {
-        if (val)
-            _localMove.x += val;
+    void move(const Vec2 val) {
+        if (val.x)
+            _localMove.x += val.x;
+
+        if (val.y)
+            _localMove.z += val.y;
     }
 
     void look(Vec2 val) {

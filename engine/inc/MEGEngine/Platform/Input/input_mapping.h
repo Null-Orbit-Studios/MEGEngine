@@ -20,8 +20,8 @@ public:
     const std::unordered_map<InputAction*, ActionState>& states() const;
 
 private:
-    void apply(InputAction* action, ActionValue v);
-    void release(InputAction* action);
+    void apply(InputAction* action, KeyCode key, ActionValue v);
+    void release(InputAction* action, KeyCode key);
     void stop(InputAction* action, ActionValue v);
     void onKeyPressed(const KeyPressedEvent& e);
     void onKeyReleased(const KeyReleasedEvent& e);

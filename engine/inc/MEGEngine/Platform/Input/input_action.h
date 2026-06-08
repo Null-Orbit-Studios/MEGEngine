@@ -8,6 +8,7 @@
 #include "MEGEngine/Math/vec2.h"
 
 #include "MEGEngine/Platform/Input/player_action_bus.h"
+#include "MEGEngine/Platform/Input/input_events.h"
 
 
 class ENGINE_API ActionValue {
@@ -51,11 +52,87 @@ private:
 };
 
 struct ENGINE_API ActionState {
-    ActionValue value;
+
+    /**
+     * @brief Get the current value of the action
+     * 
+     * If the action has multiple inputs (i.e. movement actions), the sum of
+     * the values for these actions is returned. Otherwise, the standalone value
+     * of the action is returned.
+     * 
+     * @return ```ActionValue```
+     */
+    ActionValue value() const {
+        if(_valueMap.empty()) {
+            return false;
+        }
+
+        const bool* boolVal = std::get_if<bool>(&_valueMap.begin()->second.asVariant());
+        if (boolVal) {
+            bool totalValue = false;
+            for (auto pair : _valueMap) {
+                totalValue += pair.second.asBool();
+            }
+            return totalValue;
+        }
+
+        const float* floatVal = std::get_if<float>(&_valueMap.begin()->second.asVariant());
+        if (floatVal) {
+            float totalValue = 0.0f;
+            for (auto pair : _valueMap) {
+                totalValue += pair.second.asFloat();
+            }
+            return totalValue;
+        }
+
+        const Vec2* vecVal = std::get_if<Vec2>(&_valueMap.begin()->second.asVariant());
+        if (vecVal) {
+            Vec2 totalValue = {0, 0};
+            for (auto pair : _valueMap) {
+                totalValue += pair.second.asVec2();
+            }
+            return totalValue;
+        }
+
+        return false;
+    }
+
+    /**
+     * @brief Add to the value of the state.
+     * 
+     * If the key is ```KeyCode::UNKNOWN``` then the action is not key-press related
+     * (i.e. mouse delta). Value is set as the ```val``` parameter. Otherwise, ```val```
+     * is added to a map of values.
+     * 
+     * @param [in] KeyCode  Enum of the key that has been pressed or released
+     * @param [in] ActionValue The value of the action. 
+     */
+    void addValue(KeyCode key, ActionValue val) {
+        if (hasValue(key)) {
+            _valueMap[key] = val;
+            return;
+        }
+        _valueMap.emplace(key, val);
+    }
+
+    void removeValue(KeyCode key) {
+        _valueMap.erase(key);
+    }
+
+    bool hasValue(KeyCode key) {
+        return (_valueMap.find(key) != _valueMap.end());
+    }
+
+    bool valueIsEmpty() {
+        return _valueMap.empty();
+    }
 
     bool started = false;
     bool ongoing = false;
     bool completed = false;
+
+private:
+    std::unordered_map<KeyCode, ActionValue> _valueMap;
 };
 
 class ENGINE_API InputAction {

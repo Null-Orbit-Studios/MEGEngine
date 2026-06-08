@@ -36,26 +36,26 @@ const std::unordered_map<InputAction*, ActionState>& InputMappingSystem::states(
     return _states;
 }
 
-void InputMappingSystem::apply(InputAction* action, ActionValue v) {
+void InputMappingSystem::apply(InputAction* action, KeyCode key, ActionValue v) {
     auto& state = _states[action];
 
     bool wasActive = state.ongoing;
 
-    state.value = v;
+    state.addValue(key, v);
     state.ongoing = true;
 
     if (!wasActive)
         state.started = true;
 }
 
-void InputMappingSystem::release(InputAction* action) {
+void InputMappingSystem::release(InputAction* action, KeyCode key) {
     auto& state = _states[action];
+    state.removeValue(key);
 
-    if (state.ongoing)
+    if (state.ongoing && state.valueIsEmpty())
     {
         state.ongoing = false;
         state.completed = true;
-        state.value = ActionValue(false);
     }
 }
 
@@ -66,7 +66,7 @@ void InputMappingSystem::stop(InputAction* action, ActionValue v) {
     {
         state.ongoing = false;
         state.completed = true;
-        state.value = v;
+        state.addValue(KeyCode::UNKNOWN, v);
     }
 }
 
@@ -77,13 +77,13 @@ void InputMappingSystem::onKeyPressed(const KeyPressedEvent& e) {
         if (b.source.type == InputSource::Type::KEY && b.source.key == e.key) {
             switch (b.action->type()) {
                 case InputAction::Type::BOOL:
-                    apply(b.action, ActionValue(b.value.asBool()));
+                    apply(b.action, e.key, ActionValue(b.value.asBool()));
                     break;
                 case InputAction::Type::FLOAT:
-                    apply(b.action, ActionValue(b.value.asFloat()));
+                    apply(b.action, e.key, ActionValue(b.value.asFloat()));
                     break;
                 case InputAction::Type::VEC2:
-                    apply(b.action, ActionValue(b.value.asVec2()));
+                    apply(b.action, e.key, ActionValue(b.value.asVec2()));
                     break;
             }
         }
@@ -95,7 +95,7 @@ void InputMappingSystem::onKeyReleased(const KeyReleasedEvent& e) {
 
     for (auto& b : _contexts.top()->bindings()) {
         if (b.source.type == InputSource::Type::KEY && b.source.key == e.key) {
-            release(b.action);
+            release(b.action, e.key);
         }
     }
 }
@@ -105,7 +105,7 @@ void InputMappingSystem::onMouseMoved(const MouseMovedEvent& e) {
 
     for (auto& b : _contexts.top()->bindings()) {
         if (b.source.type == InputSource::Type::MOUSE_DELTA) {
-            apply(b.action, ActionValue(Vec2{e.dx, e.dy}));
+            apply(b.action, KeyCode::UNKNOWN, ActionValue(Vec2{e.dx, e.dy}));
         }
     }
 }

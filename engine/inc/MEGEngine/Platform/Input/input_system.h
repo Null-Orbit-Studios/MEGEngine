@@ -10,6 +10,7 @@
 
 class ENGINE_API InputSystem : IInput {
 public:
+    InputSystem();
     InputAction& createAction(std::string name, InputAction::Type type) override;
     std::vector<std::shared_ptr<InputAction>>& actions() override;
     InputAction* findAction(std::string name) override;
@@ -22,7 +23,6 @@ public:
     void update() override;
     InputManager& manager() override { return _manager; }
     InputMappingSystem& mapping() override { return _mapping; };
-    void init() override;
 
 private:
     InputManager _manager;

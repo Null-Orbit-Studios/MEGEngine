@@ -5,7 +5,7 @@
 #include "MEGEngine/Core/engine.h"
 
 
-void InputSystem::init() {
+InputSystem::InputSystem() {
     Engine::instance().setInputSystem(this);
     _mapping.attachBus(_manager.bus());
 }

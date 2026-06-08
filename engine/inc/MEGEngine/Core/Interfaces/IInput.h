@@ -23,7 +23,6 @@ public:
     virtual void update() = 0;
     virtual InputManager& manager() = 0;
     virtual InputMappingSystem& mapping() = 0;
-    virtual void init() = 0;
 };
 
 #endif
