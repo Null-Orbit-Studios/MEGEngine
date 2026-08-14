@@ -1,0 +1,17 @@
+#ifndef CUSTOMEVENTS_H
+#define CUSTOMEVENTS_H
+
+#include "MEGEngine/Core/events.h"
+#include "MEGEngine/Utils/log.h"
+
+class TestEvent : public Event {};
+class TestEventListener : public EventListener {
+public:
+    TestEventListener(Entity& parent) : EventListener(parent) {}
+
+    void onEvent() override {
+        Log(LogLevel::DBG, "Test Event Listener received trigger");
+    }
+};
+
+#endif //CUSTOMEVENTS_H

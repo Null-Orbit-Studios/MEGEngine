@@ -1,0 +1,9 @@
+{
+    "General": {
+        "shaderDirectory": "/home/will/developer/proj/meg-engine/engine/resources/shaders"
+    },
+
+    "Graphics": {
+        "maxFps": 120
+    }
+}
