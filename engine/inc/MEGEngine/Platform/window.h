@@ -2,6 +2,7 @@
 #define MEGENGINEPROJECT_WINDOW_H
 
 #include <string>
+#include <cstdint>
 
 #include "MEGEngine/common.h"
 #include "MEGEngine/Core/Interfaces/IWindow.h"

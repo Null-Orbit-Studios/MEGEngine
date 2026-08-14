@@ -98,12 +98,15 @@ endif()
 # -----------------------------------------------------
 
 include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
 install(
     TARGETS MEGEngine
     EXPORT MEGEngineTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
 install(
@@ -121,4 +124,15 @@ install(
 install(
     DIRECTORY resources
     DESTINATION share/MEGEngine
+)
+
+configure_package_config_file(
+    ${CMAKE_SOURCE_DIR}/cmake/MEGEngineConfig.cmake.in
+    ${CMAKE_BINARY_DIR}/MEGEngineConfig.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/MEGEngine
+)
+
+install(
+    FILES ${CMAKE_BINARY_DIR}/MEGEngineConfig.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/MEGEngine
 )
