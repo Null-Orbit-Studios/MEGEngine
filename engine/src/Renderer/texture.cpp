@@ -38,18 +38,18 @@ Texture::Texture(const char *image, TexType texType, unsigned int slot) {
 	switch (numColCh) {
 		case 4:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, widthImg, heightImg, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
-			Log(LogLevel::DBG, "4 Channel texture image - using GL_RGBA format. Image: %s", image);
+			LOG_DBG("4 Channel texture image - using GL_RGBA format. Image: %s", image);
 			break;
 		case 3:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, widthImg, heightImg, 0, GL_RGB, GL_UNSIGNED_BYTE, bytes);
-			Log(LogLevel::DBG, "3 Channel texture image - using GL_RGB format. Image: %s", image);
+			LOG_DBG("3 Channel texture image - using GL_RGB format. Image: %s", image);
 			break;
 		case 1:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, widthImg, heightImg, 0, GL_RED, GL_UNSIGNED_BYTE, bytes);
-			Log(LogLevel::DBG, "1 Channel texture image - using GL_RED format. Image: %s", image);
+			LOG_DBG("1 Channel texture image - using GL_RED format. Image: %s", image);
 			break;
 		default:
-			Log(LogLevel::ERR, "Invalid number of channels in texture image. Must be 4 or 3 or 1. Image: %s", image);
+			LOG_ERR("Invalid number of channels in texture image. Must be 4 or 3 or 1. Image: %s", image);
 			break;
 	}
 

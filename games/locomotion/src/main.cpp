@@ -92,7 +92,7 @@ protected:
 			camIr->linkActionCallback(
 				"SwapPlayer",
 				[&](const ActionState& s){
-					Log(LogLevel::DBG, "Possessing sword");
+					LOG_DBG("Possessing sword");
 					PlayerController::instance().possess(sword);
 				}
 			);

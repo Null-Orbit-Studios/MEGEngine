@@ -16,14 +16,14 @@ Settings& Settings::instance() {
 }
 
 void Settings::init() {
-    Log(LogLevel::DBG, "Current directory: %s", std::filesystem::current_path().c_str());
+    LOG_DBG("Current directory: %s", std::filesystem::current_path().c_str());
 
 
     std::string settingsFilename = "defaultSettings.json";
     JSON json;
     std::ifstream file(settingsFilename, std::ios::binary);
     if (!file) {
-        Log(LogLevel::ERR, "Failed to open settings file for reading: " + std::string(settingsFilename));
+        LOG_ERR("Failed to open settings file for reading: " + std::string(settingsFilename));
         throw std::runtime_error("Failed to read engine settings file");
     }
     std::stringstream ss;

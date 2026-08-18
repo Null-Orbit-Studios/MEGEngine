@@ -42,7 +42,7 @@ std::string get_model_file_contents(const char* filename, uint& status) {
     status = 0;
     std::ifstream file(filename, std::ios::binary);
     if (!file) {
-        Log(LogLevel::WRN, "Failed to open file for reading: " + std::string(filename));
+        LOG_WRN("Failed to open file for reading: " + std::string(filename));
         status = 1;
     }
     std::stringstream ss;
@@ -51,7 +51,7 @@ std::string get_model_file_contents(const char* filename, uint& status) {
 }
 
 void ModelLoader::loadModelFromFile(Entity& model, const char *file) {
-    Log(LogLevel::DBG, "Loading model from file: %s", file);
+    LOG_DBG("Loading model from file: %s", file);
     // get full contents of the GLTF model file (follows a JSON format)
     uint status;
     std::string text = get_model_file_contents(file, status);
@@ -75,7 +75,7 @@ void ModelLoader::loadModelFromData(Entity &model, const std::vector<class Verte
 }
 
 void ModelLoader::traverseNode(Entity& model, unsigned int nodeIndex, Mat4 matrix) {
-    Log(LogLevel::DBG, "Processing model node index: %u", nodeIndex);
+    LOG_DBG("Processing model node index: %u", nodeIndex);
     json node = _impl->_json["nodes"][nodeIndex];
 
     // If this node has a translation, get it

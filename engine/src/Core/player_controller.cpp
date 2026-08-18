@@ -9,7 +9,7 @@ PlayerController& PlayerController::instance() {
 
 void PlayerController::possess(Entity& player) {
     if (!player.hasComponent<InputReceiver>()) {
-        Log(LogLevel::ERR, "Cannot possess entity as it does not have an InputReceiver component");
+        LOG_ERR("Cannot possess entity as it does not have an InputReceiver component");
         return;
     }
 
@@ -29,7 +29,7 @@ void PlayerController::possess(Entity& player) {
         Engine::instance().inputSystem()->subscribe(*pair.action, pair.callback);
     }
 
-    Log(LogLevel::DBG, "Possessed new entity: %s", typeid(player).name());
+    LOG_DBG("Possessed new entity: %s", typeid(player).name());
 
 }
 

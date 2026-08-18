@@ -29,7 +29,7 @@ public:
 	T* getComponent() {
 		auto it = _componentLookup.find(typeid(T));
 		if (it == _componentLookup.end()) {
-			Log(LogLevel::WRN, "Entity::getComponent<%s>(): Component not found", typeid(T).name());
+			LOG_WRN("Entity::getComponent<%s>(): Component not found", typeid(T).name());
 			return nullptr;
 		}
 
@@ -43,7 +43,7 @@ public:
 	template<typename T, typename... Args>
 	T* addComponent(Args&&... args) {
 		if (hasComponent<T>()) {
-			Log(LogLevel::WRN, "Entity::addComponent<%s>(): Component already registered", typeid(T).name());
+			LOG_WRN("Entity::addComponent<%s>(): Component already registered", typeid(T).name());
 			return nullptr;
 		}
 
@@ -65,7 +65,7 @@ public:
 	void removeComponent() {
 		auto mapIt = _componentLookup.find(typeid(T));
 		if (mapIt == _componentLookup.end()) {
-			Log(LogLevel::WRN, "Entity::removeComponent<%s>(): Component not found", typeid(T).name());
+			LOG_WRN("Entity::removeComponent<%s>(): Component not found", typeid(T).name());
 			return;
 		}
 

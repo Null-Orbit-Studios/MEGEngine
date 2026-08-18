@@ -29,7 +29,7 @@ Shader* ShaderManager::getShader(const std::string& name) {
     }
 
     // If reached this point, shader hasn't been found
-    Log(LogLevel::ERR, "Get shader failed: " + name + " does not exist. Create shader first");
+    LOG_ERR("Get shader failed: " + name + " does not exist. Create shader first");
     return nullptr;
 }
 

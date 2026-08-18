@@ -76,7 +76,7 @@ void OpenGLRenderer::draw(Entity& entity, const Scene& scene) {
     auto mr = entity.getComponent<MeshRenderer>();
 
     if (!mr->material()->shader()) {
-        Log(LogLevel::WRN, "Attempt to draw failed. Shader is null");
+        LOG_WRN("Attempt to draw failed. Shader is null");
         return;
     }
 

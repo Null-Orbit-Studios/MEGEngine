@@ -20,12 +20,6 @@ enum class ENGINE_API LogLevel {
     ERR
 };
 
-/** 
- * DEPRECATED - use LOG_DBG, LOG_INF, LOG_WRN, LOG_ERR macros instead
- * i.e. LOG_DBG("Message %i", 1);
- */
-void ENGINE_API Log(LogLevel level, const std::string& format, ...);
-
 class ENGINE_API Logger {
 public:
     Logger() {}

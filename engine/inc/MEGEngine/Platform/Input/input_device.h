@@ -13,7 +13,7 @@ public:
     virtual ~Base_InputDevice() = default;
 
     virtual void initialise(class RawInputEventBus& bus) {
-        Log(LogLevel::DBG, "Initialising device %s", typeid(*this).name());
+        LOG_DBG("Initialising device %s", typeid(*this).name());
         _bus = &bus;
     }
 

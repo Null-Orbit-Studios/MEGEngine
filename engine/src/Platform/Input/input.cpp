@@ -68,7 +68,7 @@ void setCursorPosition(IWindow& window, float x, float y) {
 void setCursorPosition(IWindow& window, Vec2 pos) {
     WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
     Vec2 center = Vec2(Settings::instance().graphics().windowWidth/2, Settings::instance().graphics().windowHeight/2);
-    Log(LogLevel::DBG, "Settings cursor position: %f, %f", center.x, center.y);
+    LOG_DBG("Settings cursor position: %f, %f", center.x, center.y);
     glfwSetCursorPos(glfwWindow->handle, pos.x, pos.y);
 }
 
@@ -84,11 +84,11 @@ Vec2 getCursorPosition(IWindow& window, Vec2* pos) {
 void setInputMode(IWindow& window, InputMode mode, InputModeValue value) {
     WindowImpl* glfwWindow = static_cast<WindowImpl*>(static_cast<void*>(&window.impl()));
     if (toGLFW(mode) < 0) {
-        Log(LogLevel::WRN, "setInputMode(): InputMode provided is invalid");
+        LOG_WRN("setInputMode(): InputMode provided is invalid");
         return;
     }
     if (toGLFW(value) < 0) {
-        Log(LogLevel::WRN, "setInputMode(): InputModeValue provided is invalid");
+        LOG_WRN("setInputMode(): InputModeValue provided is invalid");
         return;
     }
     glfwSetInputMode(glfwWindow->handle, toGLFW(mode), toGLFW(value));

@@ -10,7 +10,7 @@ public:
     TestEventListener(Entity& parent) : EventListener(parent) {}
 
     void onEvent() override {
-        Log(LogLevel::DBG, "Test Event Listener received trigger");
+        LOG_DBG("Test Event Listener received trigger");
     }
 };
 

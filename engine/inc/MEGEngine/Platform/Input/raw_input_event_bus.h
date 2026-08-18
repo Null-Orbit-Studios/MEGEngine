@@ -16,14 +16,14 @@ public:
     // add listener with the event type that will trigger it
     template<typename Event>
     static void subscribe(Listener<Event> listener) {
-        Log(LogLevel::DBG, "Subscribe listener of event type %s to RawInputEventBus", typeid(Event).name());
+        LOG_DBG("Subscribe listener of event type %s to RawInputEventBus", typeid(Event).name());
         listeners<Event>().push_back(std::move(listener));
     }
 
     // Queue an event, with a list of its listeners attached
     template<typename Event>
     static void queueEvent(const Event& e) {
-        // Log(LogLevel::DBG, "Queue event of type %s to RawInputEventBus", typeid(Event).name());
+        // LOG_DBG("Queue event of type %s to RawInputEventBus", typeid(Event).name());
         auto& vec = listeners<Event>();
         _eventQueue.push_back(std::make_unique<QueuedEvent<Event>>(e, vec));
     }

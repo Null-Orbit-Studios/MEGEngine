@@ -24,7 +24,7 @@ void Material::bind() {
             }
         }
     } else {
-        Log(LogLevel::ERR, "Material binding failed: shader is null");
+        LOG_ERR("Material binding failed: shader is null");
     }
 }
 

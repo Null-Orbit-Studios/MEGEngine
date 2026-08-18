@@ -10,7 +10,7 @@ public:
     MoveCamera() = default;
 
     void onStart() override {
-        Log(LogLevel::DBG, "MoveCamera onStart()");
+        LOG_DBG("MoveCamera onStart()");
     }
 
     void onUpdate() override {
