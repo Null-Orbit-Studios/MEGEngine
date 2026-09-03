@@ -46,6 +46,6 @@ find_package(MEGEngine REQUIRED)
 And you can include the MEGEngine headers:
 ```cpp
 #include <MEGEngine/Core.h>
-#include <MEGEngine/Core/Application.h> // although this would already be included by the line above
+#include <MEGEngine/Core/Application.hpp> // although this would already be included by the line above
 #include <MEGEngine/Math.h>
 ```

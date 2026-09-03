@@ -1,18 +1,17 @@
-#include "GLAD/glad.h"
-// #include "GLFW/glfw3.h"
+#include <GLAD/glad.h>
 
-#include "MEGEngine/Renderer/OpenGLRenderer.h"
-#include "MEGEngine/Core/camera.h"
-#include "MEGEngine/Renderer/material.h"
-#include "MEGEngine/Renderer/mesh.h"
-#include "MEGEngine/Renderer/mesh_renderer.h"
-#include "MEGEngine/Renderer/shader.h"
-#include "MEGEngine/Core/scene.h"
-#include "MEGEngine/Renderer/texture.h"
+#include "MEGEngine/Renderer/OpenGLRenderer.hpp"
+#include "MEGEngine/Core/Camera.hpp"
+#include "MEGEngine/Renderer/Material.hpp"
+#include "MEGEngine/Renderer/Mesh.hpp"
+#include "MEGEngine/Renderer/MeshRenderer.hpp"
+#include "MEGEngine/Renderer/Shader.hpp"
+#include "MEGEngine/Core/Scene.hpp"
+#include "MEGEngine/Renderer/Texture.hpp"
 
-#include "MEGEngine/Math/glm_conversions.h"
+#include "MEGEngine/Math/GLMConversions.hpp"
 
-#include "MEGEngine/Utils/log.h"
+#include "MEGEngine/Utils/Logger.hpp"
 
 
 struct OpenGLRenderer::RenderGroup {

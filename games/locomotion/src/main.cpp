@@ -1,13 +1,13 @@
 #include <memory>
 
-#include "MEGEngine/Core.h"
-#include "MEGEngine/Renderer.h"
-#include "MEGEngine/Platform/window.h"
-#include "MEGEngine/Math/quat.h"
-#include "MEGEngine/Utils/log.h"
+#include "MEGEngine/Core.hpp"
+#include "MEGEngine/Renderer.hpp"
+#include "MEGEngine/Platform/Window.hpp"
+#include "MEGEngine/Math/Quat.hpp"
+#include "MEGEngine/Utils/Logger.hpp"
 
-#include "CustomEvents.h"
-#include "MoveCamera.h"
+#include "CustomEvents.hpp"
+#include "MoveCamera.hpp"
 
 class ExampleGame : public Application {
 public:

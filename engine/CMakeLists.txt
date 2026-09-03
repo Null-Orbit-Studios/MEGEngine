@@ -77,7 +77,7 @@ target_link_libraries(MEGEngine PRIVATE
 
 add_custom_command(TARGET MEGEngine PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different        # executes "cmake -E copy_if_different..."
-        "${CMAKE_CURRENT_SOURCE_DIR}/resources/defaultSettings.json" # <-- in-file
+        "${CMAKE_CURRENT_SOURCE_DIR}/resources/DefSettings.json" # <-- in-file
         ${CMAKE_BINARY_DIR}                                  # <-- out-file path
 )
 
@@ -160,16 +160,16 @@ endif()
 # Generate file paths header for the build tree
 set(MEGENGINE_RESOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources/")
 configure_file(
-    ${PROJECT_SOURCE_DIR}/cmake/defined_paths.h.in
-    ${CMAKE_CURRENT_BINARY_DIR}/generated/build/defined_paths.h
+    ${PROJECT_SOURCE_DIR}/cmake/DefinedPaths.hpp.in
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/build/DefinedPaths.hpp
     @ONLY
 )
 
 # Generate file paths header for installing
 set(MEGENGINE_RESOURCE_DIR "${CMAKE_INSTALL_FULL_DATADIR}/MEGEngine/")
 configure_file(
-    ${PROJECT_SOURCE_DIR}/cmake/defined_paths.h.in
-    ${CMAKE_CURRENT_BINARY_DIR}/generated/install/defined_paths.h
+    ${PROJECT_SOURCE_DIR}/cmake/DefinedPaths.hpp.in
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/install/DefinedPaths.hpp
     @ONLY
 )
 

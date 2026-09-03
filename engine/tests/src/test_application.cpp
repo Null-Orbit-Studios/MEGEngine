@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "MEGEngine/Core/Application.h"
+#include "MEGEngine/Core/Application.hpp"
 
 TEST(ApplicationTests, ConstructorSetsConfigValues) {
 

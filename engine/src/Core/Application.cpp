@@ -1,14 +1,14 @@
 #include <thread>
 
-#include "MEGEngine/Core/Application.h"
-#include "MEGEngine/Core/engine.h"
-#include "MEGEngine/Core/timer.h"
-#include "MEGEngine/Core/scene.h"
-#include "MEGEngine/Renderer/OpenGLRenderer.h"
-#include "MEGEngine/Core/camera.h"
-#include "MEGEngine/Core/settings.h"
+#include "MEGEngine/Core/Application.hpp"
+#include "MEGEngine/Core/Engine.hpp"
+#include "MEGEngine/Core/Timer.hpp"
+#include "MEGEngine/Core/Scene.hpp"
+#include "MEGEngine/Renderer/OpenGLRenderer.hpp"
+#include "MEGEngine/Core/Camera.hpp"
+#include "MEGEngine/Core/Settings.hpp"
 
-#include "MEGEngine/Utils/log.h"
+#include "MEGEngine/Utils/Logger.hpp"
 
 Application::~Application() {
 	if (running) shutdown();
