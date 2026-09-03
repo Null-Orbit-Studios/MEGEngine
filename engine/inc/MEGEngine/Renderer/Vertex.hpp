@@ -7,8 +7,7 @@
 #include "MEGEngine/Math/Vec2.hpp"
 
 
-class ENGINE_API Vertex {
-public:
+struct ENGINE_API Vertex {
     Vertex(Vec3 position, Vec3 normal, Vec3 colour, Vec2 texUV) : position(position), normal(normal), colour(colour), texUV(texUV) {};
     Vec3 position;
     Vec3 normal;

@@ -34,7 +34,7 @@ public:
     void render(const Scene& scene) override;
 
 private:
-    void draw(Entity& entity, const Scene& scene) override;
+    void draw(Entity& entity, const Scene& scene);
 
     bool _initialised = false;
     int _width;

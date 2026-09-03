@@ -88,10 +88,8 @@ void OpenGLRenderer::draw(Entity& entity, const Scene& scene) {
 
     // for (unsigned int i = 0; i < entity.meshRenderer()->material()->textures().size(); i++)
     unsigned int slot = 0;
-    for (auto& pair : mr->material()->textures())
+    for (auto& [type, texture] : mr->material()->textures())
     {
-        TexType type = pair.first;
-        std::shared_ptr<Texture> texture = pair.second;
         std::string num;
         std::string uniformName;
         if (type == TexType::ALBEDO) // TODO: add support for other texture types
