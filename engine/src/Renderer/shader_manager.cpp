@@ -20,8 +20,8 @@ Shader* ShaderManager::getShader(const std::string& name) {
     // not already compiled, search default shader list
     for (const auto& shaderName : _defaultShaders) {
         if (shaderName == name) {
-            std::string vertexFile = settings.general().shaderDirectory + "/" + name + "/" + name + ".vert";
-            std::string fragmentFile = settings.general().shaderDirectory + "/" + name + "/" + name + ".frag";
+            std::string vertexFile = settings.graphics().shaderDirectory + "/" + name + "/" + name + ".vert";
+            std::string fragmentFile = settings.graphics().shaderDirectory + "/" + name + "/" + name + ".frag";
             std::unique_ptr<Shader> shader = std::make_unique<Shader>(vertexFile.c_str(), fragmentFile.c_str());
             _shaders[name] = std::move(shader);
             return _shaders[name].get();

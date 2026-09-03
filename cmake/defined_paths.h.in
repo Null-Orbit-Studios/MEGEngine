@@ -1,0 +1,2 @@
+#pragma once
+#define MEGENGINE_RESOURCE_DIR "@MEGENGINE_RESOURCE_DIR@"

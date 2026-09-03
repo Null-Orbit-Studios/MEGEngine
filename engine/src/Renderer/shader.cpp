@@ -19,7 +19,9 @@
 std::string get_file_contents(const char* filename) {
 	std::ifstream file(filename, std::ios::binary);
 	if (!file) {
-		throw std::runtime_error("Failed to open file for reading: " + std::string(filename));
+		LOG_ERR("Failed to open file for reading: " + std::string(filename));
+		return "";
+		// throw std::runtime_error("Failed to open file for reading: " + std::string(filename));
 	}
 	std::stringstream ss;
 	ss << file.rdbuf();

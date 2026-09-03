@@ -14,7 +14,7 @@ std::string get_file_contents(const char* filename);
 class ENGINE_API Shader {
 public:
 	unsigned int ID();
-	Shader(const char* vertexFile = (settings.general().shaderDirectory+"/defaultLit/defaultLit.vert").c_str(), const char* fragmentFile = (settings.general().shaderDirectory+"/defaultLit/defaultLit.frag").c_str());
+	Shader(const char* vertexFile = (settings.graphics().shaderDirectory+"/defaultLit/defaultLit.vert").c_str(), const char* fragmentFile = (settings.graphics().shaderDirectory+"/defaultLit/defaultLit.frag").c_str());
 
 	void activate();
 	void del();

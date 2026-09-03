@@ -120,6 +120,10 @@ install(
     DIRECTORY inc/MEGEngine
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/generated/install/defined_paths.h
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/MEGEngine
+)
 
 install(
     DIRECTORY resources
@@ -147,3 +151,29 @@ if(NOT TARGET uninstall)
         COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/cmake_uninstall.cmake
     )
 endif()
+
+
+# -----------------------------------------------------
+# FILE PATHS
+# -----------------------------------------------------
+
+# Generate file paths header for the build tree
+set(MEGENGINE_RESOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources/")
+configure_file(
+    ${PROJECT_SOURCE_DIR}/cmake/defined_paths.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/build/defined_paths.h
+    @ONLY
+)
+
+# Generate file paths header for installing
+set(MEGENGINE_RESOURCE_DIR "${CMAKE_INSTALL_FULL_DATADIR}/MEGEngine/")
+configure_file(
+    ${PROJECT_SOURCE_DIR}/cmake/defined_paths.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/install/defined_paths.h
+    @ONLY
+)
+
+target_include_directories(MEGEngine PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/build>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)

@@ -1,6 +1,8 @@
 #ifndef MEGENGINE_COMMON_H
 #define MEGENGINE_COMMON_H
 
+#include "defined_paths.h"
+
 #ifdef _WIN32
   #ifdef ENGINE_BUILD
 	#define ENGINE_API __declspec(dllexport)
