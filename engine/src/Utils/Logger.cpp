@@ -36,7 +36,7 @@ const std::string Logger::get_log_level_str(LogLevel level) {
             levelStr = "INF";
             break;
         case LogLevel::WRN:
-            levelStr = "WRN";
+            levelStr = "\033[33mWRN\033[0m";
             break;
         case LogLevel::ERR:
             levelStr = "\033[31mERR\033[0m"; // colour codes for when displayed in terminal
@@ -73,7 +73,7 @@ void Logger::log(LogLevel level, const char* filepath, int line, const std::stri
     std::stringstream formattedMsg;
     formattedMsg << formattedTime << " [" << levelStr << "] [" << file + ":" << line << "] [" << function << "]: " << msg;
 
-    std::cout << formattedMsg.str() << std::endl;
+    std::cout << "\033[0m" << formattedMsg.str() << std::endl;
 
     //TODO: display logs to the game screen
 }
