@@ -121,7 +121,7 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/generated/install/defined_paths.h
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/generated/install/DefinedPaths.hpp
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/MEGEngine
 )
 
