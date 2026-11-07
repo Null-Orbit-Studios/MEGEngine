@@ -28,7 +28,6 @@ else()
                 -g
         )
 endif()
-unset(CMAKE_BUILD_TYPE CACHE)
 
 target_compile_definitions(MEGEngine PRIVATE
         ENGINE_BUILD
@@ -58,9 +57,13 @@ endif ()
 # INCLUDE & LINKING
 # -----------------------------------------------------
 
-target_include_directories(MEGEngine PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/inc
+target_include_directories(MEGEngine 
+    PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/build>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 # GLFW and GLAD libraries
