@@ -81,7 +81,7 @@ protected:
 		light.getComponent<MeshRenderer>()->material()->setColour({1.0, 1.0, 1.0, 1.0});
 
 		auto& sword = scene().createEntity<Entity>();
-		modelLoader.loadModelFromFile(sword, "/home/will/developer/proj/meg-engine/games/locomotion/models/sword/sword.gltf");
+		modelLoader.loadModelFromFile(sword, "/home/will/src/megengine/games/locomotion/models/sword/sword.gltf");
 		sword.getComponent<Transform>()->setPosition(Vec3(5, -5, 0));
 		sword.getComponent<Transform>()->setOrientation(Quat(0, 0, 0, 1));
 		sword.getComponent<Transform>()->setScale(0.2);
