@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "MEGEngine/Common.hpp"
-#include "MEGEngine/Core/Interfaces/IRenderer.hpp"
+#include "MEGEngine/Renderer/Interfaces/IRenderer.hpp"
 
 
 class ENGINE_API OpenGLRenderer : public IRenderer {

@@ -1,7 +1,7 @@
 #ifndef MEGENGINE_VULKAN_RENDERER_H
 #define MEGENGINE_VULKAN_RENDERER_H
 
-#include "MEGEngine/Core/Interfaces/IRenderer.hpp"
+#include "MEGEngine/Renderer/Interfaces/IRenderer.hpp"
 
 class VulkanRenderer : public IRenderer {
 public:
@@ -23,6 +23,8 @@ public:
      * Sorts and groups the entities in a scene by the shaders they use
      * to minimise shader switching. After grouping, each group is then
      * drawn to the screen.
+     * 
+     * @param scene Constant reference to the scene to be rendered
      * 
      * @returns void
      */

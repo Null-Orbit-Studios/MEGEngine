@@ -7,7 +7,7 @@
 #include "MEGEngine/Common.hpp"
 #include "MEGEngine/Core/Scene.hpp"
 #include "MEGEngine/Core/Interfaces/IWindow.hpp"
-#include "MEGEngine/Core/Interfaces/IRenderer.hpp"
+#include "MEGEngine/Renderer/Interfaces/IRenderer.hpp"
 
 struct ENGINE_API ApplicationConfig {
 	std::string windowTitle = "MEGEngine Game";
