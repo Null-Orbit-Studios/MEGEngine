@@ -45,6 +45,16 @@ private:
     std::vector<std::unique_ptr<Entity>> _entities;
     std::vector<LightData> _lightData;
     Camera* _camera = nullptr;
+
+
+
+    /**
+     * For unit tests
+     * 
+     * Forward declared as this class doesn't need any
+     * knowledge of it or dependency on it
+     */
+    friend class Scene_fixture;
 };
 
 
